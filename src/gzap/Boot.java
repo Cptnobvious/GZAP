@@ -18,14 +18,12 @@ public class Boot {
 
 	private static TextureHandler texturehandler;
 	
-	private static Tile[][] fakechunk = new Tile[15][15];
+	private static Tile[][] fakechunk = new Tile[21][21];
 
-	public static final int W_WIDTH = 1280;
-	public static final int W_HEIGHT = 800;
 
 	public static void main(String[] args) {
 		try{
-			Display.setDisplayMode(new DisplayMode(W_WIDTH, W_HEIGHT));
+			Display.setDisplayMode(new DisplayMode(Standards.W_WIDTH, Standards.W_HEIGHT));
 			Display.setTitle("Generic Zombie Apocalypse");
 			Display.create();
 		} catch (LWJGLException e){
@@ -36,7 +34,7 @@ public class Boot {
 		//Initialization code OpenGL
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, W_WIDTH, W_HEIGHT, 0, 1, -1);
+		glOrtho(0, Standards.W_WIDTH, Standards.W_HEIGHT, 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_TEXTURE_2D);
 		//glEnable(GL_BLEND);
@@ -44,8 +42,8 @@ public class Boot {
 
 		setupTextureHandler();
 		
-		for (int x = 0; x < 15; x++){
-			for (int y = 0; y < 15; y++){
+		for (int x = 0; x < 21; x++){
+			for (int y = 0; y < 21; y++){
 				if (x == 5 || x == 7){
 					fakechunk[x][y] = new Tile(3);
 				} else if (x == 6){
@@ -63,9 +61,9 @@ public class Boot {
 			glColor4f(1f, 1f, 1f, 1f);
 
 			
-			for (int x = 0; x < 15; x++){
-				for (int y = 0; y < 15; y++){
-					fakechunk[x][y].draw((x * 16) + 64, (y * 16) + 64);
+			for (int x = 0; x < 21; x++){
+				for (int y = 0; y < 21; y++){
+					fakechunk[x][y].draw((x * Standards.TILE_SIZE) + 64, (y * Standards.TILE_SIZE) + 64);
 				}
 			}
 			

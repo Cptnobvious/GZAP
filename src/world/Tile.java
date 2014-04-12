@@ -1,5 +1,6 @@
 package world;
 
+import gzap.Standards;
 import gzap.TextureHandler;
 
 import org.lwjgl.*;
@@ -59,10 +60,10 @@ public class Tile {
 			xloc = yloc = 1;
 		}
 		
-		top = (yloc * 16) / 64;
-		bottom = top + (16f / 64f);
-		left = (xloc * 16) / 64;
-		right = left + (16f / 64f);
+		top = (yloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
+		bottom = top + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
+		left = (xloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
+		right = left + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
 		
 		
 		glBegin(GL_QUADS);
@@ -71,13 +72,13 @@ public class Tile {
 			glVertex2i(x, y);
 			
 			glTexCoord2f(right, top);
-			glVertex2i(x + 16, y);
+			glVertex2i(x + Standards.TILE_SIZE, y);
 
 			glTexCoord2f(right, bottom);
-			glVertex2i(x + 16, y + 16);
+			glVertex2i(x + Standards.TILE_SIZE, y + Standards.TILE_SIZE);
 			
 			glTexCoord2f(left, bottom);
-			glVertex2i(x, y + 16);
+			glVertex2i(x, y + Standards.TILE_SIZE);
 		}
 		glEnd();
 	}
