@@ -1,36 +1,34 @@
 package world;
 
+import gzap.Boot;
 import gzap.Standards;
-import gzap.TextureHandler;
-
-import org.lwjgl.*;
-import org.lwjgl.opengl.*;
-import org.newdawn.slick.opengl.Texture;
-
 import static org.lwjgl.opengl.GL11.*;
 
 public class Tile {
 	
-	private int type;
+	//private TileType type;
+	private TileTexInfo texInfo;
+	private int orientation;
 	
-	public Tile(int type){
-		this.type = type;
+	public Tile(TileTexInfo texInfo){
+		this.texInfo = texInfo;
+		this.orientation = Standards.NORTH;
 	}
 	
 	public Tile(){
-		type = 0;
+		this.texInfo = TileTexInfo.LAWN;
+		this.orientation = Standards.NORTH;
 	}
 	
-	public void setType(int type){
-		this.type = type;
+	public void setTexInfo(TileTexInfo texInfo){
+		this.texInfo = texInfo;
 	}
 	
 	public void draw(int x, int y){
 		
 		glColor4f(1f, 1f, 1f, 1f);
 		
-		Texture temp = TextureHandler.terrain;
-		temp.bind();
+		Boot.getTexHandler().bindTexture("terrain");
 		
 		float xloc = 0;
 		float yloc = 0;
@@ -38,27 +36,10 @@ public class Tile {
 		float bottom;
 		float left;
 		float right;
+		float rotation = orientation * 90;
 		
-		switch (type){
-		case 0:
-			xloc = 2;
-			yloc = 0;
-			break;
-		case 1:
-			xloc = 3;
-			yloc = 0;
-			break;
-		case 2:
-			xloc = 0;
-			yloc = 0;
-			break;
-		case 3:
-			xloc = 1;
-			yloc = 0;
-			break;
-		default:
-			xloc = yloc = 1;
-		}
+		xloc = texInfo.getSpriteSheetX();
+		yloc = texInfo.getSpriteSheetY();
 		
 		top = (yloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
 		bottom = top + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
@@ -68,10 +49,9 @@ public class Tile {
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
 		
-		glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
-		glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
-		
-		//TODO rotate then translate
+		//glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
+		glTranslatef((float)x, (float)y, 0f);
+		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		
 		
 		glBegin(GL_QUADS);
@@ -91,8 +71,6 @@ public class Tile {
 		glEnd();
 		glPopMatrix();
 		
-		//glEnd();
-		//glRotatef(-0.1f, 0.0f, 0.0f, -1.0f);
 	}
 	
 }

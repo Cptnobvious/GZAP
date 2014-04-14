@@ -1,11 +1,5 @@
 package gzap;
 
-import static org.lwjgl.opengl.GL11.GL_NEAREST;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
-import static org.lwjgl.opengl.GL11.glTexParameteri;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,35 +11,49 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class TextureHandler {
 
 	public static Texture terrain;
-	public static String currentlyBound;
+	public static Texture player;
+	public static String sCurrentlyBound = "null";
+	public static Texture currentlyBound;
 	
 	public TextureHandler(){
 		
 	}
 	
 	public void init(){
-		terrain = loadTexture("biggertest");
-		
+		terrain = loadTexture("terrain");
+		player = loadTexture("player");
 	}
 	
 	public void destroy(){
 		terrain.release();
+		player.release();
 	}
 	
 	public void bindTexture(String key){
-		if (!key.equals(currentlyBound)){
+		if (!key.equals(sCurrentlyBound)){
 			
-			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			sCurrentlyBound = key;
 			
 			switch (key){
 			case "terrain":
 				terrain.bind();
+				currentlyBound = terrain;
+				break;
+			case "player":
+				player.bind();
+				currentlyBound = player;
 				break;
 			default:
+				//TODO make a proper error handler
+				System.out.println("Tried to bind a texture that doesn't exist");
+				Boot.shutdownGracefully();
 			}
 			
 		}
+	}
+	
+	public Texture getCurrentlyBound(){
+		return currentlyBound;
 	}
 	
 	private Texture loadTexture(String key){
