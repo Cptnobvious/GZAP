@@ -65,22 +65,34 @@ public class Tile {
 		left = (xloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
 		right = left + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
 		
+		//This push and pop prevent rotate from having a field day
+		glPushMatrix();
+		
+		glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
+		glRotatef(45.0f, 0.0f, 0.0f, 1.0f);
+		
+		//TODO rotate then translate
+		
 		
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(left, top);
-			glVertex2i(x, y);
+			glVertex2i(0, 0);
 			
 			glTexCoord2f(right, top);
-			glVertex2i(x + Standards.TILE_SIZE, y);
+			glVertex2i(0 + Standards.TILE_SIZE, 0);
 
 			glTexCoord2f(right, bottom);
-			glVertex2i(x + Standards.TILE_SIZE, y + Standards.TILE_SIZE);
+			glVertex2i(0 + Standards.TILE_SIZE, 0 + Standards.TILE_SIZE);
 			
 			glTexCoord2f(left, bottom);
-			glVertex2i(x, y + Standards.TILE_SIZE);
+			glVertex2i(0, 0 + Standards.TILE_SIZE);
 		}
 		glEnd();
+		glPopMatrix();
+		
+		//glEnd();
+		//glRotatef(-0.1f, 0.0f, 0.0f, -1.0f);
 	}
 	
 }

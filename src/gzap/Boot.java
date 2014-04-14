@@ -63,7 +63,7 @@ public class Boot {
 			
 			for (int x = 0; x < 21; x++){
 				for (int y = 0; y < 21; y++){
-					fakechunk[x][y].draw((x * Standards.TILE_SIZE) + 64, (y * Standards.TILE_SIZE) + 64);
+					fakechunk[x][y].draw(x, y);
 				}
 			}
 			
