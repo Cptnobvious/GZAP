@@ -12,6 +12,7 @@ public class TextureHandler {
 
 	public static Texture terrain;
 	public static Texture player;
+	public static Texture debug;
 	public static String sCurrentlyBound = "null";
 	public static Texture currentlyBound;
 	
@@ -22,11 +23,13 @@ public class TextureHandler {
 	public void init(){
 		terrain = loadTexture("terrain");
 		player = loadTexture("player");
+		debug = loadTexture("debug_mapcenter");
 	}
 	
 	public void destroy(){
 		terrain.release();
 		player.release();
+		debug.release();
 	}
 	
 	public void bindTexture(String key){
@@ -42,6 +45,10 @@ public class TextureHandler {
 			case "player":
 				player.bind();
 				currentlyBound = player;
+				break;
+			case "debug":
+				debug.bind();
+				currentlyBound = debug;
 				break;
 			default:
 				//TODO make a proper error handler

@@ -4,16 +4,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.*;
 import org.lwjgl.*;
+import org.lwjgl.input.Keyboard;
 
-import debug.Dummy;
-import world.Chunk;
+import entities.living.player.Player;
+import world.Map;
 
 public class Boot {
 
 	private static TextureHandler texturehandler;
 	
-	private static Chunk testChunk;
-	private static Dummy testDummy;
+	private static Player player;
+	private static Map worldObj;
 
 
 	public static void main(String[] args) {
@@ -38,18 +39,14 @@ public class Boot {
 		setupTextureHandler();
 		
 		
-		testChunk = new Chunk();
-		testDummy = new Dummy();
+		//testChunk = new Chunk();
+		player = new Player(0, 0, 0, 100);
+		worldObj = new Map();
 		
 		while (!Display.isCloseRequested()){
 			
-			glClear(GL_COLOR_BUFFER_BIT);
-			
-			glColor4f(1f, 1f, 1f, 1f);
-
-			testChunk.draw(0, 0, 0, 0, 11, 11);
-			testDummy.draw(6 * Standards.TILE_SIZE, 6 * Standards.TILE_SIZE);
-			
+			draw();
+			input();
 			
 			Display.update();
 			Display.sync(60);
@@ -58,6 +55,46 @@ public class Boot {
 
 		//Remember to release the texture when done
 		shutdownGracefully();
+	}
+	
+	public static void draw(){
+		
+		glClear(GL_COLOR_BUFFER_BIT);
+		
+		glColor4f(1f, 1f, 1f, 1f);
+
+		int xStart = player.getX() - 12;
+		int yStart = player.getY() - 12;
+		
+		worldObj.draw(0, 0, xStart, yStart);
+		
+		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
+		
+	}
+	
+	public static void input(){
+		char key = 0;
+		
+		if (Keyboard.next()){
+			key = Keyboard.getEventCharacter();
+		}
+		
+		switch (key){
+		case 'w':
+			player.move(Standards.NORTH);
+			break;
+		case 's':
+			player.move(Standards.SOUTH);
+			break;
+		case 'd':
+			player.move(Standards.EAST);
+			break;
+		case 'a':
+			player.move(Standards.WEST);
+			break;
+		default:
+			break;
+		}
 	}
 
 

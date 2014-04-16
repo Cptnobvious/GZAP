@@ -4,6 +4,7 @@ import gzap.Standards;
 
 public class Chunk {
 
+	private boolean isLoaded = false;
 	private Tile[][] contents;
 	
 	public Chunk(){
@@ -23,8 +24,22 @@ public class Chunk {
 				}
 			}
 		}
+		
+		isLoaded = true;
 	}
 	
+	public Tile getTile(int x, int y){
+		if (x < Standards.CHUNK_SIZE && x > 0){
+			if (y < Standards.CHUNK_SIZE && y > 0){
+				return contents[x][y];
+			}
+		}
+		
+		return null;
+	}
+	
+	//This might be removed
+	@Deprecated
 	public void draw(int screenX, int screenY, int xStart, int yStart, int xStop, int yStop){
 		for (int x = xStart; x < xStop; x++){
 			for (int y = yStart; y < yStop; y++){
