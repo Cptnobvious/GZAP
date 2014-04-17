@@ -6,6 +6,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 
+import debug.SimpleConstruction;
 import entities.living.player.Player;
 import world.Map;
 
@@ -15,6 +16,7 @@ public class Boot {
 	
 	private static Player player;
 	private static Map worldObj;
+	private static SimpleConstruction debug = new SimpleConstruction();
 
 
 	public static void main(String[] args) {
@@ -40,7 +42,7 @@ public class Boot {
 		
 		
 		//testChunk = new Chunk();
-		player = new Player(75, 14, 0, 100);
+		player = new Player(0, 0, 0, 100);
 		worldObj = new Map();
 		
 		while (!Display.isCloseRequested()){
@@ -92,6 +94,9 @@ public class Boot {
 		case 'a':
 			player.move(Standards.WEST);
 			break;
+		case 'e':
+			debug.muck();
+			break;
 		default:
 			break;
 		}
@@ -101,6 +106,14 @@ public class Boot {
 	public static void setupTextureHandler(){
 		texturehandler = new TextureHandler();
 		texturehandler.init();
+	}
+	
+	public static Map getWorldObj(){
+		return worldObj;
+	}	
+	
+	public static Player getPlayer(){
+		return player;
 	}
 	
 	public static TextureHandler getTexHandler(){
