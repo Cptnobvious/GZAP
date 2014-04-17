@@ -13,11 +13,14 @@ public class Chunk {
 	}
 	
 	private void init(){
+		
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
 				if (x == 5 || x == 7){
 					contents[x][y] = new Tile(TileTexInfo.SIDEWALK);
 				} else if (x == 6){
+					contents[x][y] = new Tile(TileTexInfo.ROAD_STRIPE);
+				} else if (x == Standards.CHUNK_SIZE - 1) {
 					contents[x][y] = new Tile(TileTexInfo.ROAD_STRIPE);
 				} else {
 					contents[x][y] = new Tile(TileTexInfo.LAWN);
@@ -29,8 +32,8 @@ public class Chunk {
 	}
 	
 	public Tile getTile(int x, int y){
-		if (x < Standards.CHUNK_SIZE && x > 0){
-			if (y < Standards.CHUNK_SIZE && y > 0){
+		if (x < Standards.CHUNK_SIZE && x >= 0){
+			if (y < Standards.CHUNK_SIZE && y >= 0){
 				return contents[x][y];
 			}
 		}

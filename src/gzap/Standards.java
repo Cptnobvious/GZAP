@@ -20,7 +20,7 @@ public class Standards {
 	public static final int WEST = 3;
 	
 	public static final int CHUNK_SIZE = 64;
-	public static final int MAP_SIZE = 1;
+	public static final int MAP_SIZE = 2;
 	
 	public static final int MAP_TILES_TO_DRAW = 25;
 }

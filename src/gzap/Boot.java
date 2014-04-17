@@ -40,7 +40,7 @@ public class Boot {
 		
 		
 		//testChunk = new Chunk();
-		player = new Player(0, 0, 0, 100);
+		player = new Player(75, 14, 0, 100);
 		worldObj = new Map();
 		
 		while (!Display.isCloseRequested()){
