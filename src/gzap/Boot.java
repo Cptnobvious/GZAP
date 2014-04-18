@@ -6,6 +6,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 
+import debug.DebugDraw;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
 import world.Map;
@@ -18,6 +19,7 @@ public class Boot {
 	private static Player player;
 	private static Map worldObj;
 	private static SimpleConstruction debug = new SimpleConstruction();
+	private static DebugDraw debugdraw = new DebugDraw();
 
 
 	public static void main(String[] args) {
@@ -51,9 +53,6 @@ public class Boot {
 			draw();
 			input();
 			
-			if (worldObj.getTileAtCoords(0, 0).getTexInfo() == TileTexInfo.SIDEWALK){
-				System.out.println("Sidwalk at 0");
-			}
 			
 			Display.update();
 			Display.sync(60);
@@ -74,7 +73,7 @@ public class Boot {
 		int yStart = player.getY() - 12;
 		
 		worldObj.draw(0, 0, xStart, yStart);
-		
+		debugdraw.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
 		
 	}

@@ -19,11 +19,8 @@ public class Map {
 		for (int x = 0; x < Standards.MAP_TILES_TO_DRAW; x++){
 			for (int y = 0; y < Standards.MAP_TILES_TO_DRAW; y++){
 				
-				//The +1s are due to a quirk in the drawing code that sets it off-center
-				//TODO figure out why that's happening
-				
-				int cx = x + xStart + 1;
-				int cy = y + yStart + 1;
+				int cx = x + xStart;
+				int cy = y + yStart;
 				
 				if (isOnMap(cx, cy)){
 					int drawX = x * Standards.TILE_SIZE;
