@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
 import world.Map;
+import world.TileTexInfo;
 
 public class Boot {
 
@@ -49,6 +50,10 @@ public class Boot {
 			
 			draw();
 			input();
+			
+			if (worldObj.getTileAtCoords(0, 0).getTexInfo() == TileTexInfo.SIDEWALK){
+				System.out.println("Sidwalk at 0");
+			}
 			
 			Display.update();
 			Display.sync(60);

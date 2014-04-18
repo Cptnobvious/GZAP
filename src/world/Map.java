@@ -59,8 +59,8 @@ public class Map {
 	}
 	
 	public boolean isOnMap(int x, int y){
-		if (x > 0 && x < (Standards.CHUNK_SIZE * Standards.MAP_SIZE)){
-			if (y > 0 && y < (Standards.CHUNK_SIZE * Standards.MAP_SIZE)){
+		if (x >= 0 && x < (Standards.CHUNK_SIZE * Standards.MAP_SIZE)){
+			if (y >= 0 && y < (Standards.CHUNK_SIZE * Standards.MAP_SIZE)){
 				return true;
 			}
 		}

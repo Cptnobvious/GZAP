@@ -27,6 +27,10 @@ public class Chunk {
 				} else {
 					contents[x][y] = new Tile(TileTexInfo.LAWN);
 				}
+				
+				if (x == 0){
+					contents[x][y] = new Tile(TileTexInfo.SIDEWALK);
+				}
 			}
 		}
 

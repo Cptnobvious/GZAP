@@ -20,6 +20,10 @@ public class Tile {
 		this.orientation = Standards.NORTH;
 	}
 	
+	public TileTexInfo getTexInfo(){
+		return this.texInfo;
+	}
+	
 	public void setTexInfo(TileTexInfo texInfo){
 		this.texInfo = texInfo;
 	}
