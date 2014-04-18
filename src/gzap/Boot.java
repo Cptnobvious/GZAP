@@ -2,6 +2,8 @@ package gzap;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.io.*;
+
 import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
@@ -31,6 +33,10 @@ public class Boot {
 			e.printStackTrace();
 		}
 
+		
+		//TODO add a check to see if the save directory already exists
+		File dir = new File(Standards.WORLD_SAVE_LOCATION);
+		dir.mkdirs();
 		
 		//Initialization code OpenGL
 		glMatrixMode(GL_PROJECTION);
@@ -73,7 +79,7 @@ public class Boot {
 		int yStart = player.getY() - 12;
 		
 		worldObj.draw(0, 0, xStart, yStart);
-		debugdraw.draw();
+		//debugdraw.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
 		
 	}
@@ -100,6 +106,12 @@ public class Boot {
 			break;
 		case 'e':
 			debug.muck();
+			break;
+		case 'o':
+			worldObj.saveChunk(0,0);
+			break;
+		case 'i':
+			worldObj.loadChunk(0,0);
 			break;
 		default:
 			break;

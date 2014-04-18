@@ -1,5 +1,9 @@
 package world;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import gzap.Standards;
 
 public class Chunk {
@@ -17,19 +21,19 @@ public class Chunk {
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
 				if (x == 5 || x == 11){
-					contents[x][y] = new Tile(TileTexInfo.SIDEWALK);
+					contents[x][y] = new Tile(2);
 				} else if (x == 6 || x == 7 || x == 9 || x == 10){
-					contents[x][y] = new Tile(TileTexInfo.ROAD);
+					contents[x][y] = new Tile(0);
 				} else if (x == 8){
-					contents[x][y] = new Tile(TileTexInfo.ROAD_STRIPE);
+					contents[x][y] = new Tile(1);
 				} else if (x == Standards.CHUNK_SIZE - 1) {
-					contents[x][y] = new Tile(TileTexInfo.ROAD_STRIPE);
+					contents[x][y] = new Tile(3);
 				} else {
-					contents[x][y] = new Tile(TileTexInfo.LAWN);
+					contents[x][y] = new Tile(3);
 				}
 				
 				if (x == 0){
-					contents[x][y] = new Tile(TileTexInfo.SIDEWALK);
+					contents[x][y] = new Tile(2);
 				}
 			}
 		}
@@ -47,6 +51,36 @@ public class Chunk {
 		return null;
 	}
 
+	public void save(int chunkX, int chunkY) throws IOException{
+		String path = Standards.WORLD_SAVE_LOCATION + "/" + chunkX + "x" + chunkY + ".cnk";
+		FileOutputStream out = new FileOutputStream(path);
+
+		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
+			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
+				contents[x][y].save(out);
+			}
+		}
+
+		//Don't forget to close
+		out.close();
+	}
+	
+	public void load(int chunkX, int chunkY) throws IOException{
+		
+		String path = Standards.WORLD_SAVE_LOCATION + "/" + chunkX + "x" + chunkY + ".cnk";
+		FileInputStream in = new FileInputStream(path);
+		
+		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
+			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
+				contents[x][y].load(in);
+			}
+		}
+
+		
+		//Don't forget to close
+		in.close();
+	}
+	
 	//This might be removed
 	@Deprecated
 	public void draw(int screenX, int screenY, int xStart, int yStart, int xStop, int yStop){

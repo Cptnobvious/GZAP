@@ -23,4 +23,6 @@ public class Standards {
 	public static final int MAP_SIZE = 2;
 	
 	public static final int MAP_TILES_TO_DRAW = 25;
+	
+	public static final String WORLD_SAVE_LOCATION = "save/world";
 }

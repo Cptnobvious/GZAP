@@ -1,5 +1,9 @@
 package world;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import gzap.Boot;
 import gzap.Standards;
 import static org.lwjgl.opengl.GL11.*;
@@ -7,6 +11,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Tile {
 	
 	//private TileType type;
+	private int basetype = 0;
 	private TileTexInfo texInfo;
 	private int orientation;
 	
@@ -15,9 +20,49 @@ public class Tile {
 		this.orientation = Standards.NORTH;
 	}
 	
+	public Tile(int basetype){
+		init(basetype);
+		this.orientation = Standards.NORTH;
+	}
+	
 	public Tile(){
 		this.texInfo = TileTexInfo.LAWN;
 		this.orientation = Standards.NORTH;
+	}
+	
+	public void init(int basetype){
+		switch (basetype){
+		default:
+		case 0:
+			texInfo = TileTexInfo.ROAD;
+			break;
+		case 1:
+			texInfo = TileTexInfo.ROAD_STRIPE;
+			break;
+		case 2:
+			texInfo = TileTexInfo.SIDEWALK;
+			break;
+		case 3:
+			texInfo = TileTexInfo.LAWN;
+			break;
+		case 4:
+			texInfo = TileTexInfo.LAWN_MUD;
+			break;
+		}
+		
+		this.basetype = basetype;
+	}
+	
+	public void changeTile(){
+		
+	}
+	
+	public int getBaseType(){
+		return this.basetype;
+	}
+	
+	public void setBaseType(int newType){
+		this.basetype = newType;
 	}
 	
 	public TileTexInfo getTexInfo(){
@@ -26,6 +71,18 @@ public class Tile {
 	
 	public void setTexInfo(TileTexInfo texInfo){
 		this.texInfo = texInfo;
+	}
+	
+	public void save(FileOutputStream out) throws IOException{
+		out.write(basetype);
+	}
+	
+	public void load(FileInputStream in) throws IOException{
+		int c = in.read();
+		
+		//TODO offload this onto the enum with some kind of "get tiletexinfo(int number)" function
+		
+		init(c);
 	}
 	
 	public void draw(int x, int y){

@@ -1,5 +1,7 @@
 package world;
 
+import java.io.IOException;
+
 import gzap.Standards;
 
 public class Map {
@@ -63,5 +65,21 @@ public class Map {
 		}
 		
 		return false;
+	}
+	
+	public void saveChunk(int x, int y){
+		try {
+			world[x][y].save(x, y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void loadChunk(int x, int y){
+		try {
+			world[x][y].load(x, y);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

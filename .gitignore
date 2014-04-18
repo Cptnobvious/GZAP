@@ -225,3 +225,4 @@ lib/natives-win/jinput-raw.dll
 lib/natives-win/jinput-raw_64.dll
 lib/natives-win/lwjgl.dll
 lib/natives-win/lwjgl64.dll
+*.cnk
