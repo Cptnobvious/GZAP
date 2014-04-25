@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL11.*;
 public class Tile {
 	
 	//private TileType type;
-	private int basetype = 0;
+	private int id = 0;
 	private TileTexInfo texInfo;
 	private int orientation;
 	
@@ -31,26 +31,11 @@ public class Tile {
 	}
 	
 	public void init(int basetype){
-		switch (basetype){
-		default:
-		case 0:
-			texInfo = TileTexInfo.ROAD;
-			break;
-		case 1:
-			texInfo = TileTexInfo.ROAD_STRIPE;
-			break;
-		case 2:
-			texInfo = TileTexInfo.SIDEWALK;
-			break;
-		case 3:
-			texInfo = TileTexInfo.LAWN;
-			break;
-		case 4:
-			texInfo = TileTexInfo.LAWN_MUD;
-			break;
-		}
 		
-		this.basetype = basetype;
+		texInfo = TileTexInfo.ROAD;
+		texInfo = texInfo.getInfoByID(basetype);
+		
+		this.id = basetype;
 	}
 	
 	public void changeTile(){
@@ -58,11 +43,11 @@ public class Tile {
 	}
 	
 	public int getBaseType(){
-		return this.basetype;
+		return this.id;
 	}
 	
 	public void setBaseType(int newType){
-		this.basetype = newType;
+		this.id = newType;
 	}
 	
 	public TileTexInfo getTexInfo(){
@@ -74,7 +59,7 @@ public class Tile {
 	}
 	
 	public void save(FileOutputStream out) throws IOException{
-		out.write(basetype);
+		out.write(id);
 	}
 	
 	public void load(FileInputStream in) throws IOException{

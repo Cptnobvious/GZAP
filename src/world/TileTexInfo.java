@@ -27,4 +27,29 @@ public enum TileTexInfo {
 		return spriteSheetY;
 	}
 	
+	public TileTexInfo getInfoByID(int id){
+		TileTexInfo texInfo;
+		
+		switch(id){
+		default:
+		case 0:
+			texInfo = TileTexInfo.ROAD;
+			break;
+		case 1:
+			texInfo = TileTexInfo.ROAD_STRIPE;
+			break;
+		case 2:
+			texInfo = TileTexInfo.SIDEWALK;
+			break;
+		case 3:
+			texInfo = TileTexInfo.LAWN;
+			break;
+		case 4:
+			texInfo = TileTexInfo.LAWN_MUD;
+			break;
+		}
+	
+		return texInfo;
+	}
+	
 }
