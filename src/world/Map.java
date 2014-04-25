@@ -2,6 +2,7 @@ package world;
 
 import java.io.IOException;
 
+import world.tile.Tile;
 import gzap.Standards;
 
 public class Map {

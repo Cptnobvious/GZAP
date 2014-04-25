@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import world.tile.Tile;
 import gzap.Standards;
 
 public class Chunk {

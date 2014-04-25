@@ -1,4 +1,4 @@
-package world;
+package world.tile;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

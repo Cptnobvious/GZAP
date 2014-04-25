@@ -12,7 +12,7 @@ import debug.DebugDraw;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
 import world.Map;
-import world.TileTexInfo;
+import world.tile.TileTexInfo;
 
 public class Boot {
 
