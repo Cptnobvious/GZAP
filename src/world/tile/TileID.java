@@ -10,5 +10,6 @@ public class TileID {
 	public static final int WOOD_FLOOR		= 5;
 	public static final int CARPET			= 6;
 	public static final int TILE_FLOOR		= 7;
+	public static final int WOOD_WALL		= 8;
 	
 }

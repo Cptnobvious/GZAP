@@ -11,6 +11,7 @@ import org.lwjgl.input.Keyboard;
 import debug.DebugDraw;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
+import util.TextWriter;
 import world.Map;
 import world.tile.TileTexInfo;
 
@@ -21,6 +22,7 @@ public class Boot {
 	private static Player player;
 	private static Map worldObj;
 	private static SimpleConstruction debug = new SimpleConstruction();
+	private static TextWriter textwriter = new TextWriter();
 	private static DebugDraw debugdraw = new DebugDraw();
 
 
@@ -81,6 +83,8 @@ public class Boot {
 		worldObj.draw(0, 0, xStart, yStart);
 		//debugdraw.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
+		
+		textwriter.drawString(900, 100, "abab");
 		
 	}
 	

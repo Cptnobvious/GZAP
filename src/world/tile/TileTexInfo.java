@@ -13,7 +13,8 @@ public enum TileTexInfo {
 	LAWN_MUD		(4, 0),
 	WOOD_FLOOR		(5, 0),
 	CARPET			(6, 0, 0.7f, 0.7f, 1f, 1f),
-	TILE_FLOOR		(7, 0);
+	TILE_FLOOR		(7, 0),
+	WOOD_WALL		(8, 0);
 	
 	
 	private int spriteSheetX;
@@ -74,6 +75,9 @@ public enum TileTexInfo {
 			break;
 		case TileID.TILE_FLOOR:
 			texInfo = TileTexInfo.TILE_FLOOR;
+			break;
+		case TileID.WOOD_WALL:
+			texInfo = TileTexInfo.WOOD_WALL;
 			break;
 		}
 	
