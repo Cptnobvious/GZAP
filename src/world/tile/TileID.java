@@ -8,5 +8,7 @@ public class TileID {
 	public static final int LAWN 			= 3;
 	public static final int LAWN_MUD 		= 4;
 	public static final int WOOD_FLOOR		= 5;
+	public static final int CARPET			= 6;
+	public static final int TILE_FLOOR		= 7;
 	
 }

@@ -74,6 +74,9 @@ public class Tile {
 	public void draw(int x, int y){
 		
 		glColor4f(1f, 1f, 1f, 1f);
+		glColor4f(texInfo.getColor4F().getRed(), texInfo.getColor4F().getGreen(),
+				texInfo.getColor4F().getBlue(), texInfo.getColor4F().getAlpha());
+		
 		
 		Boot.getTexHandler().bindTexture("terrain");
 		
