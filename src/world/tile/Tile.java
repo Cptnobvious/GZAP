@@ -38,8 +38,9 @@ public class Tile {
 		this.id = basetype;
 	}
 	
-	public void changeTile(){
-		
+	public void changeTile(int id){
+		this.id = id;
+		texInfo = texInfo.getInfoByID(id);
 	}
 	
 	public int getBaseType(){

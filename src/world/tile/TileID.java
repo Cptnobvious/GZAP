@@ -7,5 +7,6 @@ public class TileID {
 	public static final int SIDEWALK 		= 2;
 	public static final int LAWN 			= 3;
 	public static final int LAWN_MUD 		= 4;
+	public static final int WOOD_FLOOR		= 5;
 	
 }

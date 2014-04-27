@@ -8,7 +8,8 @@ public enum TileTexInfo {
 	ROAD_STRIPE		(1, 0),
 	SIDEWALK		(2, 0),
 	LAWN			(3, 0),
-	LAWN_MUD		(4, 0);
+	LAWN_MUD		(4, 0),
+	WOOD_FLOOR		(5, 0);
 	
 	
 	private int spriteSheetX;
@@ -46,6 +47,9 @@ public enum TileTexInfo {
 			break;
 		case 4:
 			texInfo = TileTexInfo.LAWN_MUD;
+			break;
+		case 5:
+			texInfo = TileTexInfo.WOOD_FLOOR;
 			break;
 		}
 	
