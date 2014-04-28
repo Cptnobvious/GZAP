@@ -7,10 +7,12 @@ import java.io.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 
 import debug.DebugDraw;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
+import gui.DebugGui;
 import util.TextWriter;
 import world.Map;
 import world.tile.TileTexInfo;
@@ -23,7 +25,7 @@ public class Boot {
 	private static Map worldObj;
 	private static SimpleConstruction debug = new SimpleConstruction();
 	private static TextWriter textwriter = new TextWriter();
-	private static DebugDraw debugdraw = new DebugDraw();
+	private static DebugGui debuggui = new DebugGui();
 
 
 	public static void main(String[] args) {
@@ -81,10 +83,8 @@ public class Boot {
 		int yStart = player.getY() - 12;
 		
 		worldObj.draw(0, 0, xStart, yStart);
-		//debugdraw.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
-		
-		textwriter.drawString(700, 100, "the quick brown fox jumped over the lazy dog 1234567890 .!?");
+		debuggui.showInfo();
 		
 	}
 	
@@ -120,6 +120,11 @@ public class Boot {
 		default:
 			break;
 		}
+		
+		
+		if (Mouse.isButtonDown(1)){
+			debuggui.rightClick(Mouse.getX(), Mouse.getY());
+		}
 	}
 
 
@@ -134,6 +139,10 @@ public class Boot {
 	
 	public static Player getPlayer(){
 		return player;
+	}
+	
+	public static TextWriter getTextWriter(){
+		return textwriter;
 	}
 	
 	public static TextureHandler getTexHandler(){
