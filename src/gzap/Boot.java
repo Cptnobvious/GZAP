@@ -84,7 +84,7 @@ public class Boot {
 		//debugdraw.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
 		
-		textwriter.drawString(810, 100, "the quick brown fox jumped over the lazy dog");
+		textwriter.drawString(700, 100, "the quick brown fox jumped over the lazy dog 1234567890 .!?");
 		
 	}
 	

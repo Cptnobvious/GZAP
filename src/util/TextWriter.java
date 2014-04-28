@@ -131,6 +131,45 @@ public class TextWriter {
 		case 'Z':
 			offset = 25;
 			break;
+		case '1':
+			offset = 26;
+			break;
+		case '2':
+			offset = 27;
+			break;
+		case '3':
+			offset = 28;
+			break;
+		case '4':
+			offset = 29;
+			break;
+		case '5':
+			offset = 30;
+			break;
+		case '6':
+			offset = 31;
+			break;
+		case '7':
+			offset = 32;
+			break;
+		case '8':
+			offset = 33;
+			break;
+		case '9':
+			offset = 34;
+			break;
+		case '0':
+			offset = 35;
+			break;
+		case '.':
+			offset = 36;
+			break;
+		case '!':
+			offset = 37;
+			break;
+		case '?':
+			offset = 38;
+			break;
 		}
 		
 		return (xloc * offset);
