@@ -13,6 +13,7 @@ import debug.DebugDraw;
 import debug.SimpleConstruction;
 import entities.living.player.Player;
 import gui.DebugGui;
+import gui.GuiHandler;
 import util.TextWriter;
 import world.Map;
 import world.tile.TileTexInfo;
@@ -25,7 +26,7 @@ public class Boot {
 	private static Map worldObj;
 	private static SimpleConstruction debug = new SimpleConstruction();
 	private static TextWriter textwriter = new TextWriter();
-	private static DebugGui debuggui = new DebugGui();
+	private static GuiHandler guihandler = new GuiHandler();
 
 
 	public static void main(String[] args) {
@@ -84,7 +85,7 @@ public class Boot {
 		
 		worldObj.draw(0, 0, xStart, yStart);
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
-		debuggui.showInfo();
+		guihandler.draw(810, 10);
 		
 	}
 	
@@ -123,7 +124,7 @@ public class Boot {
 		
 		
 		if (Mouse.isButtonDown(1)){
-			debuggui.rightClick(Mouse.getX(), Mouse.getY());
+			guihandler.messageDistributor(Mouse.getX(), Mouse.getY());
 		}
 	}
 
