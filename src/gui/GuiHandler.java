@@ -9,7 +9,7 @@ public class GuiHandler {
 	}
 	
 	public void draw(int x, int y){
-		debuggui.showInfo();
+		debuggui.draw();
 	}
 	
 }

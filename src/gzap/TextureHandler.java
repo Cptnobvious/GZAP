@@ -43,6 +43,10 @@ public class TextureHandler {
 			sCurrentlyBound = key;
 			
 			switch (key){
+			case "null":
+				glBindTexture(GL_TEXTURE_2D, 0);
+				currentlyBound = null;
+				break;
 			case "terrain":
 				terrain.bind();
 				currentlyBound = terrain;

@@ -185,9 +185,7 @@ public class TextWriter {
 		float end = start + charlength;
 		
 		Boot.getTexHandler().bindTexture("text");
-		
-		glColor4f(1f, 1f, 1f, 1f);
-		
+				
 		glPushMatrix();
 		
 		glTranslatef(ScreenX, ScreenY, 0f);
@@ -212,7 +210,25 @@ public class TextWriter {
 		glPopMatrix();
 	}
 	
+	
+	public void drawString(int ScreenX, int ScreenY, String text, Color4F color){
+		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+
+		for (int x = 0; x < text.length(); x++){
+			char c = text.charAt(x);
+			
+			if (c != ' '){
+				drawLetter(ScreenX + (x * 9), ScreenY, c);
+			}
+		}
+		
+		glColor4f(1f, 1f, 1f, 1f);
+	}
+	
 	public void drawString(int ScreenX, int ScreenY, String text){
+		
+		glColor4f(1f, 1f, 1f, 1f);
+
 		
 		for (int x = 0; x < text.length(); x++){
 			char c = text.charAt(x);
