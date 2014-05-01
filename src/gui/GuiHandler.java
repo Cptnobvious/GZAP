@@ -6,7 +6,7 @@ import org.lwjgl.input.Mouse;
 
 public class GuiHandler {
 
-	private static DebugGui debuggui = new DebugGui();
+	private static DebugGui debuggui = new DebugGui("Debug Gui");
 	private static boolean mouseState = false;
 	private static GUIWindow activewindow = (GUIWindow)debuggui;
 	

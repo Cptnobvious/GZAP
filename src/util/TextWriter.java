@@ -212,8 +212,10 @@ public class TextWriter {
 	
 	
 	public void drawString(int ScreenX, int ScreenY, String text, Color4F color){
+		
 		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
-
+		Boot.getTexHandler().bindTexture("text");
+		
 		for (int x = 0; x < text.length(); x++){
 			char c = text.charAt(x);
 			
@@ -228,7 +230,7 @@ public class TextWriter {
 	public void drawString(int ScreenX, int ScreenY, String text){
 		
 		glColor4f(1f, 1f, 1f, 1f);
-
+		Boot.getTexHandler().bindTexture("text");
 		
 		for (int x = 0; x < text.length(); x++){
 			char c = text.charAt(x);

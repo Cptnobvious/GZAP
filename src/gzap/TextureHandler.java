@@ -38,13 +38,14 @@ public class TextureHandler {
 	}
 	
 	public void bindTexture(String key){
-		if (!key.equals(sCurrentlyBound)){
+		if (!key.equals(sCurrentlyBound) || currentlyBound == null){
 			
 			sCurrentlyBound = key;
+			glEnable(GL_TEXTURE_2D);
 			
 			switch (key){
 			case "null":
-				glBindTexture(GL_TEXTURE_2D, 0);
+				glDisable(GL_TEXTURE_2D);
 				currentlyBound = null;
 				break;
 			case "terrain":

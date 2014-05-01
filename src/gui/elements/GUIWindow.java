@@ -14,21 +14,55 @@ public abstract class GUIWindow {
 	private int GrabBarHeight = 12;
 	private String title = "Unnamed Window";
 	
+	
+	public GUIWindow(String name){
+		this.ScreenX = 0;
+		this.ScreenY = 0;
+		this.Width = 200;
+		this.Height = 100;
+		this.title = name;
+	}
+	
 	public GUIWindow(){
 		this.ScreenX = 0;
 		this.ScreenY = 0;
 		this.Width = 200;
-		this.Height = 10;
+		this.Height = 100;
 	}
 
 	
-	public abstract void drawBackground();
 	public abstract void drawForeground();
+	
+	public void drawBackground(){
+		
+		Boot.getTexHandler().bindTexture("null");
+		
+		glColor4f(0.3f, 0.3f, 0.3f, 1f);
+		
+		glPushMatrix();
+		
+		
+		glBegin(GL_QUADS);
+		{
+			glVertex2i(ScreenX, ScreenY + GrabBarHeight);
+			
+			glVertex2i(ScreenX + Width, ScreenY + GrabBarHeight);
+
+			glVertex2i(ScreenX + Width, ScreenY + Height + GrabBarHeight);
+			
+			glVertex2i(ScreenX, ScreenY + Height + GrabBarHeight);
+		}
+		glEnd();
+		glPopMatrix();
+		
+		
+		Boot.getTextWriter().drawString(ScreenX, ScreenY + 1, title, new Color4F(0f, 0f, 0f, 1f));
+	}
 	
 	public void drawGrabBar(){
 		Boot.getTexHandler().bindTexture("null");
 		
-		glColor4f(0.8f, 0.8f, 0.8f, 1f);
+		glColor4f(0.7f, 0.7f, 0.7f, 1f);
 		
 		glPushMatrix();
 		
