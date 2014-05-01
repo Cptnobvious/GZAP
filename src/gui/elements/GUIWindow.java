@@ -60,4 +60,15 @@ public abstract class GUIWindow {
 		Boot.getTextWriter().drawString(x + ScreenX, y + ScreenY + GrabBarHeight, text);
 	}
 	
+	public void move(int dx, int dy){
+		dy = dy * -1;
+		
+		if (ScreenX + dx > 0 && ScreenX + Width + dx < Standards.W_WIDTH){
+			ScreenX += dx;
+		}
+		if (ScreenY + dy > 0 && ScreenY + Height + dy < Standards.W_HEIGHT){
+			ScreenY += dy;
+		}
+	}
+	
 }

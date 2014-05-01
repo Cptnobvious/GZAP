@@ -122,10 +122,7 @@ public class Boot {
 			break;
 		}
 		
-		
-		if (Mouse.isButtonDown(1)){
-			guihandler.messageDistributor(Mouse.getX(), Mouse.getY());
-		}
+		guihandler.mouseInput();
 	}
 
 
