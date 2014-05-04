@@ -1,4 +1,4 @@
-package gui;
+package gui.windows;
 
 import gui.elements.GUIWindow;
 import gzap.Boot;
@@ -9,8 +9,8 @@ public class DebugGui extends GUIWindow{
 	private int ChunkX = 0;
 	private int ChunkY = 0;
 	
-	public DebugGui(String name){
-		super(name);
+	public DebugGui(int id, String name){
+		super(id, name);
 	}
 	
 	

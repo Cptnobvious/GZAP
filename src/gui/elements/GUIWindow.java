@@ -12,26 +12,31 @@ public abstract class GUIWindow {
 	private int Width;
 	private int Height;
 	private int GrabBarHeight = 12;
+	private int id;
 	private String title = "Unnamed Window";
 	
 	
-	public GUIWindow(String name){
+	public GUIWindow(int id, String name){
 		this.ScreenX = 0;
 		this.ScreenY = 0;
 		this.Width = 200;
 		this.Height = 100;
 		this.title = name;
+		this.id = id;
 	}
 	
-	public GUIWindow(){
+	public GUIWindow(int id){
 		this.ScreenX = 0;
 		this.ScreenY = 0;
 		this.Width = 200;
 		this.Height = 100;
+		this.id = id;
 	}
 
 	
-	public abstract void drawForeground();
+	public void drawForeground(){
+		
+	}
 	
 	public void drawBackground(){
 		
@@ -97,7 +102,7 @@ public abstract class GUIWindow {
 	public void move(int dx, int dy){
 		dy = dy * -1;
 		
-		if (ScreenX + dx > 0 && ScreenX + Width + dx < Standards.W_WIDTH){
+		if (ScreenX + dx > 0 && ScreenX + Width + dx < 800){
 			ScreenX += dx;
 		}
 		if (ScreenY + dy > 0 && ScreenY + Height + dy < Standards.W_HEIGHT){
@@ -109,4 +114,8 @@ public abstract class GUIWindow {
 		
 	}
 	
+	
+	public int getID(){
+		return this.id;
+	}
 }
