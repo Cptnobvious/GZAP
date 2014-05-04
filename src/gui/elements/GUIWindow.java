@@ -105,4 +105,8 @@ public abstract class GUIWindow {
 		}
 	}
 	
+	public void rightClick(int x, int y){
+		
+	}
+	
 }

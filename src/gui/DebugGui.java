@@ -13,6 +13,8 @@ public class DebugGui extends GUIWindow{
 		super(name);
 	}
 	
+	
+	@Override
 	public void rightClick(int x, int y){
 		
 		if (x < 800){

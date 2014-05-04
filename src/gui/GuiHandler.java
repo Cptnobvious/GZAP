@@ -1,6 +1,11 @@
 package gui;
 
+import static org.lwjgl.opengl.GL11.*;
+
+import java.util.ArrayList;
+
 import gui.elements.GUIWindow;
+import gzap.Boot;
 
 import org.lwjgl.input.Mouse;
 
@@ -8,12 +13,13 @@ public class GuiHandler {
 
 	private static DebugGui debuggui = new DebugGui("Debug Gui");
 	private static boolean mouseState = false;
-	private static GUIWindow activewindow = (GUIWindow)debuggui;
+	private GUIWindow activewindow = (GUIWindow)debuggui;
+	private static ArrayList<GUIWindow> windowslist = new ArrayList<GUIWindow>();
 	
 	
 	public void mouseInput(){
 		if (Mouse.isButtonDown(0) && mouseState){
-			debuggui.move(Mouse.getDX(), Mouse.getDY());
+			activewindow.move(Mouse.getDX(), Mouse.getDY());
 		} else if (Mouse.isButtonDown(0)){
 			mouseState = true;
 		} else {
@@ -27,11 +33,43 @@ public class GuiHandler {
 	}
 	
 	public void messageHandler(int x, int y){
-		debuggui.rightClick(x, y);
+		activewindow.rightClick(x, y);
+	}
+	
+	public void update(){
+		
 	}
 	
 	public void draw(int x, int y){
-		debuggui.draw();
+		activewindow = (GUIWindow)debuggui;
+		activewindow.draw();
+		drawSideMenu();
+	}
+	
+	public void drawSideMenu(){
+		Boot.getTexHandler().bindTexture("debugmenu");
+		
+		glColor4f(1f, 1f, 1f, 1f);
+		
+		glPushMatrix();
+		
+		
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(0f, 0f);
+			glVertex2i(800, 288);
+			
+			glTexCoord2f((480f / 512f), 0f);
+			glVertex2i(1280, 288);
+
+			glTexCoord2f((480f / 512f), 1f);
+			glVertex2i(1280, 800);
+			
+			glTexCoord2f(0f, 1f);
+			glVertex2i(800, 800);
+		}
+		glEnd();
+		glPopMatrix();
 	}
 	
 }
