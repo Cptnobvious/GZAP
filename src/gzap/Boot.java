@@ -56,7 +56,7 @@ public class Boot {
 		
 		
 		//testChunk = new Chunk();
-		player = new Player(0, 0, 0, 100);
+		player = new Player(14, 14, 0, 100);
 		worldObj = new Map();
 		
 		while (!Display.isCloseRequested()){
@@ -85,7 +85,7 @@ public class Boot {
 		
 		worldObj.draw(0, 0, xStart, yStart);
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
-		guihandler.draw(810, 10);
+		guihandler.draw();
 		
 	}
 	
@@ -145,6 +145,10 @@ public class Boot {
 	
 	public static TextureHandler getTexHandler(){
 		return texturehandler;
+	}
+	
+	public static GuiHandler getGUIHandler(){
+		return guihandler;
 	}
 
 	public static void shutdownGracefully(){

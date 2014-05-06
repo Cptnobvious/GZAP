@@ -33,7 +33,6 @@ public abstract class GUIWindow {
 		this.id = id;
 	}
 
-	
 	public void drawForeground(){
 		
 	}
@@ -105,17 +104,24 @@ public abstract class GUIWindow {
 		if (ScreenX + dx > 0 && ScreenX + Width + dx < 800){
 			ScreenX += dx;
 		}
-		if (ScreenY + dy > 0 && ScreenY + Height + dy < Standards.W_HEIGHT){
+		if (ScreenY + dy > 0 && ScreenY + dy + getTotalHeight() < Standards.W_HEIGHT){
 			ScreenY += dy;
 		}
+	}
+	
+	public int getTotalHeight(){
+		return Height + GrabBarHeight;
 	}
 	
 	public void rightClick(int x, int y){
 		
 	}
 	
-	
 	public int getID(){
 		return this.id;
+	}
+	
+	public void setID(int id){
+		this.id = id;
 	}
 }

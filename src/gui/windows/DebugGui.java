@@ -13,6 +13,9 @@ public class DebugGui extends GUIWindow{
 		super(id, name);
 	}
 	
+	public DebugGui(int id){
+		super(id);
+	}
 	
 	@Override
 	public void rightClick(int x, int y){

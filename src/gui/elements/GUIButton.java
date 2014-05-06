@@ -8,6 +8,7 @@ import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 import gzap.Boot;
+import gzap.Standards;
 import util.Color4F;
 
 public class GUIButton {
@@ -17,6 +18,7 @@ public class GUIButton {
 	private int width;
 	private int height;
 	private int buttonID;
+	private boolean hover = false;
 	
 	public GUIButton(int x, int y, int width, int height, int buttonID){
 		this.x = x;
@@ -26,6 +28,9 @@ public class GUIButton {
 		this.buttonID = buttonID;
 	}
 	
+	public void setHover(boolean hover){
+		this.hover = hover;
+	}
 	
 	public int onClick(int wX, int wY, int mouseX, int mouseY){
 		if (isOnButton(wX, wY, mouseX, mouseY)){
@@ -36,6 +41,8 @@ public class GUIButton {
 	}
 	
 	public boolean isOnButton(int wX, int wY, int mouseX, int mouseY){
+		mouseY = Standards.W_HEIGHT - mouseY - 1;
+		
 		if ((mouseX > wX + x) && (mouseX < wX + x + width)){
 			if ((mouseY > wY + y) && (mouseY < wY + y + height)){
 				return true;
@@ -52,8 +59,12 @@ public class GUIButton {
 		
 		Boot.getTexHandler().bindTexture("null");
 		
-		glColor4f(0.3f, 0.3f, 0.3f, 1f);
-		
+		if (this.hover){
+			glColor4f(0.9f, 0.9f, 0.9f, 1f);
+		} else {
+			glColor4f(0.3f, 0.3f, 0.3f, 1f);
+		}
+			
 		glPushMatrix();
 		
 		
