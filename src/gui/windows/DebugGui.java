@@ -17,6 +17,7 @@ public class DebugGui extends GUIWindow{
 		super(id);
 	}
 	
+	/*
 	@Override
 	public void rightClick(int x, int y){
 		
@@ -28,6 +29,7 @@ public class DebugGui extends GUIWindow{
 			this.ChunkY = cy + ((Standards.W_HEIGHT - y) / Standards.TILE_SIZE) - 12;
 		}
 	}
+	*/
 
 	@Override
 	public void drawBackground() {

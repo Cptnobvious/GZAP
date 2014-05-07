@@ -22,7 +22,14 @@ public class GuiHandler {
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
 		
+		
+		for (int x = 0; x < windowslist.size(); x ++){
+			windowslist.get(x).recieveMouseEvent(mouseX, mouseY);
+		}
+		
+		
 		activePane.recieveMouseEvent(mouseX, mouseY);
+
 	}
 	
 	public void messageHandler(int x, int y){
@@ -47,10 +54,36 @@ public class GuiHandler {
 	
 	public void addWindow(GUIWindow window){
 		if (window.getID() == -1){
-			window.setID(windowslist.size() + 1);
+			window.setID(getUniqueWindowID());
 		}
 		
 		windowslist.add(window);
+	}
+	
+	public void removeWindow(int id){
+		for (int x = 0; x < windowslist.size(); x++){
+			if (windowslist.get(x).getID() == id){
+				windowslist.remove(x);
+			}
+		}
+	}
+	
+	public int getUniqueWindowID(){
+		int id = 0;
+		boolean unique = false;
+		
+		while (!unique){
+			unique = true;
+			
+			for (int x = 0; x < windowslist.size(); x++){
+				if (id == windowslist.get(x).getID()){
+					unique = false;
+					id++;
+				}
+			}
+		}
+		
+		return id;
 	}
 	
 }

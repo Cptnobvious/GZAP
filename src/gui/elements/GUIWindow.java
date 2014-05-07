@@ -1,6 +1,9 @@
 package gui.elements;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import org.lwjgl.input.Mouse;
+
 import util.Color4F;
 import gzap.Boot;
 import gzap.Standards;
@@ -14,6 +17,8 @@ public abstract class GUIWindow {
 	private int GrabBarHeight = 12;
 	private int id;
 	private String title = "Unnamed Window";
+	private boolean mouseLeft = false;
+	private boolean grabbed = false;
 	
 	
 	public GUIWindow(int id, String name){
@@ -113,15 +118,61 @@ public abstract class GUIWindow {
 		return Height + GrabBarHeight;
 	}
 	
-	public void rightClick(int x, int y){
-		
-	}
-	
 	public int getID(){
 		return this.id;
 	}
 	
 	public void setID(int id){
 		this.id = id;
+	}
+	
+	public void recieveMouseEvent(int mouseX, int mouseY){
+		if (isInWindow(mouseX, mouseY) || grabbed){
+			if (Mouse.isButtonDown(0) && mouseLeft){
+				if (grabbed){
+					move(Mouse.getDX(), Mouse.getDY());
+				}
+			} else if (Mouse.isButtonDown(0) && !mouseLeft){
+				mouseLeft = true;
+				if (isInGrabBar(mouseX, mouseY)){
+					grabbed = true;
+				}
+			} else {
+				mouseLeft = false;
+				grabbed = false;
+			}
+			
+			
+			
+			if (Mouse.isButtonDown(1)){
+				if (isInGrabBar(mouseX, mouseY)){
+					Boot.getGUIHandler().removeWindow(this.id);
+				}
+			}
+		}
+	}
+	
+	private boolean isInWindow(int mouseX, int mouseY){
+		mouseY = Standards.W_HEIGHT - mouseY - 1;
+		
+		if ((mouseX > ScreenX) && (mouseX < ScreenX + Width)){
+			if ((mouseY > ScreenY) && (mouseY < ScreenY + getTotalHeight())){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	private boolean isInGrabBar(int mouseX, int mouseY){
+		mouseY = Standards.W_HEIGHT - mouseY - 1;
+		
+		if ((mouseX > ScreenX) && (mouseX < ScreenX + Width)){
+			if ((mouseY > ScreenY) && (mouseY < ScreenY + GrabBarHeight)){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
