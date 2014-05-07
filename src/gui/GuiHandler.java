@@ -11,17 +11,21 @@ import org.lwjgl.input.Mouse;
 
 public class GuiHandler {
 
-	//private static DebugGui debuggui = new DebugGui(0, "Debug Gui");
-	private static boolean mouseState = false;
-	//private GUIWindow activewindow = (GUIWindow)debuggui;
 	private static ArrayList<GUIWindow> windowslist = new ArrayList<GUIWindow>();
 	private static DebugPane activePane = new DebugPane();
 	
+	private boolean pointsRequested = false;
+	private boolean justRequested = false;
+	private int id = -1;
+	private int requestedPointsLeft = -1;
 	
 	public void mouseInput(){
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
 		
+		if (!justRequested){
+			distributePoints(mouseX, mouseY);
+		} 
 		
 		for (int x = 0; x < windowslist.size(); x ++){
 			windowslist.get(x).recieveMouseEvent(mouseX, mouseY);
@@ -30,10 +34,9 @@ public class GuiHandler {
 		
 		activePane.recieveMouseEvent(mouseX, mouseY);
 
-	}
-	
-	public void messageHandler(int x, int y){
-		//activewindow.rightClick(x, y);
+		if (!Mouse.isButtonDown(0)){
+			justRequested = false;
+		}
 	}
 	
 	public void update(){
@@ -84,6 +87,33 @@ public class GuiHandler {
 		}
 		
 		return id;
+	}
+	
+	public void requestPoints(int id, int points){
+		this.pointsRequested = true;
+		this.id = id;
+		this.requestedPointsLeft = points;
+		this.justRequested = true;
+	}
+	
+	private void distributePoints(int mouseX, int mouseY){
+		if (pointsRequested && id != -1 && requestedPointsLeft != -1){
+			if (requestedPointsLeft > 0){
+				for (int x = 0; x < windowslist.size(); x++){
+					if (windowslist.get(x).getID() == id){
+						if (Mouse.isButtonDown(0)){
+							if (windowslist.get(x).getPoint(mouseX, mouseY)){
+								requestedPointsLeft--;
+							}
+						}
+					}
+				}
+			} else {
+				id = -1;
+				pointsRequested = false;
+				requestedPointsLeft = -1;
+			}
+		}
 	}
 	
 }

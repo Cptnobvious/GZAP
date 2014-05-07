@@ -2,6 +2,8 @@ package gui.elements;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Mouse;
 
 import util.Color4F;
@@ -18,8 +20,10 @@ public abstract class GUIWindow {
 	private int id;
 	private String title = "Unnamed Window";
 	private boolean mouseLeft = false;
+	private boolean mouseLeftButton = false;
 	private boolean grabbed = false;
-	
+	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
+
 	
 	public GUIWindow(int id, String name){
 		this.ScreenX = 0;
@@ -97,6 +101,7 @@ public abstract class GUIWindow {
 		drawGrabBar();
 		drawBackground();
 		drawForeground();
+		drawButtons();
 	}
 	
 	public void addText(int x, int y, String text){
@@ -149,6 +154,28 @@ public abstract class GUIWindow {
 					Boot.getGUIHandler().removeWindow(this.id);
 				}
 			}
+			
+			//Deal with buttons
+			
+			for (int i = 0; i < buttons.size(); i++){
+				if (buttons.get(i).isOnButton(ScreenX, ScreenY, mouseX, mouseY)){
+					buttons.get(i).setHover(true);
+				} else {
+					buttons.get(i).setHover(false);
+				}
+				
+				if (Mouse.isButtonDown(0) && !mouseLeftButton){
+					int buttonID = buttons.get(i).onClick(ScreenX, ScreenY, mouseX, mouseY);
+					if (buttonID != -1){
+						recieveButtonEvent(buttonID);
+					}
+					mouseLeftButton = true;
+				} else if (Mouse.isButtonDown(0) && mouseLeftButton) {
+					//do nothing
+				} else {
+					mouseLeftButton = false;
+				}
+			}
 		}
 	}
 	
@@ -174,5 +201,27 @@ public abstract class GUIWindow {
 		}
 		
 		return false;
+	}
+	
+	public void requestPoints(int number){
+		Boot.getGUIHandler().requestPoints(this.id, number);
+	}
+	
+	public boolean getPoint(int mouseX, int mouseY){
+		return true;
+	}
+	
+	public void drawButtons(){
+		for (int x = 0; x < buttons.size(); x ++){
+			buttons.get(x).draw(ScreenX, ScreenY);
+		}
+	}
+	
+	public void addButton(int x, int y, int width, int height, int buttonID){
+		buttons.add(new GUIButton(x, y + GrabBarHeight, width, height, buttonID));
+	}
+	
+	protected void recieveButtonEvent(int buttonID){
+		
 	}
 }

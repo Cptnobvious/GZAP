@@ -62,7 +62,7 @@ public class GUIButton {
 		if (this.hover){
 			glColor4f(0.9f, 0.9f, 0.9f, 1f);
 		} else {
-			glColor4f(0.3f, 0.3f, 0.3f, 1f);
+			glColor4f(0.3f, 0.3f, 0.7f, 1f);
 		}
 			
 		glPushMatrix();

@@ -62,10 +62,6 @@ public abstract class GUIPane {
 		//Boot.getTextWriter().drawString(x + ScreenX, y + ScreenY + GrabBarHeight, text);
 	}
 	
-	public void rightClick(int x, int y){
-		
-	}
-	
 	public void drawButtons(){
 		for (int x = 0; x < buttons.size(); x ++){
 			buttons.get(x).draw(800, 288);
