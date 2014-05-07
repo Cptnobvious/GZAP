@@ -13,6 +13,7 @@ public class GuiHandler {
 
 	private static ArrayList<GUIWindow> windowslist = new ArrayList<GUIWindow>();
 	private static DebugPane activePane = new DebugPane();
+	//private boolean windowUsed = false;
 	
 	private boolean pointsRequested = false;
 	private boolean justRequested = false;
@@ -25,16 +26,19 @@ public class GuiHandler {
 		
 		if (!justRequested){
 			distributePoints(mouseX, mouseY);
+			justRequested = true;
 		} 
 		
 		for (int x = 0; x < windowslist.size(); x ++){
-			windowslist.get(x).recieveMouseEvent(mouseX, mouseY);
+			if (windowslist.get(x).recieveMouseEvent(mouseX, mouseY)){
+				break;
+			}
 		}
 		
 		
 		activePane.recieveMouseEvent(mouseX, mouseY);
 
-		if (!Mouse.isButtonDown(0)){
+		if (!Mouse.isButtonDown(0) && justRequested){
 			justRequested = false;
 		}
 	}

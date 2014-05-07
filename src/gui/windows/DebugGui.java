@@ -8,6 +8,9 @@ public class DebugGui extends GUIWindow{
 
 	private int posX = 0;
 	private int posY = 0;
+	private int posX2 = 0;
+	private int posY2 = 0;
+	private int picks = 0;
 	
 	public DebugGui(int id, String name){
 		super(id, name);
@@ -18,19 +21,33 @@ public class DebugGui extends GUIWindow{
 	public DebugGui(int id){
 		super(id);
 		
-		addButton(10, 10, 30, 10, 1);
+		addButton(10, 24, 30, 10, 1);
 	}
 	
 
 	@Override
 	public boolean getPoint(int mouseX, int mouseY){
+		int newX = -1;
+		int newY = -1;
 		
 		if (mouseX < 800){
 			int cx = Boot.getPlayer().getX();
 			int cy = Boot.getPlayer().getY();
 
-			this.posX = cx + (mouseX / Standards.TILE_SIZE) - 12;
-			this.posY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
+			newX = cx + (mouseX / Standards.TILE_SIZE) - 12;
+			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
+		}
+		
+		if (newX != -1 && newY != -1){
+			if (picks == 0){
+				this.posX = newX;
+				this.posY = newY;
+				picks = 1;
+			} else {
+				this.posX2 = newX;
+				this.posY2 = newY;
+				picks = 0;
+			}
 		}
 		
 		return true;
@@ -39,7 +56,8 @@ public class DebugGui extends GUIWindow{
 	@Override
 	protected void recieveButtonEvent(int buttonID){
 		if (buttonID == 1){
-			requestPoints(1);
+			requestPoints(2);
+			picks = 0;
 		}
 	}
 
@@ -51,7 +69,9 @@ public class DebugGui extends GUIWindow{
 	@Override
 	public void drawForeground() {
 		String str = "X." + String.valueOf(posX) + " Y." + String.valueOf(posY);
+		String str2 = "X1." + String.valueOf(posX2) + " Y2." + String.valueOf(posY2);
 		addText(0, 0, str);
+		addText(0, 12, str2);
 	}
 	
 }

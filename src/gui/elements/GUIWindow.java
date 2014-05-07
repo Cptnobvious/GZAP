@@ -131,7 +131,7 @@ public abstract class GUIWindow {
 		this.id = id;
 	}
 	
-	public void recieveMouseEvent(int mouseX, int mouseY){
+	public boolean recieveMouseEvent(int mouseX, int mouseY){
 		if (isInWindow(mouseX, mouseY) || grabbed){
 			if (Mouse.isButtonDown(0) && mouseLeft){
 				if (grabbed){
@@ -176,10 +176,14 @@ public abstract class GUIWindow {
 					mouseLeftButton = false;
 				}
 			}
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
-	private boolean isInWindow(int mouseX, int mouseY){
+	public boolean isInWindow(int mouseX, int mouseY){
 		mouseY = Standards.W_HEIGHT - mouseY - 1;
 		
 		if ((mouseX > ScreenX) && (mouseX < ScreenX + Width)){
