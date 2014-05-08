@@ -47,41 +47,30 @@ public enum TileTexInfo {
 		return color4f;
 	}
 	
-	public TileTexInfo getInfoByID(int id){
-		TileTexInfo texInfo;
+	public static TileTexInfo getInfoByID(int id){
 		
 		switch(id){
 		default:
 		case TileID.ROAD:
-			texInfo = TileTexInfo.ROAD;
-			break;
+			return TileTexInfo.ROAD;
 		case TileID.ROAD_STRIPE:
-			texInfo = TileTexInfo.ROAD_STRIPE;
-			break;
+			return TileTexInfo.ROAD_STRIPE;
 		case TileID.SIDEWALK:
-			texInfo = TileTexInfo.SIDEWALK;
-			break;
+			return TileTexInfo.SIDEWALK;
 		case TileID.LAWN:
-			texInfo = TileTexInfo.LAWN;
-			break;
+			return TileTexInfo.LAWN;
 		case TileID.LAWN_MUD:
-			texInfo = TileTexInfo.LAWN_MUD;
-			break;
+			return TileTexInfo.LAWN_MUD;
 		case TileID.WOOD_FLOOR:
-			texInfo = TileTexInfo.WOOD_FLOOR;
-			break;
+			return TileTexInfo.WOOD_FLOOR;
 		case TileID.CARPET:
-			texInfo = TileTexInfo.CARPET;
-			break;
+			return TileTexInfo.CARPET;
 		case TileID.TILE_FLOOR:
-			texInfo = TileTexInfo.TILE_FLOOR;
-			break;
+			return TileTexInfo.TILE_FLOOR;
 		case TileID.WOOD_WALL:
-			texInfo = TileTexInfo.WOOD_WALL;
-			break;
+			return TileTexInfo.WOOD_WALL;
 		}
 	
-		return texInfo;
 	}
 	
 }

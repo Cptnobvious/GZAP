@@ -19,35 +19,6 @@ public class Player extends AbstractMob{
 		super(x, y, z, health);
 	}
 
-	@Override
-	public boolean canMove() {
-		// TODO This needs updating
-		return false;
-	}
-
-	@Override
-	public boolean move(int direction) {
-		switch (direction){
-		case Standards.NORTH:
-			y--;
-			break;
-		case Standards.EAST:
-			x++;
-			break;
-		case Standards.SOUTH:
-			y++;
-			break;
-		case Standards.WEST:
-			x--;
-			break;
-		default:
-			break;
-		}
-		
-		orientation = direction;
-		
-		return false;
-	}
 
 	@Override
 	public void draw(int x, int y) {

@@ -13,12 +13,8 @@ public class Tile {
 	//private TileType type;
 	private int id = 0;
 	private TileTexInfo texInfo;
+	private boolean isSolid = false;
 	private int orientation;
-	
-	public Tile(TileTexInfo texInfo){
-		this.texInfo = texInfo;
-		this.orientation = Standards.NORTH;
-	}
 	
 	public Tile(int basetype){
 		init(basetype);
@@ -31,16 +27,24 @@ public class Tile {
 	}
 	
 	public void init(int basetype){
-		
-		texInfo = TileTexInfo.ROAD;
-		texInfo = texInfo.getInfoByID(basetype);
+		TileInfo tileinfo = TileInfo.getInfoByID(basetype);
+		texInfo = tileinfo.getTexInfo();
+		isSolid = tileinfo.getSolid();
+		orientation = Standards.NORTH;
 		
 		this.id = basetype;
 	}
 	
 	public void changeTile(int id){
-		this.id = id;
-		texInfo = texInfo.getInfoByID(id);
+		init(id);
+	}
+	
+	public void setSolid(boolean solid){
+		this.isSolid = solid;
+	}
+	
+	public boolean getSolid(){
+		return this.isSolid;
 	}
 	
 	public int getBaseType(){
