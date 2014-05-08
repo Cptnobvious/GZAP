@@ -3,17 +3,20 @@ package gui;
 
 import java.util.ArrayList;
 
+import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.panes.DebugPane;
 import gui.windows.DebugGui;
 
 import org.lwjgl.input.Mouse;
 
+import world.generation.prefab.PrefabPane;
+
 public class GuiHandler {
 
 	private static ArrayList<GUIWindow> windowslist = new ArrayList<GUIWindow>();
-	private static DebugPane activePane = new DebugPane();
-	//private boolean windowUsed = false;
+	private static GUIPane activePane = (GUIPane)new DebugPane();
+	private static PanesSelector panesselector = new PanesSelector();
 	
 	private boolean pointsRequested = false;
 	private boolean justRequested = false;
@@ -35,12 +38,17 @@ public class GuiHandler {
 			}
 		}
 		
+		panesselector.recieveInput(mouseX, mouseY);
 		
 		activePane.recieveMouseEvent(mouseX, mouseY);
 
 		if (!Mouse.isButtonDown(0) && justRequested){
 			justRequested = false;
 		}
+	}
+	
+	public void changeActivePane(GUIPane pane){
+		activePane = pane;
 	}
 	
 	public void update(){
@@ -52,6 +60,7 @@ public class GuiHandler {
 			windowslist.get(x).draw();
 		}
 		
+		panesselector.draw();
 		drawSideMenu();
 	}
 	

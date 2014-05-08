@@ -59,7 +59,7 @@ public abstract class GUIPane {
 	}
 	
 	public void addText(int x, int y, String text){
-		//Boot.getTextWriter().drawString(x + ScreenX, y + ScreenY + GrabBarHeight, text);
+		Boot.getTextWriter().drawString(800 + x, 288 + y, text);
 	}
 	
 	public void drawButtons(){
@@ -70,6 +70,10 @@ public abstract class GUIPane {
 	
 	public void addButton(int x, int y, int width, int height, int buttonID){
 		buttons.add(new GUIButton(x, y, width, height, buttonID));
+	}
+	
+	public void addButton(int x, int y, int width, int height, int buttonID, String name){
+		buttons.add(new GUIButton(x, y, width, height, buttonID, name));
 	}
 	
 	public void recieveMouseEvent(int x, int y){

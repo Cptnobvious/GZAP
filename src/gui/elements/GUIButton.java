@@ -19,6 +19,7 @@ public class GUIButton {
 	private int height;
 	private int buttonID;
 	private boolean hover = false;
+	private String name = "";
 	
 	public GUIButton(int x, int y, int width, int height, int buttonID){
 		this.x = x;
@@ -26,6 +27,15 @@ public class GUIButton {
 		this.width = width;
 		this.height = height;
 		this.buttonID = buttonID;
+	}
+	
+	public GUIButton(int x, int y, int width, int height, int buttonID, String name){
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.buttonID = buttonID;
+		this.name = name;
 	}
 	
 	public void setHover(boolean hover){
@@ -80,5 +90,7 @@ public class GUIButton {
 		}
 		glEnd();
 		glPopMatrix();
+		
+		Boot.getTextWriter().drawString(wX + x, wY + y, name);
 	}
 }

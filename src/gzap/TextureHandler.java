@@ -18,6 +18,7 @@ public class TextureHandler {
 	public static Texture text;
 	public static String sCurrentlyBound = "null";
 	public static Texture currentlyBound;
+	public static Texture panes;
 	
 	public static Texture debugMenu;
 	
@@ -30,6 +31,7 @@ public class TextureHandler {
 		player = loadTexture("player");
 		debug = loadTexture("debug_mapcenter");
 		text = loadTexture("text");
+		panes = loadTexture("panes");
 		
 		debugMenu = loadTexture("debugmenu");
 	}
@@ -39,6 +41,7 @@ public class TextureHandler {
 		player.release();
 		debug.release();
 		text.release();
+		panes.release();
 		
 		debugMenu.release();
 	}
@@ -73,6 +76,10 @@ public class TextureHandler {
 			case "debugmenu":
 				debugMenu.bind();
 				currentlyBound = debugMenu;
+				break;
+			case "panes":
+				panes.bind();
+				currentlyBound = panes;
 				break;
 			default:
 				//TODO make a proper error handler
