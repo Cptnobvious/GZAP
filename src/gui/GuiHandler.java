@@ -111,10 +111,10 @@ public class GuiHandler {
 	
 	private void distributePoints(int mouseX, int mouseY){
 		if (pointsRequested && id != -1 && requestedPointsLeft != -1){
-			if (requestedPointsLeft > 0){
+			if (requestedPointsLeft > 0 && id != -2){
 				for (int x = 0; x < windowslist.size(); x++){
 					
-					if (id != -2 && windowslist.get(x).getID() == id){
+					if (windowslist.get(x).getID() == id){
 						if (Mouse.isButtonDown(0)){
 							if (windowslist.get(x).getPoint(mouseX, mouseY)){
 								requestedPointsLeft--;
@@ -122,14 +122,12 @@ public class GuiHandler {
 						}
 					} 
 					
-					if (id == -2){
-						if (Mouse.isButtonDown(0)){
-							if (activePane.getPoint(mouseX, mouseY)){
-								requestedPointsLeft--;
-							}
-						}
+				}
+			} else if (requestedPointsLeft > 0 && id == -2){
+				if (Mouse.isButtonDown(0)){
+					if (activePane.getPoint(mouseX, mouseY)){
+						requestedPointsLeft--;
 					}
-					
 				}
 			} else {
 				id = -1;

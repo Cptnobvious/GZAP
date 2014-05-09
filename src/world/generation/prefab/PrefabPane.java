@@ -58,9 +58,6 @@ public class PrefabPane extends GUIPane{
 	
 	@Override
 	protected void recieveButtonEvent(int buttonID){
-		
-		System.out.print(buttonID);
-		
 		switch(buttonID){
 		default:
 			break;
