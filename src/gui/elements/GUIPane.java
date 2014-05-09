@@ -77,6 +77,12 @@ public abstract class GUIPane {
 	}
 	
 	public void recieveMouseEvent(int x, int y){
+		boolean left = false;
+		
+		if (Mouse.isButtonDown(0)){
+			left = true;
+		}
+		
 		for (int i = 0; i < buttons.size(); i++){
 			if (buttons.get(i).isOnButton(800, 288, x, y)){
 				buttons.get(i).setHover(true);
@@ -84,13 +90,13 @@ public abstract class GUIPane {
 				buttons.get(i).setHover(false);
 			}
 			
-			if (Mouse.isButtonDown(0) && !mouseStatus){
+			if (left && !mouseStatus){
 				int buttonID = buttons.get(i).onClick(800, 288, x, y);
 				if (buttonID != -1){
 					recieveButtonEvent(buttonID);
+					mouseStatus = true;
 				}
-				mouseStatus = true;
-			} else if (Mouse.isButtonDown(0) && mouseStatus) {
+			} else if (left && mouseStatus) {
 				//do nothing
 			} else {
 				mouseStatus = false;
@@ -101,6 +107,14 @@ public abstract class GUIPane {
 	
 	protected void recieveButtonEvent(int buttonID){
 		
+	}
+	
+	public void requestPoints(int number){
+		Boot.getGUIHandler().requestPoints(-2, number);
+	}
+	
+	public boolean getPoint(int mouseX, int mouseY){
+		return true;
 	}
 	
 }
