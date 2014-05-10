@@ -17,7 +17,6 @@ public class ConstructionPane extends GUIPane{
 	public ConstructionPane(){
 		super();
 		
-		int lines = 0;
 		int buttonY = 10;
 		
 		for (int i = 0; i < allowed.length; i ++){

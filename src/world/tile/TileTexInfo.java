@@ -12,7 +12,7 @@ public enum TileTexInfo {
 	LAWN			(3, 0),
 	LAWN_MUD		(4, 0),
 	WOOD_FLOOR		(5, 0),
-	CARPET			(6, 0, 0.7f, 0.7f, 1f, 1f),
+	CARPET			(6, 0, 0.5f, 0.5f, 0.6f, 1f),
 	TILE_FLOOR		(7, 0),
 	WOOD_WALL		(8, 0);
 	
