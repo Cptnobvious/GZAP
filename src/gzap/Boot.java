@@ -42,6 +42,8 @@ public class Boot {
 		//TODO add a check to see if the save directory already exists
 		File dir = new File(Standards.WORLD_SAVE_LOCATION);
 		dir.mkdirs();
+		dir = new File("data");
+		dir.mkdir();
 		
 		//Initialization code OpenGL
 		glMatrixMode(GL_PROJECTION);

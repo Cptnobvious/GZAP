@@ -40,7 +40,7 @@ public class GuiHandler {
 		
 		panesselector.recieveInput(mouseX, mouseY);
 		
-		activePane.recieveMouseEvent(mouseX, mouseY);
+		activePane.__recieveMouseEvent(mouseX, mouseY);
 
 		if (!Mouse.isButtonDown(0) && justRequested){
 			justRequested = false;

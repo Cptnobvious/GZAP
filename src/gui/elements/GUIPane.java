@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 
+import gui.elements.buttons.GUIButton;
 import gzap.Boot;
 
 public abstract class GUIPane {
@@ -68,6 +69,10 @@ public abstract class GUIPane {
 		}
 	}
 	
+	public void addButton(GUIButton newButton){
+		buttons.add(newButton);
+	}
+	
 	public void addButton(int x, int y, int width, int height, int buttonID){
 		buttons.add(new GUIButton(x, y, width, height, buttonID));
 	}
@@ -76,7 +81,7 @@ public abstract class GUIPane {
 		buttons.add(new GUIButton(x, y, width, height, buttonID, name));
 	}
 	
-	public void recieveMouseEvent(int x, int y){
+	public void __recieveMouseEvent(int x, int y){
 		boolean left = false;
 		
 		if (Mouse.isButtonDown(0)){
@@ -102,8 +107,13 @@ public abstract class GUIPane {
 				mouseStatus = false;
 			}
 		}
+		
+		recieveMouseEvent(x, y);
 	}
 	
+	public void recieveMouseEvent(int mouseX, int mouseY){
+		
+	}
 	
 	protected void recieveButtonEvent(int buttonID){
 		

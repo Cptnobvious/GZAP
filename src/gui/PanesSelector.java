@@ -6,6 +6,7 @@ import org.lwjgl.input.Mouse;
 
 import world.generation.prefab.PrefabPane;
 import gui.elements.GUIPane;
+import gui.panes.ConstructionPane;
 import gui.panes.DebugPane;
 import gzap.Boot;
 import gzap.Standards;
@@ -49,6 +50,8 @@ public class PanesSelector {
 			return (GUIPane)(new DebugPane());
 		case 1:
 			return (GUIPane)(new PrefabPane());
+		case 2:
+			return (GUIPane)(new ConstructionPane());
 		}
 		
 	}

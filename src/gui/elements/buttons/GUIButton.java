@@ -1,4 +1,4 @@
-package gui.elements;
+package gui.elements.buttons;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.glBegin;
@@ -13,8 +13,8 @@ import util.Color4F;
 
 public class GUIButton {
 
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	private int width;
 	private int height;
 	private int buttonID;
