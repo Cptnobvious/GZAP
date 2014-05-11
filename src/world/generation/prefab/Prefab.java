@@ -41,8 +41,8 @@ public class Prefab {
 	}
 	
 	
-	public void save() throws IOException{
-		String path = "data/prefabtest.pfb";
+	public void save(String name) throws IOException{
+		String path = name;
 		FileOutputStream out = new FileOutputStream(path);
 
 		out.write(width);
@@ -62,7 +62,7 @@ public class Prefab {
 	}
 	
 	public void buildPrefab(int x, int y, String name) throws IOException{
-		String path = "data/" + name + ".pfb";
+		String path = name; 
 		FileInputStream in = new FileInputStream(path);
 		
 		width = in.read();

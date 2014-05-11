@@ -1,7 +1,9 @@
 package world.generation.prefab;
 
+import java.io.File;
 import java.io.IOException;
 
+import world.tile.TileInfo;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.windows.DebugGui;
@@ -16,15 +18,17 @@ public class PrefabPane extends GUIPane{
 	private int y1;
 	private int y2;
 
+	private int spawnRotation = 0;
+	
 	private Prefab prefab = new Prefab(0, 0, 0, 0);
 	
 	public PrefabPane(){
 		super();
 		addButton(10, 10, 100, 40, 1, "Prefab Win");
 		addButton(130, 10, 100, 40, 2, "Request New");
-		addButton(130, 60, 100, 40, 3, "Make Prefab");
-		addButton(130, 110, 100, 40, 4, "Save Prefab");
-		addButton(130, 160, 100, 40, 5, "Load Prefab");
+		addButton(130, 60, 100, 40, 4, "Save Prefab");
+		addButton(130, 110, 100, 40, 5, "Load Prefab");
+		addButton(250, 10, 100, 40, 6, "Spawn Zone");
 	}
 
 	@Override
@@ -69,16 +73,29 @@ public class PrefabPane extends GUIPane{
 			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
 		}
 		
+		
 		if (newX != -1 && newY != -1){
-			if (picks == 0){
+			switch(picks){
+			default:
+				break;
+			case 0:
 				this.x1 = newX;
 				this.y1 = newY;
 				picks = 1;
-			} else {
+				break;
+			case 1:
 				this.x2 = newX;
 				this.y2 = newY;
 				picks = 0;
+				break;
+			case 3:
+				spawnBox(20, newX, newY);
+				break;
+			case 4:
+				loadPrefab(newX, newY);
+				break;
 			}
+
 		}
 		
 		return true;
@@ -96,24 +113,76 @@ public class PrefabPane extends GUIPane{
 			requestPoints(2);
 			picks = 0;
 			break;
-		case 3:
-			prefab = new Prefab(x1, y1, x2, y2);
-			break;
 		case 4:
-			try {
-				prefab.save();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			makePrefab();
 			break;
 		case 5:
+			requestPoints(1);
+			picks = 4;
+			break;
+		case 6:
+			requestPoints(1);
+			picks = 3;
+			break;
+		}
+	}
+	
+	
+	private void makePrefab(){
+		prefab = new Prefab(x1, y1, x2, y2);
+		boolean found = true;
+		int filenumber = 0;
+		String pathTag = "HousePrefab";
+		String path = "";
+		
+		do {
+			path = "data/" + pathTag + String.valueOf(filenumber) + ".pfb";
+			File f = new File(path);
+			if (!f.isFile()){
+				found = false;
+			} else {
+				filenumber++;
+			}
+		} while (found);
+		
+		
+		
+		try {
+			prefab.save(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	private void loadPrefab(int spawnX, int spawnY){
+		String pathTag = "HousePrefab";
+		String path = "";
+		
+		path = "data/" + pathTag + String.valueOf(spawnRotation) + ".pfb";
+		File f = new File(path);
+		
+		if (f.isFile()){
 			try {
-				prefab.buildPrefab(3, 3, "prefabtest");
+				prefab.buildPrefab(spawnX, spawnY, path);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			break;
+			spawnRotation++;
+		} else {
+			spawnRotation = 0;
+		}
+		
+	}
+	
+	private void spawnBox(int size, int xStart, int yStart){
+		size = size + 2;
+		for (int i = 0; i < size; i++){
+			for (int j = 0; j < size; j++){
+				if (i == 0 || i == size - 1 || j == 0 || j == size - 1){
+					Boot.getWorldObj().getTileAtCoords(xStart + i, yStart + j).init(TileInfo.ROAD.getID());;
+				}
+			}
 		}
 	}
 }

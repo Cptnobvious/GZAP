@@ -12,7 +12,7 @@ import gzap.Standards;
 public class ConstructionPane extends GUIPane{
 
 	private int ID = 8;
-	private int[] allowed = {0, 1, 2, 3, 5, 6, 7, 8};
+	private int[] allowed = {0, 1, 2, 3, 4, 5, 6, 7, 8};
 
 	public ConstructionPane(){
 		super();
@@ -20,7 +20,11 @@ public class ConstructionPane extends GUIPane{
 		int buttonY = 10;
 		
 		for (int i = 0; i < allowed.length; i ++){
-			int buttonX = (i * (32 + 5)) + 10;
+			if (i % 8 == 0){
+				buttonY = ((i / 8) * (32 + 4)) + 10;
+			}
+			
+			int buttonX = ((i % 8)* (32 + 4)) + 10;
 			addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i])));
 		}
 	}
