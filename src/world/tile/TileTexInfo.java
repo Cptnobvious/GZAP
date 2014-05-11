@@ -12,7 +12,7 @@ public enum TileTexInfo {
 	LAWN			(3, 0),
 	LAWN_MUD		(4, 0),
 	WOOD_FLOOR		(5, 0),
-	CARPET			(6, 0, 0.5f, 0.5f, 0.6f, 1f),
+	CARPET			(6, 0, 124, 134, 153, 255),
 	TILE_FLOOR		(7, 0),
 	WOOD_WALL		(8, 0);
 	
@@ -29,6 +29,13 @@ public enum TileTexInfo {
 	}
 	
 	TileTexInfo(int spriteSheetX, int spriteSheetY, float red, float green, float blue, float alpha){
+		this.spriteSheetX = spriteSheetX;
+		this.spriteSheetY = spriteSheetY;
+		
+		this.color4f = new Color4F(red, green, blue, alpha);
+	}
+	
+	TileTexInfo(int spriteSheetX, int spriteSheetY, int red, int green, int blue, int alpha){
 		this.spriteSheetX = spriteSheetX;
 		this.spriteSheetY = spriteSheetY;
 		

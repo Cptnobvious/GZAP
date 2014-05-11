@@ -12,7 +12,7 @@ import gzap.Standards;
 public class ConstructionPane extends GUIPane{
 
 	private int ID = 8;
-	private int[] allowed = {2, 3, 5, 6, 7, 8};
+	private int[] allowed = {0, 1, 2, 3, 5, 6, 7, 8};
 
 	public ConstructionPane(){
 		super();
@@ -44,6 +44,12 @@ public class ConstructionPane extends GUIPane{
 			if (Mouse.isButtonDown(0)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
 					Boot.getWorldObj().getTileAtCoords(newX, newY).init(ID);
+				}
+			}
+			
+			if (Mouse.isButtonDown(1)){
+				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
+					Boot.getWorldObj().getTileAtCoords(newX, newY).setOrientation(Standards.EAST);
 				}
 			}
 		}

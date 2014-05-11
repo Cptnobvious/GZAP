@@ -39,6 +39,14 @@ public class Tile {
 		init(id);
 	}
 	
+	public void setOrientation(int direction){
+		this.orientation = direction;
+	}
+	
+	public int getOrientation(){
+		return this.orientation;
+	}
+	
 	public void setSolid(boolean solid){
 		this.isSolid = solid;
 	}
@@ -100,11 +108,30 @@ public class Tile {
 		left = (xloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
 		right = left + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
 		
+		float rotXOffset = 0;
+		float rotYOffset = 0;
+		
+		switch (this.getOrientation()){
+		case Standards.NORTH:
+			break;
+		case Standards.SOUTH:
+			rotXOffset = Standards.TILE_SIZE;
+			rotYOffset = Standards.TILE_SIZE;
+			break;
+		case Standards.EAST:
+			rotXOffset = Standards.TILE_SIZE;
+			//rotYOffset = Standards.TILE_SIZE;
+			break;
+		case Standards.WEST:
+			rotYOffset = Standards.TILE_SIZE;
+			break;
+		}
+		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
 		
 		//glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
-		glTranslatef((float)x, (float)y, 0f);
+		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
 		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		
 		

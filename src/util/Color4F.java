@@ -21,6 +21,13 @@ public class Color4F {
 		this.blue = blue;
 		this.alpha = alpha;
 	}
+	
+	public Color4F(int red, int green, int blue, int alpha){
+		this.red = 		(float)red / 255f;
+		this.green = 	(float)green / 255f;
+		this.blue = 	(float)blue / 255f;
+		this.alpha = 	(float)alpha / 255f;
+	}
 
 
 	public float getRed() {
