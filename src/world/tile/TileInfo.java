@@ -1,5 +1,7 @@
 package world.tile;
 
+import java.util.ArrayList;
+
 public enum TileInfo {
 
 	ROAD			(TileID.ROAD, false),
@@ -19,13 +21,13 @@ public enum TileInfo {
 	
 	TileInfo(){
 		this.tileID = 0;
-		this.texinfo = texinfo.getInfoByID(0);
+		//this.texinfo = texinfo.getInfoByID(0);
 		this.isSolid = false;
 	}
 	
 	TileInfo(int id, boolean isSolid){
 		this.tileID = id;
-		this.texinfo = TileTexInfo.getInfoByID(id);
+		//this.texinfo = TileTexInfo.getInfoByID(id);
 		this.isSolid = isSolid;
 	}
 	

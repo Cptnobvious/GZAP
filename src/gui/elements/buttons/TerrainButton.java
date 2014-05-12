@@ -11,6 +11,7 @@ import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 import gzap.Boot;
+import gzap.GameRegistry;
 import gzap.Standards;
 import world.tile.TileTexInfo;
 
@@ -21,8 +22,8 @@ public class TerrainButton extends GUIButton {
 	
 	public TerrainButton(int x, int y, int TerrainID) {
 		super(x, y, Standards.TILE_SIZE, Standards.TILE_SIZE, TerrainID);
-		TexX = TileTexInfo.getInfoByID(TerrainID).getSpriteSheetX();
-		TexY = TileTexInfo.getInfoByID(TerrainID).getSpriteSheetY();
+		TexX = GameRegistry.getTile(TerrainID).getTexInfo(0).getSpriteSheetX();//TileTexInfo.getInfoByID(TerrainID).getSpriteSheetX();
+		TexY = GameRegistry.getTile(TerrainID).getTexInfo(0).getSpriteSheetY();
 	}
 	
 	@Override

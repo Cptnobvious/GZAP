@@ -28,9 +28,9 @@ public class Chunk {
 				} else if (x == 8){
 					contents[x][y] = new Tile(1);
 				} else if (x == Standards.CHUNK_SIZE - 1) {
-					contents[x][y] = new Tile(3);
+					contents[x][y] = new Tile(2);
 				} else {
-					contents[x][y] = new Tile(3);
+					contents[x][y] = new Tile(2);
 				}
 				
 				if (x == 0){
@@ -58,7 +58,7 @@ public class Chunk {
 
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
-				contents[x][y].save(out);
+				//contents[x][y].save(out);
 			}
 		}
 
@@ -73,7 +73,7 @@ public class Chunk {
 		
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
-				contents[x][y].load(in);
+				//contents[x][y].load(in);
 			}
 		}
 

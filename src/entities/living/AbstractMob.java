@@ -39,7 +39,7 @@ public abstract class AbstractMob extends AbstractEntity{
 		if (newX >= 0 && newX <= mapedge){
 			if (newY >= 0 && newY <= mapedge){
 
-				boolean isSolid = Boot.getWorldObj().getTileAtCoords(newX, newY).getSolid();
+				boolean isSolid = Boot.getWorldObj().getTileAtCoords(newX, newY).isSolid();
 				if (!isSolid){
 					return true;
 				}

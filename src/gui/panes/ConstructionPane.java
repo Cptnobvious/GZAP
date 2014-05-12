@@ -47,13 +47,13 @@ public class ConstructionPane extends GUIPane{
 
 			if (Mouse.isButtonDown(0)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
-					Boot.getWorldObj().getTileAtCoords(newX, newY).init(ID);
+					//Boot.getWorldObj().getTileAtCoords(newX, newY).init(ID);
 				}
 			}
 			
 			if (Mouse.isButtonDown(1)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
-					Boot.getWorldObj().getTileAtCoords(newX, newY).setOrientation(Standards.EAST);
+					//Boot.getWorldObj().getTileAtCoords(newX, newY).setOrientation(Standards.EAST);
 				}
 			}
 		}

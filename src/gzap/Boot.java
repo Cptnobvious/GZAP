@@ -27,6 +27,7 @@ public class Boot {
 	private static SimpleConstruction debug = new SimpleConstruction();
 	private static TextWriter textwriter = new TextWriter();
 	private static GuiHandler guihandler = new GuiHandler();
+	private static GameRegistry registry = new GameRegistry();
 
 
 	public static void main(String[] args) {
@@ -44,6 +45,9 @@ public class Boot {
 		dir.mkdirs();
 		dir = new File("data");
 		dir.mkdir();
+		
+		//TODO put this initialization code in its own block somewhere
+		registry.initializeRegistry();
 		
 		//Initialization code OpenGL
 		glMatrixMode(GL_PROJECTION);
@@ -127,7 +131,6 @@ public class Boot {
 		guihandler.mouseInput();
 	}
 
-
 	public static void setupTextureHandler(){
 		texturehandler = new TextureHandler();
 		texturehandler.init();
@@ -143,6 +146,10 @@ public class Boot {
 	
 	public static TextWriter getTextWriter(){
 		return textwriter;
+	}
+	
+	public static GameRegistry getGameRegistry(){
+		return registry;
 	}
 	
 	public static TextureHandler getTexHandler(){

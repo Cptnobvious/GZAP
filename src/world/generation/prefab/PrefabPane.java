@@ -180,7 +180,7 @@ public class PrefabPane extends GUIPane{
 		for (int i = 0; i < size; i++){
 			for (int j = 0; j < size; j++){
 				if (i == 0 || i == size - 1 || j == 0 || j == size - 1){
-					Boot.getWorldObj().getTileAtCoords(xStart + i, yStart + j).init(TileInfo.ROAD.getID());;
+					//Boot.getWorldObj().getTileAtCoords(xStart + i, yStart + j).init(TileInfo.ROAD.getID());;
 				}
 			}
 		}

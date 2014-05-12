@@ -53,7 +53,7 @@ public class Prefab {
 		
 		for (int x = 0; x < width; x++){
 			for (int y = 0; y < height; y++){
-				Boot.getWorldObj().getTileAtCoords(x1 + x, y1 + y).save(out);
+				//Boot.getWorldObj().getTileAtCoords(x1 + x, y1 + y).save(out);
 			}
 		}
 
@@ -70,7 +70,7 @@ public class Prefab {
 		
 		for (int i = 0; i < width; i++){
 			for (int j = 0; j < height; j++){
-				Boot.getWorldObj().getTileAtCoords(x + i, y + j).init(in.read());
+				//Boot.getWorldObj().getTileAtCoords(x + i, y + j).init(in.read());
 			}
 		}
 
