@@ -7,25 +7,38 @@ import gui.elements.GUIPane;
 import gui.elements.buttons.GUIButton;
 import gui.elements.buttons.TerrainButton;
 import gzap.Boot;
+import gzap.GameRegistry;
 import gzap.Standards;
 
 public class ConstructionPane extends GUIPane{
 
 	private int ID = 8;
-	private int[] allowed = {0, 1, 2, 3, 4, 5, 6, 7, 8};
+	private int[] allowed = {0, 1, 2, 3, 4, 5, 6};
 
 	public ConstructionPane(){
 		super();
 		
 		int buttonY = 10;
+		int buttonX = 10;
+		int offset = 0;
 		
 		for (int i = 0; i < allowed.length; i ++){
-			if (i % 8 == 0){
-				buttonY = ((i / 8) * (32 + 4)) + 10;
+			if ((i + offset) % 8 == 0){
+				buttonY = (((i + offset) / 8) * (32 + 4)) + 10;
 			}
 			
-			int buttonX = ((i % 8)* (32 + 4)) + 10;
-			addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i])));
+			
+			if (GameRegistry.getTile(i).getSubTiles() > 0){
+				for (int j = 0; j < GameRegistry.getTile(i).getSubTiles(); j++){
+					buttonX = (((i + offset) % 8)* (32 + 4)) + 10;
+					addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i], j)));
+					offset++;
+				}
+				offset--;
+			} else {
+				buttonX = (((i + offset) % 8)* (32 + 4)) + 10;
+				addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i], 0)));
+			}
 		}
 	}
 
@@ -47,13 +60,14 @@ public class ConstructionPane extends GUIPane{
 
 			if (Mouse.isButtonDown(0)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
-					//Boot.getWorldObj().getTileAtCoords(newX, newY).init(ID);
+					Boot.getWorldObj().getTileAtCoords(newX, newY).setTileID(ID);
 				}
 			}
 			
 			if (Mouse.isButtonDown(1)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
-					//Boot.getWorldObj().getTileAtCoords(newX, newY).setOrientation(Standards.EAST);
+					int meta = Boot.getWorldObj().getTileAtCoords(newX, newY).getMetadata();
+					Boot.getWorldObj().getTileAtCoords(newX, newY).setMetadata(meta + 1);
 				}
 			}
 		}

@@ -20,10 +20,10 @@ public class TerrainButton extends GUIButton {
 	int TexX;
 	int TexY;
 	
-	public TerrainButton(int x, int y, int TerrainID) {
+	public TerrainButton(int x, int y, int TerrainID, int metadata) {
 		super(x, y, Standards.TILE_SIZE, Standards.TILE_SIZE, TerrainID);
-		TexX = GameRegistry.getTile(TerrainID).getTexInfo(0).getSpriteSheetX();//TileTexInfo.getInfoByID(TerrainID).getSpriteSheetX();
-		TexY = GameRegistry.getTile(TerrainID).getTexInfo(0).getSpriteSheetY();
+		TexX = GameRegistry.getTile(TerrainID).getTexInfo(metadata).getSpriteSheetX();//TileTexInfo.getInfoByID(TerrainID).getSpriteSheetX();
+		TexY = GameRegistry.getTile(TerrainID).getTexInfo(metadata).getSpriteSheetY();
 	}
 	
 	@Override

@@ -1,6 +1,7 @@
 package world.tile.basetiles;
 
 import world.tile.AbstractTile;
+import world.tile.TileID;
 import world.tile.TileTexInfo;
 
 public class TileAsphalt extends AbstractTile{
@@ -9,7 +10,7 @@ public class TileAsphalt extends AbstractTile{
 	private TileTexInfo striped = new TileTexInfo(1, 0);
 	
 	public TileAsphalt(){
-		super(TileIDConfig.ASPHALT);
+		super(TileID.ASPHALT, 2);
 	}
 
 	@Override

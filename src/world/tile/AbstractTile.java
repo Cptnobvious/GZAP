@@ -14,11 +14,24 @@ public abstract class AbstractTile {
 	protected int id = 0;
 	protected boolean isSolid;
 	protected int orientation;
+	protected int subTiles;
 	
 	public AbstractTile(int uniqueID){
 		id = uniqueID;
 		isSolid = false;
+		subTiles = 0;
 		orientation = Standards.NORTH;
+	}
+	
+	public AbstractTile(int uniqueID, int subTiles){
+		id = uniqueID;
+		isSolid = false;
+		this.subTiles = subTiles;
+		orientation = Standards.NORTH;
+	}
+	
+	public int getSubTiles(){
+		return subTiles;
 	}
 	
 	public void setOrientation(int direction){

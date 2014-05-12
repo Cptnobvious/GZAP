@@ -28,7 +28,6 @@ public class GameRegistry {
 	}
 	
 	public static AbstractTile getTile(int uniqueID){
-		//uniqueID = uniqueID - 1;
 		if (uniqueID <= tiles.size() && tiles.get(uniqueID) != null){
 			return tiles.get(uniqueID);
 		}

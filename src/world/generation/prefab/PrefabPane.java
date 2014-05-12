@@ -3,7 +3,6 @@ package world.generation.prefab;
 import java.io.File;
 import java.io.IOException;
 
-import world.tile.TileInfo;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.windows.DebugGui;

@@ -22,19 +22,19 @@ public class Chunk {
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
 				if (x == 5 || x == 11){
-					contents[x][y] = new Tile(2);
+					contents[x][y] = new Tile(1);
 				} else if (x == 6 || x == 7 || x == 9 || x == 10){
 					contents[x][y] = new Tile(0);
 				} else if (x == 8){
-					contents[x][y] = new Tile(1);
+					contents[x][y] = new Tile(0, 1);
 				} else if (x == Standards.CHUNK_SIZE - 1) {
-					contents[x][y] = new Tile(2);
+					contents[x][y] = new Tile(1);
 				} else {
 					contents[x][y] = new Tile(2);
 				}
 				
 				if (x == 0){
-					contents[x][y] = new Tile(2);
+					contents[x][y] = new Tile(1);
 				}
 			}
 		}
