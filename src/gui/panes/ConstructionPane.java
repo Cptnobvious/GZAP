@@ -78,7 +78,7 @@ public class ConstructionPane extends GUIPane{
 	@Override
 	protected void recieveButtonEvent(int buttonID){
 		if (buttonID % 16 == 0){
-			ID = buttonID;
+			ID = buttonID / 16;
 		} else {
 			ID = (buttonID /  16);
 			metadata = (buttonID % 16);

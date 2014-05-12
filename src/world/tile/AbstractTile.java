@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import util.Color4F;
 import gzap.Boot;
 import gzap.Standards;
 import static org.lwjgl.opengl.GL11.*;
@@ -59,10 +60,10 @@ public abstract class AbstractTile {
 	public void draw(int x, int y, int data){
 		
 		TileTexInfo currentTexInfo = getTexInfo(data);
+		Color4F color = currentTexInfo.getColor4F();
 		
 		glColor4f(1f, 1f, 1f, 1f);
-		glColor4f(currentTexInfo.getColor4F().getRed(), currentTexInfo.getColor4F().getGreen(),
-				currentTexInfo.getColor4F().getBlue(), currentTexInfo.getColor4F().getAlpha());
+		glColor4f(color.getRed(), color.getBlue(), color.getGreen(), color.getAlpha());
 		
 		
 		Boot.getTexHandler().bindTexture("terrain");
