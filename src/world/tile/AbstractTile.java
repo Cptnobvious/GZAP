@@ -63,7 +63,7 @@ public abstract class AbstractTile {
 		Color4F color = currentTexInfo.getColor4F();
 		
 		glColor4f(1f, 1f, 1f, 1f);
-		glColor4f(color.getRed(), color.getBlue(), color.getGreen(), color.getAlpha());
+		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 		
 		
 		Boot.getTexHandler().bindTexture("terrain");

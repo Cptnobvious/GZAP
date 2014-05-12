@@ -30,8 +30,12 @@ public class GameRegistry {
 	public static AbstractTile getTile(int uniqueID){
 		if (uniqueID <= tiles.size() && tiles.get(uniqueID) != null){
 			return tiles.get(uniqueID);
+		} else {
+			System.out.println("Tried to access an ID not bound to a tile");
+			System.out.println(String.valueOf(uniqueID));
+			return tiles.get(0);
 		}
 		
-		return null;
+		//return null;
 	}
 }

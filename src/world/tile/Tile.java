@@ -1,5 +1,9 @@
 package world.tile;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import gzap.GameRegistry;
 
 public class Tile {
@@ -41,5 +45,14 @@ public class Tile {
 	public void setTileID(int id, int metadata){
 		base = GameRegistry.getTile(id);
 		this.metadata = metadata;
+	}
+	
+	public void save(FileOutputStream out) throws IOException{
+		out.write(base.getBaseType());
+	}
+	
+	public void load(FileInputStream in) throws IOException{
+		int c = in.read();
+		setTileID(c);
 	}
 }
