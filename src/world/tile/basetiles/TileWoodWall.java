@@ -9,6 +9,7 @@ public class TileWoodWall extends AbstractTile{
 
 	public TileWoodWall(){
 		super(TileID.WOOD_WALL);
+		isSolid = true;
 	}
 
 	@Override

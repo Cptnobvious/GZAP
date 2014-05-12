@@ -10,14 +10,17 @@ public class Tile {
 
 	private AbstractTile base;
 	int metadata;
+	boolean isSolid;
 	
 	public Tile(int id){
 		base = GameRegistry.getTile(id);
+		isSolid = base.getSolid();
 		metadata = 0;
 	}
 	
 	public Tile(int id, int metadata){
 		base = GameRegistry.getTile(id);
+		isSolid = base.getSolid();
 		this.metadata = metadata;
 	}
 	
@@ -35,11 +38,12 @@ public class Tile {
 	}
 	
 	public boolean isSolid(){
-		return false;
+		return isSolid;
 	}
 	
 	public void setTileID(int id){
 		base = GameRegistry.getTile(id);
+		isSolid = base.getSolid();
 	}
 	
 	public void setTileID(int id, int metadata){

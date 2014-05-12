@@ -1,9 +1,5 @@
 package world.tile;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import util.Color4F;
 import gzap.Boot;
 import gzap.Standards;

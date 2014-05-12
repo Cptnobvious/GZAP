@@ -6,11 +6,8 @@ import java.util.ArrayList;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.panes.DebugPane;
-import gui.windows.DebugGui;
 
 import org.lwjgl.input.Mouse;
-
-import world.generation.prefab.PrefabPane;
 
 public class GuiHandler {
 

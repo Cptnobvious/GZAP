@@ -7,16 +7,11 @@ import java.io.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
-import debug.DebugDraw;
-import debug.SimpleConstruction;
 import entities.living.player.Player;
 import gui.GuiHandler;
-import gui.windows.DebugGui;
 import util.TextWriter;
 import world.Map;
-import world.tile.TileTexInfo;
 
 public class Boot {
 
@@ -24,7 +19,6 @@ public class Boot {
 	
 	private static Player player;
 	private static Map worldObj;
-	private static SimpleConstruction debug = new SimpleConstruction();
 	private static TextWriter textwriter = new TextWriter();
 	private static GuiHandler guihandler = new GuiHandler();
 	private static GameRegistry registry = new GameRegistry();
@@ -116,7 +110,6 @@ public class Boot {
 			player.move(Standards.WEST);
 			break;
 		case 'e':
-			debug.muck();
 			break;
 		case 'o':
 			worldObj.saveChunk(0,0);

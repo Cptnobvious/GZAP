@@ -2,7 +2,6 @@ package world;
 
 import java.io.IOException;
 
-import world.tile.AbstractTile;
 import world.tile.Tile;
 import gzap.Standards;
 

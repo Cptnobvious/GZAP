@@ -1,12 +1,10 @@
 package world.generation.prefab;
 
 import gzap.Boot;
-import gzap.Standards;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Prefab {
 
@@ -14,8 +12,10 @@ public class Prefab {
 	private int height;
 	
 	private int x1;
+	@SuppressWarnings("unused")
 	private int x2;
 	private int y1;
+	@SuppressWarnings("unused")
 	private int y2;
 	
 	public Prefab(int x1, int y1, int x2, int y2){
@@ -47,9 +47,6 @@ public class Prefab {
 
 		out.write(width);
 		out.write(height);
-		
-		int startx = x1;
-		int starty = y1;
 		
 		for (int x = 0; x < width; x++){
 			for (int y = 0; y < height; y++){
