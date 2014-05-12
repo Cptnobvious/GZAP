@@ -12,7 +12,8 @@ import gzap.Standards;
 
 public class ConstructionPane extends GUIPane{
 
-	private int ID = 8;
+	private int ID = 0;
+	private int metadata = 0;
 	private int[] allowed = {0, 1, 2, 3, 4, 5, 6};
 
 	public ConstructionPane(){
@@ -61,6 +62,7 @@ public class ConstructionPane extends GUIPane{
 			if (Mouse.isButtonDown(0)){
 				if (PointMath.distance2Points(newX, newY, cx, cy) < 3){
 					Boot.getWorldObj().getTileAtCoords(newX, newY).setTileID(ID);
+					Boot.getWorldObj().getTileAtCoords(newX, newY).setMetadata(metadata);
 				}
 			}
 			
@@ -75,6 +77,11 @@ public class ConstructionPane extends GUIPane{
 
 	@Override
 	protected void recieveButtonEvent(int buttonID){
-		ID = buttonID;
+		if (buttonID % 16 == 0){
+			ID = buttonID;
+		} else {
+			ID = (buttonID /  16);
+			metadata = (buttonID % 16);
+		}
 	}
 }

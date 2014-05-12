@@ -21,7 +21,7 @@ public class TerrainButton extends GUIButton {
 	int TexY;
 	
 	public TerrainButton(int x, int y, int TerrainID, int metadata) {
-		super(x, y, Standards.TILE_SIZE, Standards.TILE_SIZE, TerrainID);
+		super(x, y, Standards.TILE_SIZE, Standards.TILE_SIZE, ((TerrainID * 16) + metadata));
 		TexX = GameRegistry.getTile(TerrainID).getTexInfo(metadata).getSpriteSheetX();//TileTexInfo.getInfoByID(TerrainID).getSpriteSheetX();
 		TexY = GameRegistry.getTile(TerrainID).getTexInfo(metadata).getSpriteSheetY();
 	}
