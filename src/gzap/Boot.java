@@ -62,6 +62,7 @@ public class Boot {
 		while (!Display.isCloseRequested()){
 			
 			draw();
+			worldObj.update();
 			input();
 			
 			

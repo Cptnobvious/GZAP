@@ -13,7 +13,7 @@ public class Map {
 		world = new Chunk[Standards.MAP_SIZE][Standards.MAP_SIZE];
 		for (int x = 0; x < Standards.MAP_SIZE; x++){
 			for (int y = 0; y < Standards.MAP_SIZE; y++){
-				world[x][y] = new Chunk();
+				world[x][y] = new Chunk(x, y);
 			}
 		}
 	}
@@ -66,6 +66,14 @@ public class Map {
 		}
 		
 		return false;
+	}
+	
+	public void update(){
+		for (int x = 0; x < Standards.MAP_SIZE; x++){
+			for (int y = 0; y < Standards.MAP_SIZE; y++){
+				world[x][y].update();
+			}
+		}
 	}
 	
 	public void saveChunk(int x, int y){

@@ -2,6 +2,7 @@ package world.tile;
 
 import world.tile.basetiles.TileAsphalt;
 import world.tile.basetiles.TileCarpet;
+import world.tile.basetiles.TileDoor;
 import world.tile.basetiles.TileLawn;
 import world.tile.basetiles.TileSidwalk;
 import world.tile.basetiles.TileTileFloor;
@@ -19,6 +20,8 @@ public class Tiles {
 		GameRegistry.registerTile(TileID.CARPET,		new TileCarpet());
 		GameRegistry.registerTile(TileID.TILE_FLOOR, 	new TileTileFloor());
 		GameRegistry.registerTile(TileID.WOOD_WALL, 	new TileWoodWall());
+		GameRegistry.registerTile(TileID.DOOR, 			new TileDoor());
+		
 	}
 	
 	

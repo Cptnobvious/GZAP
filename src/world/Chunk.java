@@ -11,8 +11,10 @@ public class Chunk {
 
 	private boolean isLoaded = false;
 	private Tile[][] contents;
+	private int chunkX;
+	private int chunkY;
 
-	public Chunk(){
+	public Chunk(int x, int y){
 		contents = new Tile[Standards.CHUNK_SIZE][Standards.CHUNK_SIZE];
 		init();
 	}
@@ -21,20 +23,24 @@ public class Chunk {
 
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
+				
+				int tileX = (chunkX * Standards.CHUNK_SIZE) + x;
+				int tileY = (chunkY * Standards.CHUNK_SIZE) + y;
+				
 				if (x == 5 || x == 11){
-					contents[x][y] = new Tile(1);
+					contents[x][y] = new Tile(1, tileX, tileY);
 				} else if (x == 6 || x == 7 || x == 9 || x == 10){
-					contents[x][y] = new Tile(0);
+					contents[x][y] = new Tile(0, tileX, tileY);
 				} else if (x == 8){
-					contents[x][y] = new Tile(0, 1);
+					contents[x][y] = new Tile(0, 1, tileX, tileY);
 				} else if (x == Standards.CHUNK_SIZE - 1) {
-					contents[x][y] = new Tile(1);
+					contents[x][y] = new Tile(1, tileX, tileY);
 				} else {
-					contents[x][y] = new Tile(2);
+					contents[x][y] = new Tile(2, tileX, tileY);
 				}
 				
 				if (x == 0){
-					contents[x][y] = new Tile(1);
+					contents[x][y] = new Tile(1, tileX, tileY);
 				}
 			}
 		}
@@ -88,6 +94,14 @@ public class Chunk {
 		for (int x = xStart; x < xStop; x++){
 			for (int y = yStart; y < yStop; y++){
 				contents[x][y].draw(screenX + (x * Standards.TILE_SIZE), screenY + (y * Standards.TILE_SIZE));
+			}
+		}
+	}
+
+	public void update() {
+		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
+			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
+				contents[x][y].update();
 			}
 		}
 	}

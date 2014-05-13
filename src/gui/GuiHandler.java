@@ -6,8 +6,12 @@ import java.util.ArrayList;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.panes.DebugPane;
+import gzap.Boot;
+import gzap.Standards;
 
 import org.lwjgl.input.Mouse;
+
+import world.tile.TileEntity;
 
 public class GuiHandler {
 
@@ -42,10 +46,37 @@ public class GuiHandler {
 		if (!Mouse.isButtonDown(0) && justRequested){
 			justRequested = false;
 		}
+		
+		if (Mouse.isButtonDown(0)){
+			worldInput(mouseX, mouseY);
+		}
 	}
 	
 	public void changeActivePane(GUIPane pane){
 		activePane = pane;
+	}
+	
+	public void worldInput(int mouseX, int mouseY){
+		
+		int button = -1;
+		
+		if (Mouse.isButtonDown(0)){
+			button = 0;
+		}
+		if (mouseX < 800){
+			int newX = -1;
+			int newY = -1;
+			int cx = Boot.getPlayer().getX();
+			int cy = Boot.getPlayer().getY();
+
+			newX = cx + (mouseX / Standards.TILE_SIZE) - 12;
+			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
+			
+			TileEntity active = Boot.getWorldObj().getTileAtCoords(newX, newY).getTileEntity();
+			if (active != null){
+				active.getMouseEvent(button);
+			}
+		}
 	}
 	
 	public void update(){

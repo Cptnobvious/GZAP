@@ -9,21 +9,39 @@ import gzap.GameRegistry;
 public class Tile {
 
 	private AbstractTile base;
-	int metadata;
-	boolean isSolid;
+	private int metadata;
+	private boolean isSolid;
+	private int mapX;
+	private int mapY;
+	private TileEntity TE = null;
 	
-	public Tile(int id){
+	public Tile(int id, int x, int y){
 		base = GameRegistry.getTile(id);
+		mapX = x;
+		mapY = y;
 		isSolid = base.getSolid();
+		TE = base.getTileEntity(this);
 		metadata = 0;
 	}
 	
-	public Tile(int id, int metadata){
+	public Tile(int id, int metadata, int x, int y){
 		base = GameRegistry.getTile(id);
+		mapX = x;
+		mapY = y;
 		isSolid = base.getSolid();
+		TE = base.getTileEntity(this);
 		this.metadata = metadata;
 	}
 	
+	public void update(){
+		if (TE != null){
+			TE.update();
+		}
+	}
+	
+	public TileEntity getTileEntity(){
+		return TE;
+	}
 	
 	public void draw(int x, int y){
 		base.draw(x, y, metadata);
@@ -37,17 +55,33 @@ public class Tile {
 		this.metadata = metadata;
 	}
 	
+	public void setSolid(boolean solid){
+		isSolid = solid;
+	}
+	
 	public boolean isSolid(){
 		return isSolid;
 	}
 	
+	public int getMapX() {
+		return mapX;
+	}
+
+	public int getMapY() {
+		return mapY;
+	}
+
 	public void setTileID(int id){
 		base = GameRegistry.getTile(id);
 		isSolid = base.getSolid();
+		TE = base.getTileEntity(this);
+		metadata = 0;
 	}
 	
 	public void setTileID(int id, int metadata){
 		base = GameRegistry.getTile(id);
+		isSolid = base.getSolid();
+		TE = base.getTileEntity(this);
 		this.metadata = metadata;
 	}
 	

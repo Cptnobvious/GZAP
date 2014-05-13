@@ -51,6 +51,7 @@ public abstract class AbstractTile {
 		this.id = newType;
 	}
 	
+	public abstract TileEntity getTileEntity(Tile parent);
 	public abstract TileTexInfo getTexInfo(int data);
 	
 	public void draw(int x, int y, int data){

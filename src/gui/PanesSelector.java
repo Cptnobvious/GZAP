@@ -8,6 +8,7 @@ import world.generation.prefab.PrefabPane;
 import gui.elements.GUIPane;
 import gui.panes.ConstructionPane;
 import gui.panes.DebugPane;
+import gui.panes.DefaultPane;
 import gzap.Boot;
 import gzap.Standards;
 
@@ -52,6 +53,8 @@ public class PanesSelector {
 			return (GUIPane)(new PrefabPane());
 		case 2:
 			return (GUIPane)(new ConstructionPane());
+		case 3:
+			return (GUIPane)(new DefaultPane());
 		}
 		
 	}
