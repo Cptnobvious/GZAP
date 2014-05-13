@@ -21,6 +21,7 @@ public class TextureHandler {
 	public static Texture panes;
 	
 	public static Texture debugMenu;
+	public static Texture constructionMenu;
 	
 	public TextureHandler(){
 		
@@ -33,6 +34,8 @@ public class TextureHandler {
 		text = loadTexture("text");
 		panes = loadTexture("panes");
 		
+		
+		constructionMenu = loadTexture("constructionmenu");
 		debugMenu = loadTexture("debugmenu");
 	}
 	
@@ -43,6 +46,7 @@ public class TextureHandler {
 		text.release();
 		panes.release();
 		
+		constructionMenu.release();
 		debugMenu.release();
 	}
 	
@@ -72,6 +76,10 @@ public class TextureHandler {
 			case "text":
 				text.bind();
 				currentlyBound = text;
+				break;
+			case "constructionMenu":
+				constructionMenu.bind();
+				currentlyBound = constructionMenu;
 				break;
 			case "debugmenu":
 				debugMenu.bind();

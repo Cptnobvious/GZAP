@@ -47,7 +47,7 @@ public class GuiHandler {
 			justRequested = false;
 		}
 		
-		if (Mouse.isButtonDown(0)){
+		if (Mouse.isButtonDown(0) && activePane.doesAllowMapInteraction()){
 			worldInput(mouseX, mouseY);
 		}
 	}

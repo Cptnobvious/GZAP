@@ -17,7 +17,7 @@ public class ConstructionPane extends GUIPane{
 	private int[] allowed = {0, 1, 2, 3, 4, 5, 6, 7};
 
 	public ConstructionPane(){
-		super();
+		super("constructionMenu");
 		
 		int buttonY = 10;
 		int buttonX = 10;

@@ -14,6 +14,7 @@ public abstract class GUIPane {
 	private String texturename;
 	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
 	private boolean mouseStatus = false;
+	protected boolean allowsMapInteraction = false;
 	
 	public GUIPane(String texturename){
 		this.texturename = texturename;
@@ -21,6 +22,14 @@ public abstract class GUIPane {
 	
 	public GUIPane(){
 		this.texturename = "debugmenu";
+	}
+	
+	public boolean doesAllowMapInteraction(){
+		return allowsMapInteraction;
+	}
+
+	public void setAllowsMapInteraction(boolean allowsMapInteraction) {
+		this.allowsMapInteraction = allowsMapInteraction;
 	}
 
 	public void drawForeground(){
