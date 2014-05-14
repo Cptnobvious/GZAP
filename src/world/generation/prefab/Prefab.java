@@ -3,8 +3,10 @@ package world.generation.prefab;
 import gzap.Boot;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 public class Prefab {
 
@@ -74,5 +76,29 @@ public class Prefab {
 		
 		//Don't forget to close
 		in.close();
+	}
+	
+	public void randomPrefabFromFile(int x, int y) throws IOException{
+		String path = "data/houses.pfl";
+		FileInputStream in = new FileInputStream(path);
+		Random rand = new Random(System.currentTimeMillis());
+		
+		int cPrefabs = in.read();
+		long skip = rand.nextInt(cPrefabs);
+		skip = (skip * 24 * 24) + (skip * 2);
+		
+		in.skip(skip);
+		
+		width = in.read();
+		height = in.read();
+		
+		for (int i = 0; i < width; i++){
+			for (int j = 0; j < height; j++){
+				Boot.getWorldObj().getTileAtCoords(x + i, y + j).setTileID(in.read());
+			}
+		}
+		
+		in.close();
+		
 	}
 }

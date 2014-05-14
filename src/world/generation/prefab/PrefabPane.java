@@ -3,6 +3,7 @@ package world.generation.prefab;
 import java.io.File;
 import java.io.IOException;
 
+import world.generation.RoadGenerator;
 import world.tile.TileID;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
@@ -21,14 +22,17 @@ public class PrefabPane extends GUIPane{
 	private int spawnRotation = 0;
 	
 	private Prefab prefab = new Prefab(0, 0, 0, 0);
+	private RoadGenerator roadGen = new RoadGenerator();
 	
 	public PrefabPane(){
 		super();
 		addButton(10, 10, 100, 40, 1, "Prefab Win");
 		addButton(130, 10, 100, 40, 2, "Request New");
 		addButton(130, 60, 100, 40, 4, "Save Prefab");
+		addButton(130, 160, 100, 40, 3, "Random Pre");
 		addButton(130, 110, 100, 40, 5, "Load Prefab");
 		addButton(250, 10, 100, 40, 6, "Spawn Zone");
+		addButton(250, 60, 100, 40, 7, "Make Road");
 	}
 
 	@Override
@@ -94,6 +98,9 @@ public class PrefabPane extends GUIPane{
 			case 4:
 				loadPrefab(newX, newY);
 				break;
+			case 5:
+				loadRandomPrefab(newX, newY);
+				break;
 			}
 
 		}
@@ -116,6 +123,10 @@ public class PrefabPane extends GUIPane{
 		case 4:
 			makePrefab();
 			break;
+		case 3:
+			requestPoints(1);
+			picks = 5;
+			break;
 		case 5:
 			requestPoints(1);
 			picks = 4;
@@ -123,6 +134,9 @@ public class PrefabPane extends GUIPane{
 		case 6:
 			requestPoints(1);
 			picks = 3;
+			break;
+		case 7:
+			roadGen.layRoad(x1, y1, x2, y2);
 			break;
 		}
 	}
@@ -183,6 +197,14 @@ public class PrefabPane extends GUIPane{
 					Boot.getWorldObj().getTileAtCoords(xStart + i, yStart + j).setTileID(TileID.ASPHALT);
 				}
 			}
+		}
+	}
+	
+	private void loadRandomPrefab(int xStart, int yStart){
+		try {
+			prefab.randomPrefabFromFile(xStart, yStart);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

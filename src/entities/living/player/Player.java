@@ -2,6 +2,7 @@ package entities.living.player;
 
 import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glColor4f;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
@@ -22,6 +23,8 @@ public class Player extends AbstractMob{
 
 	@Override
 	public void draw(int x, int y) {
+		
+		glColor4f(1f, 1f, 1f, 1f);
 
 		//TODO fix this, it's due to a quirk in the drawing code that offsets the draw by one
 		x = x - Standards.TILE_SIZE;
