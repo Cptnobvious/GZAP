@@ -10,33 +10,22 @@ public abstract class AbstractTile {
 	//private TileType type;
 	protected int id = 0;
 	protected boolean isSolid;
-	protected int orientation;
 	protected int subTiles;
 	
 	public AbstractTile(int uniqueID){
 		id = uniqueID;
 		isSolid = false;
 		subTiles = 0;
-		orientation = Standards.NORTH;
 	}
 	
 	public AbstractTile(int uniqueID, int subTiles){
 		id = uniqueID;
 		isSolid = false;
 		this.subTiles = subTiles;
-		orientation = Standards.NORTH;
 	}
 	
 	public int getSubTiles(){
 		return subTiles;
-	}
-	
-	public void setOrientation(int direction){
-		this.orientation = direction;
-	}
-	
-	public int getOrientation(){
-		return this.orientation;
 	}
 	
 	public boolean getSolid(){
@@ -54,7 +43,7 @@ public abstract class AbstractTile {
 	public abstract TileEntity getTileEntity(Tile parent);
 	public abstract TileTexInfo getTexInfo(int data);
 	
-	public void draw(int x, int y, int data){
+	public void draw(int x, int y, int orientation, int data){
 		
 		TileTexInfo currentTexInfo = getTexInfo(data);
 		Color4F color = currentTexInfo.getColor4F();
@@ -84,7 +73,7 @@ public abstract class AbstractTile {
 		float rotXOffset = 0;
 		float rotYOffset = 0;
 		
-		switch (this.getOrientation()){
+		switch (orientation){
 		case Standards.NORTH:
 			break;
 		case Standards.SOUTH:

@@ -5,12 +5,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import gzap.GameRegistry;
+import gzap.Standards;
 
 public class Tile {
 
 	private AbstractTile base;
 	private int metadata;
 	private boolean isSolid;
+	private int orientation = Standards.NORTH;
 	private int mapX;
 	private int mapY;
 	private TileEntity TE = null;
@@ -44,7 +46,7 @@ public class Tile {
 	}
 	
 	public void draw(int x, int y){
-		base.draw(x, y, metadata);
+		base.draw(x, y, orientation, metadata);
 	}
 	
 	public int getMetadata(){
@@ -92,5 +94,9 @@ public class Tile {
 	public void load(FileInputStream in) throws IOException{
 		int c = in.read();
 		setTileID(c);
+	}
+
+	public void setOrientation(int orientation) {
+		this.orientation = orientation;
 	}
 }
