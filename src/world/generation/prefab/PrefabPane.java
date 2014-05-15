@@ -3,6 +3,7 @@ package world.generation.prefab;
 import java.io.File;
 import java.io.IOException;
 
+import world.generation.BlockGenerator;
 import world.generation.RoadGenerator;
 import world.tile.TileID;
 import gui.elements.GUIPane;
@@ -23,6 +24,7 @@ public class PrefabPane extends GUIPane{
 	
 	private Prefab prefab = new Prefab(0, 0, 0, 0);
 	private RoadGenerator roadGen = new RoadGenerator();
+	private BlockGenerator blockGen = new BlockGenerator();
 	
 	public PrefabPane(){
 		super();
@@ -33,6 +35,7 @@ public class PrefabPane extends GUIPane{
 		addButton(130, 110, 100, 40, 5, "Load Prefab");
 		addButton(250, 10, 100, 40, 6, "Spawn Zone");
 		addButton(250, 60, 100, 40, 7, "Make Road");
+		addButton(250, 110, 100, 40, 8, "Make Block");
 	}
 
 	@Override
@@ -137,6 +140,9 @@ public class PrefabPane extends GUIPane{
 			break;
 		case 7:
 			roadGen.layRoad(x1, y1, x2, y2);
+			break;
+		case 8:
+			blockGen.makeNewBlock(x1, y1, 3);
 			break;
 		}
 	}
