@@ -8,6 +8,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 
+import entities.living.mobs.Zombie;
 import entities.living.player.Player;
 import gui.GuiHandler;
 import util.TextWriter;
@@ -22,7 +23,8 @@ public class Boot {
 	private static TextWriter textwriter = new TextWriter();
 	private static GuiHandler guihandler = new GuiHandler();
 	private static GameRegistry registry = new GameRegistry();
-
+	private static NPCList npclist = new NPCList();
+	
 
 	public static void main(String[] args) {
 		try{
@@ -58,6 +60,7 @@ public class Boot {
 		//testChunk = new Chunk();
 		player = new Player(14, 14, 0, 100);
 		worldObj = new Map();
+		worldObj.Generate(0, 0);
 		
 		while (!Display.isCloseRequested()){
 			
@@ -85,6 +88,7 @@ public class Boot {
 		int yStart = player.getY() - 12;
 		
 		worldObj.draw(0, 0, xStart, yStart);
+		npclist.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
 		guihandler.draw();
 		
@@ -152,6 +156,10 @@ public class Boot {
 	
 	public static GuiHandler getGUIHandler(){
 		return guihandler;
+	}
+	
+	public static NPCList getNPCList(){
+		return npclist;
 	}
 
 	public static void shutdownGracefully(){

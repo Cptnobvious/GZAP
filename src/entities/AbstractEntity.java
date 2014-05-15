@@ -2,41 +2,41 @@ package entities;
 
 public abstract class AbstractEntity {
 
-	protected int x;
-	protected int y;
-	protected int z;
+	protected int xLoc;
+	protected int yLoc;
+	protected int zLoc;
 	
 
 	public AbstractEntity(int x, int y, int z){
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this.xLoc = x;
+		this.yLoc = y;
+		this.zLoc = z;
 	}
 	
 	public abstract void draw(int x, int y);
 
 	public int getX() {
-		return x;
+		return xLoc;
 	}
 
 	public void setX(int x) {
-		this.x = x;
+		this.xLoc = x;
 	}
 
 	public int getY() {
-		return y;
+		return yLoc;
 	}
 
 	public void setY(int y) {
-		this.y = y;
+		this.yLoc = y;
 	}
 
 	public int getZ() {
-		return z;
+		return zLoc;
 	}
 
 	public void setZ(int z) {
-		this.z = z;
+		this.zLoc = z;
 	}
 	
 }

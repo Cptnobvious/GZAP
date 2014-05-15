@@ -8,6 +8,7 @@ public abstract class AbstractMob extends AbstractEntity{
 
 	protected int health;
 	protected int orientation;
+	protected int id = -1;
 
 	public AbstractMob(int x, int y, int z, int health) {
 		super(x, y, z);
@@ -16,8 +17,8 @@ public abstract class AbstractMob extends AbstractEntity{
 	}
 
 	public boolean canMove(int direction){
-		int newX = x;
-		int newY = y;
+		int newX = xLoc;
+		int newY = yLoc;
 		int mapedge = (Standards.CHUNK_SIZE * Standards.MAP_SIZE) - 1; 
 
 		switch(direction){
@@ -50,21 +51,28 @@ public abstract class AbstractMob extends AbstractEntity{
 		return false;
 	}
 
-
+	public void setID(int a){
+		id = a;
+	}
+	
+	public int getID(){
+		return id;
+	}
+	
 	public boolean move(int direction){
 		if (canMove(direction)){
 			switch (direction){
 			case Standards.NORTH:
-				y--;
+				yLoc--;
 				break;
 			case Standards.EAST:
-				x++;
+				xLoc++;
 				break;
 			case Standards.SOUTH:
-				y++;
+				yLoc++;
 				break;
 			case Standards.WEST:
-				x--;
+				xLoc--;
 				break;
 			default:
 				break;

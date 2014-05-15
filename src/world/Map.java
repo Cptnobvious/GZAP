@@ -2,6 +2,7 @@ package world;
 
 import java.io.IOException;
 
+import world.generation.BlockGenerator;
 import world.tile.Tile;
 import gzap.Standards;
 
@@ -90,5 +91,11 @@ public class Map {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Deprecated
+	public void Generate(int x, int y){
+		BlockGenerator blockGen = new BlockGenerator();
+		blockGen.makeNewBlock(8, 8, 3);
 	}
 }

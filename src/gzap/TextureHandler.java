@@ -20,6 +20,8 @@ public class TextureHandler {
 	public static Texture currentlyBound;
 	public static Texture panes;
 	
+	public static Texture zed;
+	
 	public static Texture debugMenu;
 	public static Texture constructionMenu;
 	
@@ -34,6 +36,7 @@ public class TextureHandler {
 		text = loadTexture("text");
 		panes = loadTexture("panes");
 		
+		zed = loadTexture("zed");
 		
 		constructionMenu = loadTexture("constructionmenu");
 		debugMenu = loadTexture("debugmenu");
@@ -45,6 +48,8 @@ public class TextureHandler {
 		debug.release();
 		text.release();
 		panes.release();
+		
+		zed.release();
 		
 		constructionMenu.release();
 		debugMenu.release();
@@ -89,9 +94,14 @@ public class TextureHandler {
 				panes.bind();
 				currentlyBound = panes;
 				break;
+			case "zed":
+				zed.bind();
+				currentlyBound = zed;
+				break;
 			default:
 				//TODO make a proper error handler
 				System.out.println("Tried to bind a texture that doesn't exist");
+				System.out.println(key);
 				Boot.shutdownGracefully();
 			}
 			
