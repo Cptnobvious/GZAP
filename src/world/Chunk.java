@@ -3,6 +3,7 @@ package world;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 
 import world.tile.Tile;
 import gzap.Standards;
@@ -21,6 +22,8 @@ public class Chunk {
 
 	private void init(){
 
+		Random rand = new Random(System.currentTimeMillis());
+		
 		for (int x = 0; x < Standards.CHUNK_SIZE; x++){
 			for (int y = 0; y < Standards.CHUNK_SIZE; y++){
 				
@@ -37,6 +40,9 @@ public class Chunk {
 					contents[x][y] = new Tile(1, tileX, tileY);
 				} else {
 					contents[x][y] = new Tile(2, tileX, tileY);
+					if (rand.nextInt(40) == 0){
+						contents[x][y].setMetadata(2);
+					}
 				}
 				
 				if (x == 0){

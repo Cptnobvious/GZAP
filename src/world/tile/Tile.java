@@ -41,6 +41,10 @@ public class Tile {
 		}
 	}
 	
+	public int getID(){
+		return base.getBaseType();
+	}
+	
 	public TileEntity getTileEntity(){
 		return TE;
 	}
