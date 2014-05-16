@@ -14,7 +14,7 @@ public class Zombie extends AbstractMob{
 
 	private AbstractMob target = null;
 	private boolean hasTarget = false;
-	
+
 	public Zombie(int x, int y, int z) {
 		super(x, y, z, 100);
 	}
@@ -22,10 +22,10 @@ public class Zombie extends AbstractMob{
 	@Override
 	public void update(){
 		Random rand = new Random(System.currentTimeMillis());
-		
+
 		if (!hasTarget){
 			ArrayList<AbstractMob> targetslist = Boot.getNPCList().findNearMobs(xLoc, yLoc, 6, getID());
-			
+
 			if (targetslist != null){
 				AbstractMob target = findBestTarget(targetslist);
 				if (target != null){
@@ -39,46 +39,66 @@ public class Zombie extends AbstractMob{
 			}
 		} else {
 			double distance = PointMath.distance2Points(target.getX(), target.getY(), this.getX(), this.getY());
-			
+
 			if (distance < 8){
 				move(goTowardsTargetDirection());
+			} else {
+				hasTarget = false;
+				this.target = null;
 			}
 		}
-		
+
 	}
-	
+
 	private int goTowardsTargetDirection(){
-		int xDistance = target.getX() - this.getX();
-		int yDistance = target.getY() - this.getY();
-		
-		if (xDistance <= yDistance){
+
+		if (target.getX() == this.getX()){
+			int yDistance = target.getY() - this.getY();
 			if (yDistance <= 0){
 				return Standards.NORTH;
 			} else {
 				return Standards.SOUTH;
 			}
-		} else {
+		} else if (target.getY() == this.getY()){
+			int xDistance = target.getX() - this.getX();
 			if (xDistance <= 0){
 				return Standards.WEST;
 			} else {
 				return Standards.EAST;
 			}
+		} else {
+			int xDistance = target.getX() - this.getX();
+			int yDistance = target.getY() - this.getY();
+
+			if (xDistance <= yDistance){
+				if (yDistance <= 0){
+					return Standards.NORTH;
+				} else {
+					return Standards.SOUTH;
+				}
+			} else {
+				if (xDistance <= 0){
+					return Standards.WEST;
+				} else {
+					return Standards.EAST;
+				}
+			}
 		}
 	}
-	
+
 	private AbstractMob findBestTarget(ArrayList<AbstractMob> list){
 		AbstractMob best = null;
-		
+
 		for (int i = 0; i < list.size(); i++){
 			if (!(list.get(i) instanceof Zombie)){
 				best = list.get(i);
 				break;
 			}
 		}
-		
+
 		return best;
 	}
-	
+
 	@Override
 	public void draw(int x, int y) {
 		glColor4f(1f, 1f, 1f, 1f);
@@ -86,13 +106,13 @@ public class Zombie extends AbstractMob{
 		//TODO fix this, it's due to a quirk in the drawing code that offsets the draw by one
 		x = x - Standards.TILE_SIZE;
 		y = y - Standards.TILE_SIZE;
-		
+
 		Boot.getTexHandler().bindTexture("zed");
 
 		float rotation = this.getOrientation() * 90;
 		float rotXOffset = 0;
 		float rotYOffset = 0;
-		
+
 		switch (this.getOrientation()){
 		case Standards.NORTH:
 			break;
@@ -107,7 +127,7 @@ public class Zombie extends AbstractMob{
 			rotYOffset = Standards.TILE_SIZE;
 			break;
 		}
-		
+
 		glPushMatrix();
 
 		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
