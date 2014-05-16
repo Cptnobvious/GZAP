@@ -74,7 +74,6 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 			break;
 		case Standards.EAST:
 			rotXOffset = Standards.TILE_SIZE;
-			//rotYOffset = Standards.TILE_SIZE;
 			break;
 		case Standards.WEST:
 			rotYOffset = Standards.TILE_SIZE;
@@ -83,8 +82,6 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
-		
-		//glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
 		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
 		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		

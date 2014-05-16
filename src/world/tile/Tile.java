@@ -118,6 +118,8 @@ public class Tile {
 	}
 
 	public void getMouseEvent(int button) {
-		TE.getMouseEvent(button);
+		if (TE != null){
+			TE.getMouseEvent(button);
+		}
 	}
 }
