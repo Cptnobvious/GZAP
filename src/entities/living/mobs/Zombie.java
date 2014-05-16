@@ -12,6 +12,11 @@ public class Zombie extends AbstractMob{
 	}
 
 	@Override
+	public void update(){
+		move(Standards.EAST);
+	}
+	
+	@Override
 	public void draw(int x, int y) {
 		glColor4f(1f, 1f, 1f, 1f);
 

@@ -26,15 +26,33 @@ public class NPCList {
 			AbstractMob current = mobs.get(x);
 			
 			if (isInSightRange(current.getX(), current.getY())){
-				int xDraw = 15 - Boot.getPlayer().getX() - current.getX();
+				int xDraw = 13 - (Boot.getPlayer().getX() - current.getX());
 				xDraw = xDraw * Standards.TILE_SIZE;
 				
-				int yDraw = 15 - Boot.getPlayer().getY() - current.getY();
+				int yDraw = 13 - (Boot.getPlayer().getY() - current.getY());
 				yDraw = yDraw * Standards.TILE_SIZE;
 				
 				mobs.get(x).draw(xDraw, yDraw);
 			}
 		}
+	}
+	
+	public void update(int delta){
+		for (int x = 0; x < mobs.size(); x++){
+			mobs.get(x)._update(delta);
+		}
+	}
+	
+	public boolean isOccupied(int x, int y){
+		for (int i = 0; i < mobs.size(); i++){
+			int occupiedX = mobs.get(i).getX();
+			int occupiedY = mobs.get(i).getY();
+			
+			if (x == occupiedX && y == occupiedY){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public boolean isInSightRange(int x, int y){

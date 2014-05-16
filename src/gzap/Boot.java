@@ -24,6 +24,9 @@ public class Boot {
 	private static GuiHandler guihandler = new GuiHandler();
 	private static GameRegistry registry = new GameRegistry();
 	private static NPCList npclist = new NPCList();
+	private static GameTimer timer = new GameTimer();
+	private static int tick = 0;
+	private static final int TICKRATE = 50;
 	
 
 	public static void main(String[] args) {
@@ -56,17 +59,25 @@ public class Boot {
 
 		setupTextureHandler();
 		
-		
-		//testChunk = new Chunk();
 		player = new Player(14, 14, 0, 100);
 		worldObj = new Map();
 		worldObj.Generate(0, 0);
+		timer.init();
 		
 		while (!Display.isCloseRequested()){
+			
+			int deltaTime = timer.getDelta();
+			
+			tick += deltaTime;
 			
 			draw();
 			worldObj.update();
 			input();
+			
+			if (tick > TICKRATE){
+				npclist.update(deltaTime);
+				tick = 0;
+			}
 			
 			
 			Display.update();
@@ -94,7 +105,7 @@ public class Boot {
 		
 	}
 	
-	public static void input(){
+	public static boolean input(){
 		char key = 0;
 		
 		if (Keyboard.next()){
@@ -127,6 +138,8 @@ public class Boot {
 		}
 		
 		guihandler.mouseInput();
+		
+		return true;
 	}
 
 	public static void setupTextureHandler(){
