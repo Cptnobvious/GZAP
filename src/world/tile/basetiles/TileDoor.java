@@ -1,15 +1,15 @@
 package world.tile.basetiles;
 
+import util.TexInfo;
 import world.tile.AbstractTile;
 import world.tile.Tile;
 import world.tile.TileEntity;
 import world.tile.TileID;
-import world.tile.TileTexInfo;
 
 public class TileDoor extends AbstractTile{
 
-	private TileTexInfo normal = new TileTexInfo(9, 0);
-	private TileTexInfo open = new TileTexInfo(10, 0);
+	private TexInfo normal = new TexInfo(9, 0);
+	private TexInfo open = new TexInfo(10, 0);
 	
 	public TileDoor(){
 		super(TileID.DOOR);
@@ -17,7 +17,7 @@ public class TileDoor extends AbstractTile{
 	}
 
 	@Override
-	public TileTexInfo getTexInfo(int metadata){
+	public TexInfo getTexInfo(int metadata){
 		switch(metadata){
 		default:
 		case 0:

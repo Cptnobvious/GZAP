@@ -11,6 +11,7 @@ import gzap.Standards;
 
 import org.lwjgl.input.Mouse;
 
+import world.tile.Tile;
 import world.tile.TileEntity;
 
 public class GuiHandler {
@@ -72,7 +73,8 @@ public class GuiHandler {
 			newX = cx + (mouseX / Standards.TILE_SIZE) - 12;
 			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
 			
-			TileEntity active = Boot.getWorldObj().getTileAtCoords(newX, newY).getTileEntity();
+			Tile active = Boot.getWorldObj().getTileAtCoords(newX, newY);
+			//TileEntity active = Boot.getWorldObj().getTileAtCoords(newX, newY).getTileEntity();
 			if (active != null){
 				active.getMouseEvent(button);
 			}

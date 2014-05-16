@@ -1,59 +1,50 @@
-package world.tile;
+package entities.inanimate;
 
+import static org.lwjgl.opengl.GL11.*;
 import util.Color4F;
 import util.TexInfo;
+import entities.AbstractEntity;
 import gzap.Boot;
 import gzap.Standards;
-import static org.lwjgl.opengl.GL11.*;
 
-public abstract class AbstractTile {
+public abstract class AbstractInanimateEntity extends AbstractEntity{
+
+	private int orientation = Standards.NORTH;
+	protected TexInfo texinfo = null;
+	protected boolean isSolid = false;
 	
-	//private TileType type;
-	protected int id = 0;
-	protected boolean isSolid;
-	protected int subTiles;
-	
-	public AbstractTile(int uniqueID){
-		id = uniqueID;
-		isSolid = false;
-		subTiles = 0;
+	public AbstractInanimateEntity(int x, int y, int z, TexInfo texinfo) {
+		super(x, y, z);
+		this.texinfo = texinfo;
 	}
-	
-	public AbstractTile(int uniqueID, int subTiles){
-		id = uniqueID;
-		isSolid = false;
-		this.subTiles = subTiles;
-	}
-	
-	public int getSubTiles(){
-		return subTiles;
+
+	public void setSolid(boolean solid){
+		this.isSolid = solid;
 	}
 	
 	public boolean getSolid(){
-		return isSolid;
+		return this.isSolid;
 	}
 	
-	public int getBaseType(){
-		return this.id;
+	public void setOrientation(int direction){
+		this.orientation = direction;
 	}
 	
-	public void setBaseType(int newType){
-		this.id = newType;
+	public int getOrientation(){
+		return this.orientation;
 	}
 	
-	public abstract TileEntity getTileEntity(Tile parent);
-	public abstract TexInfo getTexInfo(int data);
-	
-	public void draw(int x, int y, int orientation, int data){
+	@Override
+	public void draw(int x, int y) {
 		
-		TexInfo currentTexInfo = getTexInfo(data);
+		TexInfo currentTexInfo = texinfo;
 		Color4F color = currentTexInfo.getColor4F();
 		
 		glColor4f(1f, 1f, 1f, 1f);
 		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 		
 		
-		Boot.getTexHandler().bindTexture("terrain");
+		Boot.getTexHandler().bindTexture("entities");
 		
 		float xloc = 0;
 		float yloc = 0;
@@ -116,5 +107,5 @@ public abstract class AbstractTile {
 		glPopMatrix();
 		
 	}
-	
+
 }

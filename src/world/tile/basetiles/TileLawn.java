@@ -2,23 +2,23 @@ package world.tile.basetiles;
 
 import java.util.Random;
 
+import util.TexInfo;
 import world.tile.AbstractTile;
 import world.tile.Tile;
 import world.tile.TileEntity;
 import world.tile.TileID;
-import world.tile.TileTexInfo;
 
 public class TileLawn extends AbstractTile{
-	private TileTexInfo normal = new TileTexInfo(3, 0);
-	private TileTexInfo mud = new TileTexInfo(4, 0);
-	private TileTexInfo whiteFlowers = new TileTexInfo(3, 1);
+	private TexInfo normal = new TexInfo(3, 0);
+	private TexInfo mud = new TexInfo(4, 0);
+	private TexInfo whiteFlowers = new TexInfo(3, 1);
 	
 	public TileLawn(){
 		super(TileID.LAWN, 3);
 	}
 
 	@Override
-	public TileTexInfo getTexInfo(int data){
+	public TexInfo getTexInfo(int data){
 		switch(data){
 		default:
 		case 0:

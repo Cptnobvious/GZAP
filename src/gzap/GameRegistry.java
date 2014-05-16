@@ -2,12 +2,13 @@ package gzap;
 
 import java.util.ArrayList;
 
+import entities.inanimate.AbstractInanimateEntity;
 import world.tile.AbstractTile;
 import world.tile.Tiles;
 
 public class GameRegistry {
 
-	 static private ArrayList<AbstractTile> tiles = new ArrayList<AbstractTile>();
+	static private ArrayList<AbstractTile> tiles = new ArrayList<AbstractTile>();
 	
 	public static void initializeRegistry(){
 		//Setup tiles
@@ -38,4 +39,5 @@ public class GameRegistry {
 		
 		//return null;
 	}
+	
 }

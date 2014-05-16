@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import entities.inanimate.AbstractInanimateEntity;
 import gzap.GameRegistry;
 import gzap.Standards;
 
@@ -15,6 +16,7 @@ public class Tile {
 	private int orientation = Standards.NORTH;
 	private int mapX;
 	private int mapY;
+	private AbstractInanimateEntity AIE = null;
 	private TileEntity TE = null;
 	
 	public Tile(int id, int x, int y){
@@ -45,12 +47,23 @@ public class Tile {
 		return base.getBaseType();
 	}
 	
+	public AbstractInanimateEntity getInanimateEntity(){
+		return AIE;
+	}
+	
+	public void setInanimateEntity(AbstractInanimateEntity ent){
+		AIE = ent;
+	}
+	
 	public TileEntity getTileEntity(){
 		return TE;
 	}
 	
 	public void draw(int x, int y){
 		base.draw(x, y, orientation, metadata);
+		if (AIE != null){
+			AIE.draw(x, y);
+		}
 	}
 	
 	public int getMetadata(){
@@ -102,5 +115,9 @@ public class Tile {
 
 	public void setOrientation(int orientation) {
 		this.orientation = orientation;
+	}
+
+	public void getMouseEvent(int button) {
+		TE.getMouseEvent(button);
 	}
 }

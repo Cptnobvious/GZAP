@@ -13,6 +13,8 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class TextureHandler {
 
 	public static Texture terrain;
+	public static Texture entities;
+	
 	public static Texture player;
 	public static Texture debug;
 	public static Texture text;
@@ -31,6 +33,8 @@ public class TextureHandler {
 	
 	public void init(){
 		terrain = loadTexture("terrain");
+		entities = loadTexture("entities");
+		
 		player = loadTexture("player");
 		debug = loadTexture("debug_mapcenter");
 		text = loadTexture("text");
@@ -44,6 +48,8 @@ public class TextureHandler {
 	
 	public void destroy(){
 		terrain.release();
+		entities.release();
+		
 		player.release();
 		debug.release();
 		text.release();
@@ -97,6 +103,10 @@ public class TextureHandler {
 			case "zed":
 				zed.bind();
 				currentlyBound = zed;
+				break;
+			case "entities":
+				entities.bind();
+				currentlyBound = entities;
 				break;
 			default:
 				//TODO make a proper error handler

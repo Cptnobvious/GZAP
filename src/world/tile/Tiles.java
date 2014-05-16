@@ -21,7 +21,6 @@ public class Tiles {
 		GameRegistry.registerTile(TileID.TILE_FLOOR, 	new TileTileFloor());
 		GameRegistry.registerTile(TileID.WOOD_WALL, 	new TileWoodWall());
 		GameRegistry.registerTile(TileID.DOOR, 			new TileDoor());
-		
 	}
 	
 	

@@ -2,6 +2,7 @@ package gui.panes;
 
 import org.lwjgl.input.Mouse;
 
+import entities.inanimate.ents.Fridge;
 import entities.living.mobs.Zombie;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
@@ -11,10 +12,13 @@ import gzap.Standards;
 
 public class DebugPane extends GUIPane{
 
+	int picks = 0;
+	
 	public DebugPane(){
 		super();
 		addButton(10, 10, 100, 40, 1, "Debug");
 		addButton(10, 60, 100, 40, 2, "Zombie");
+		addButton(10, 110, 100, 40, 3, "Fridge");
 	}
 
 	@Override
@@ -30,18 +34,38 @@ public class DebugPane extends GUIPane{
 			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
 		}
 		
-		Boot.getNPCList().addNPC(new Zombie(newX, newY, 0));
+		switch(picks){
+		default:
+		case 0:
+			Boot.getNPCList().addNPC(new Zombie(newX, newY, 0));
+			break;
+		case 1:
+			Boot.getWorldObj().getTileAtCoords(newX, newY).setInanimateEntity(new Fridge(newX, newY, 0));
+			break;
+		}
+		
 		
 		return true;
 	}
 	
 	@Override
 	protected void recieveButtonEvent(int buttonID){
-		if (buttonID == 1){
+		switch(buttonID){
+		default:
+		case 1:
 			Boot.getGUIHandler().addWindow((GUIWindow)(new DebugGui(-1)));
-		} else {
+			break;
+		case 2:
 			requestPoints(1);
+			picks = 0;
+			break;
+		case 3:
+			requestPoints(1);
+			picks = 1;
+			break;
 		}
+		
+			
 	}
 	
 	@Override 
