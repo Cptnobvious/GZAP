@@ -2,6 +2,7 @@ package gzap;
 
 import java.util.ArrayList;
 
+import util.PointMath;
 import entities.living.AbstractMob;
 
 public class NPCList {
@@ -40,6 +41,35 @@ public class NPCList {
 	public void update(int delta){
 		for (int x = 0; x < mobs.size(); x++){
 			mobs.get(x)._update(delta);
+		}
+	}
+	
+	public ArrayList<AbstractMob> findNearMobs(int x, int y, int range, int selfID){
+		ArrayList<AbstractMob> nearby = new ArrayList<AbstractMob>();
+		
+		for (int i = 0; i < mobs.size(); i++){
+			AbstractMob current = mobs.get(i);
+			
+			double distance = PointMath.distance2Points(current.getX(), current.getY(), x, y);
+			
+			
+			if (distance < range + 1){
+				if (mobs.get(i).getID() != selfID){
+					nearby.add(mobs.get(i));
+				}
+			}
+		}
+		
+		double distance = PointMath.distance2Points(x, y, Boot.getPlayer().getX(), Boot.getPlayer().getY());
+		
+		if (distance < range){
+			nearby.add(Boot.getPlayer());
+		}
+		
+		if (nearby.isEmpty()){
+			return null;
+		}  else {
+			return nearby;
 		}
 	}
 	

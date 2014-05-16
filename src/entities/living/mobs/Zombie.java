@@ -1,19 +1,82 @@
 package entities.living.mobs;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+import util.PointMath;
 import entities.living.AbstractMob;
 import gzap.Boot;
 import gzap.Standards;
 
 public class Zombie extends AbstractMob{
 
+	private AbstractMob target = null;
+	private boolean hasTarget = false;
+	
 	public Zombie(int x, int y, int z) {
 		super(x, y, z, 100);
 	}
 
 	@Override
 	public void update(){
-		move(Standards.EAST);
+		Random rand = new Random(System.currentTimeMillis());
+		
+		if (!hasTarget){
+			ArrayList<AbstractMob> targetslist = Boot.getNPCList().findNearMobs(xLoc, yLoc, 6, getID());
+			
+			if (targetslist != null){
+				AbstractMob target = findBestTarget(targetslist);
+				if (target != null){
+					hasTarget = true;
+					this.target = target;
+				}
+			} else {
+				if (rand.nextInt(4) == 0){
+					move(rand.nextInt(4));
+				}
+			}
+		} else {
+			double distance = PointMath.distance2Points(target.getX(), target.getY(), this.getX(), this.getY());
+			
+			if (distance < 8){
+				move(goTowardsTargetDirection());
+			}
+		}
+		
+	}
+	
+	private int goTowardsTargetDirection(){
+		int xDistance = target.getX() - this.getX();
+		int yDistance = target.getY() - this.getY();
+		
+		if (xDistance <= yDistance){
+			if (yDistance <= 0){
+				return Standards.NORTH;
+			} else {
+				return Standards.SOUTH;
+			}
+		} else {
+			if (xDistance <= 0){
+				return Standards.WEST;
+			} else {
+				return Standards.EAST;
+			}
+		}
+	}
+	
+	private AbstractMob findBestTarget(ArrayList<AbstractMob> list){
+		AbstractMob best = null;
+		
+		for (int i = 0; i < list.size(); i++){
+			if (!(list.get(i) instanceof Zombie)){
+				best = list.get(i);
+				break;
+			}
+		}
+		
+		return best;
 	}
 	
 	@Override
