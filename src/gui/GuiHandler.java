@@ -58,8 +58,9 @@ public class GuiHandler {
 		}
 		
 		ticksPassed++;
-		if (ticksPassed > 10){
+		if (ticksPassed > 20){
 			gotWorldInput = false;
+			ticksPassed = 0;
 		}
 	}
 	

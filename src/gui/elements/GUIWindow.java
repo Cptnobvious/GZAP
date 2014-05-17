@@ -24,6 +24,7 @@ public abstract class GUIWindow {
 	private boolean mouseLeftButton = false;
 	private boolean grabbed = false;
 	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
+	private ArrayList<GUIIcon> icons = new ArrayList<GUIIcon>();
 
 	
 	public GUIWindow(int id, String name){
@@ -214,6 +215,20 @@ public abstract class GUIWindow {
 	
 	public boolean getPoint(int mouseX, int mouseY){
 		return true;
+	}
+	
+	public void addIcon(GUIIcon icon){
+		icons.add(icon);
+	}
+	
+	public void drawIcons(){
+		for (int x = 0; x < icons.size(); x++){
+			icons.get(x).draw(ScreenX, ScreenY + GrabBarHeight);
+		}
+	}
+	
+	public void clearIcons(){
+		icons.clear();
 	}
 	
 	public void drawButtons(){

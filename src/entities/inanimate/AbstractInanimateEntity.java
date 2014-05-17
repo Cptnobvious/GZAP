@@ -17,6 +17,8 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		super(x, y, z);
 		this.texinfo = texinfo;
 	}
+	
+	public abstract void update();
 
 	public void setSolid(boolean solid){
 		this.isSolid = solid;
