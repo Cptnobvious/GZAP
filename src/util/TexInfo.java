@@ -49,6 +49,10 @@ public class TexInfo {
 		return sheet;
 	}
 	
+	public void setTextureName(String name){
+		this.sheet = name;
+	}
+	
 	public Color4F getColor4F(){
 		return color4f;
 	}

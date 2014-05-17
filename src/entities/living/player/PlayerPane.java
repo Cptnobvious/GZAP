@@ -11,8 +11,8 @@ public class PlayerPane extends GUIPane{
 
 	public PlayerPane(){
 		allowsMapInteraction = true;
-		TexInfo texinfo = new TexInfo(0, 0, "items");
-		addIcon(new GUIIcon(10, 10, texinfo));
+		//TexInfo texinfo = new TexInfo(0, 0, "items");
+		//addIcon(new GUIIcon(10, 10, texinfo));
 	}
 	
 	
@@ -22,7 +22,9 @@ public class PlayerPane extends GUIPane{
 		
 		for (int i = 0; i < Boot.getPlayer().getInventorySize(); i++){
 			if (Boot.getPlayer().getItemInSlot(i) != null){
-				addIcon(new GUIIcon(i * 32 + 8, 10, Boot.getPlayer().getItemInSlot(i).getBase().getTexInfo()));
+				TexInfo texinfo = Boot.getPlayer().getItemInSlot(i).getBase().getTexInfo();
+				texinfo.setTextureName("items");
+				addIcon(new GUIIcon((i * 32) + 8, 10, texinfo));
 			}
 		}
 		
