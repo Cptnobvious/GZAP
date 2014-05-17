@@ -1,40 +1,25 @@
-package entities.inanimate;
+package items;
 
 import static org.lwjgl.opengl.GL11.*;
-import util.Color4F;
-import util.TexInfo;
-import entities.AbstractEntity;
 import gzap.Boot;
 import gzap.Standards;
+import util.Color4F;
+import util.TexInfo;
 
-public abstract class AbstractInanimateEntity extends AbstractEntity{
+public abstract class AbstractItem {
 
-	private int orientation = Standards.NORTH;
-	protected TexInfo texinfo = null;
-	protected boolean isSolid = false;
+	String name;
+	protected TexInfo texinfo;
 	
-	public AbstractInanimateEntity(int x, int y, int z, TexInfo texinfo) {
-		super(x, y, z);
+	public AbstractItem(String name, TexInfo texinfo){
+		this.name = name;
 		this.texinfo = texinfo;
 	}
 
-	public void setSolid(boolean solid){
-		this.isSolid = solid;
+	public TexInfo getTexInfo(){
+		return texinfo;
 	}
 	
-	public boolean getSolid(){
-		return this.isSolid;
-	}
-	
-	public void setOrientation(int direction){
-		this.orientation = direction;
-	}
-	
-	public int getOrientation(){
-		return this.orientation;
-	}
-	
-	@Override
 	public void draw(int x, int y) {
 		
 		TexInfo currentTexInfo = texinfo;
@@ -44,7 +29,7 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 		
 		
-		Boot.getTexHandler().bindTexture("entities");
+		Boot.getTexHandler().bindTexture("items");
 		
 		float xloc = 0;
 		float yloc = 0;
@@ -52,7 +37,6 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		float bottom;
 		float left;
 		float right;
-		float rotation = orientation * 90;
 		
 		xloc = currentTexInfo.getSpriteSheetX();
 		yloc = currentTexInfo.getSpriteSheetY();
@@ -62,28 +46,11 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		left = (xloc * Standards.TILE_SIZE_ON_TEX_F) / Standards.TEX_SIZE_F;
 		right = left + (Standards.TILE_SIZE_ON_TEX_F / Standards.TEX_SIZE_F);
 		
-		float rotXOffset = 0;
-		float rotYOffset = 0;
-		
-		switch (orientation){
-		case Standards.NORTH:
-			break;
-		case Standards.SOUTH:
-			rotXOffset = Standards.TILE_SIZE;
-			rotYOffset = Standards.TILE_SIZE;
-			break;
-		case Standards.EAST:
-			rotXOffset = Standards.TILE_SIZE;
-			break;
-		case Standards.WEST:
-			rotYOffset = Standards.TILE_SIZE;
-			break;
-		}
 		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
-		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
-		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
+		glTranslatef((float)x, (float)y, 0f);
+		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
 		
 		
 		glBegin(GL_QUADS);
@@ -104,7 +71,4 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		glPopMatrix();
 		
 	}
-
-	public abstract void getMouseEvent(int button);
-
 }

@@ -1,41 +1,34 @@
-package entities.inanimate;
+package gui.elements;
 
 import static org.lwjgl.opengl.GL11.*;
-import util.Color4F;
-import util.TexInfo;
-import entities.AbstractEntity;
 import gzap.Boot;
 import gzap.Standards;
+import util.Color4F;
+import util.TexInfo;
 
-public abstract class AbstractInanimateEntity extends AbstractEntity{
+public class GUIIcon {
 
-	private int orientation = Standards.NORTH;
-	protected TexInfo texinfo = null;
-	protected boolean isSolid = false;
+	TexInfo texInfo;
+	protected int iconX;
+	protected int iconY;
 	
-	public AbstractInanimateEntity(int x, int y, int z, TexInfo texinfo) {
-		super(x, y, z);
-		this.texinfo = texinfo;
-	}
-
-	public void setSolid(boolean solid){
-		this.isSolid = solid;
+	public GUIIcon(int iconX, int iconY, TexInfo texInfo){
+		this.iconX = iconX;
+		this.iconY = iconY;
+		this.texInfo = texInfo;
 	}
 	
-	public boolean getSolid(){
-		return this.isSolid;
+	public void draw(int x, int y){
+		draw(x, y, texInfo);
 	}
 	
-	public void setOrientation(int direction){
-		this.orientation = direction;
+	public void draw(int x, int y, TexInfo texinfo){
+		draw(x, y, texinfo, 0);
 	}
 	
-	public int getOrientation(){
-		return this.orientation;
-	}
-	
-	@Override
-	public void draw(int x, int y) {
+	public void draw(int wX, int wY, TexInfo texinfo, int orientation){
+		int screenX = wX + iconX;
+		int screenY = wY + iconY;
 		
 		TexInfo currentTexInfo = texinfo;
 		Color4F color = currentTexInfo.getColor4F();
@@ -44,7 +37,7 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 		
 		
-		Boot.getTexHandler().bindTexture("entities");
+		Boot.getTexHandler().bindTexture(currentTexInfo.getTextureName());
 		
 		float xloc = 0;
 		float yloc = 0;
@@ -82,29 +75,27 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
-		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
+		//glTranslatef((float)screenX + rotXOffset, (float)screenY + rotYOffset, 0f);
 		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		
 		
 		glBegin(GL_QUADS);
 		{
 			glTexCoord2f(left, top);
-			glVertex2i(0, 0);
+			glVertex2i(screenX, screenY);
 			
 			glTexCoord2f(right, top);
-			glVertex2i(0 + Standards.TILE_SIZE, 0);
+			glVertex2i(screenX + Standards.TILE_SIZE, screenY);
 
 			glTexCoord2f(right, bottom);
-			glVertex2i(0 + Standards.TILE_SIZE, 0 + Standards.TILE_SIZE);
+			glVertex2i(screenX + Standards.TILE_SIZE, screenY + Standards.TILE_SIZE);
 			
 			glTexCoord2f(left, bottom);
-			glVertex2i(0, 0 + Standards.TILE_SIZE);
+			glVertex2i(screenX, screenY + Standards.TILE_SIZE);
 		}
 		glEnd();
 		glPopMatrix();
 		
 	}
-
-	public abstract void getMouseEvent(int button);
-
+	
 }

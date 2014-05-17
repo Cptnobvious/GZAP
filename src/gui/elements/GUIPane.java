@@ -13,6 +13,7 @@ public abstract class GUIPane {
 	
 	private String texturename;
 	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
+	private ArrayList<GUIIcon> icons = new ArrayList<GUIIcon>();
 	private boolean mouseStatus = false;
 	protected boolean allowsMapInteraction = false;
 	
@@ -73,9 +74,23 @@ public abstract class GUIPane {
 	}
 	
 	public void drawButtons(){
-		for (int x = 0; x < buttons.size(); x ++){
+		for (int x = 0; x < buttons.size(); x++){
 			buttons.get(x).draw(800, 288);
 		}
+	}
+	
+	public void addIcon(GUIIcon icon){
+		icons.add(icon);
+	}
+	
+	public void drawIcons(){
+		for (int x = 0; x < icons.size(); x++){
+			icons.get(x).draw(800, 288);
+		}
+	}
+	
+	public void clearIcons(){
+		icons.clear();
 	}
 	
 	public void addButton(GUIButton newButton){

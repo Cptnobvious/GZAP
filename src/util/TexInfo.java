@@ -6,10 +6,19 @@ public class TexInfo {
 	private int spriteSheetX;
 	private int spriteSheetY;
 	private Color4F color4f;
+	private String sheet = null;
 	
 	public TexInfo(int spriteSheetX, int spriteSheetY){
 		this.spriteSheetX = spriteSheetX;
 		this.spriteSheetY = spriteSheetY;
+		
+		this.color4f = new Color4F();
+	}
+	
+	public TexInfo(int spriteSheetX, int spriteSheetY, String sheet){
+		this.spriteSheetX = spriteSheetX;
+		this.spriteSheetY = spriteSheetY;
+		this.sheet = sheet;
 		
 		this.color4f = new Color4F();
 	}
@@ -34,6 +43,10 @@ public class TexInfo {
 
 	public int getSpriteSheetY() {
 		return spriteSheetY;
+	}
+	
+	public String getTextureName(){
+		return sheet;
 	}
 	
 	public Color4F getColor4F(){

@@ -4,6 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.input.Mouse;
 
+import entities.living.player.PlayerPane;
 import world.generation.prefab.PrefabPane;
 import gui.elements.GUIPane;
 import gui.panes.ConstructionPane;
@@ -55,6 +56,8 @@ public class PanesSelector {
 			return (GUIPane)(new ConstructionPane());
 		case 3:
 			return (GUIPane)(new DefaultPane());
+		case 4:
+			return (GUIPane)(new PlayerPane());
 		}
 		
 	}

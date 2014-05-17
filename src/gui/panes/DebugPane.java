@@ -1,5 +1,9 @@
 package gui.panes;
 
+import items.Item;
+import items.ItemID;
+import items.baseitems.Milk;
+
 import org.lwjgl.input.Mouse;
 
 import entities.inanimate.ents.Fridge;
@@ -8,6 +12,7 @@ import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.windows.DebugGui;
 import gzap.Boot;
+import gzap.GameRegistry;
 import gzap.Standards;
 
 public class DebugPane extends GUIPane{
@@ -19,6 +24,7 @@ public class DebugPane extends GUIPane{
 		addButton(10, 10, 100, 40, 1, "Debug");
 		addButton(10, 60, 100, 40, 2, "Zombie");
 		addButton(10, 110, 100, 40, 3, "Fridge");
+		addButton(10, 160, 100, 40, 4, "Milk");
 	}
 
 	@Override
@@ -63,6 +69,9 @@ public class DebugPane extends GUIPane{
 			requestPoints(1);
 			picks = 1;
 			break;
+		case 4:
+			Boot.getPlayer().addItemToInventory(new Item(ItemID.MILK));
+			break;
 		}
 		
 			
@@ -70,8 +79,8 @@ public class DebugPane extends GUIPane{
 	
 	@Override 
 	public void drawForeground(){
-		addText(10, 68, "Mouse Info");
+		addText(150, 68, "Mouse Info");
 		String str = "X." + Integer.toString(Mouse.getX()) + " Y." + Integer.toString(Standards.W_HEIGHT - Mouse.getY());
-		addText(10, 80, str);
+		addText(150, 80, str);
 	}
 }

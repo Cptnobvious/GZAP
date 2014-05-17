@@ -14,6 +14,7 @@ public class TextureHandler {
 
 	public static Texture terrain;
 	public static Texture entities;
+	public static Texture items;
 	
 	public static Texture player;
 	public static Texture debug;
@@ -34,6 +35,7 @@ public class TextureHandler {
 	public void init(){
 		terrain = loadTexture("terrain");
 		entities = loadTexture("entities");
+		items = loadTexture("items");
 		
 		player = loadTexture("player");
 		debug = loadTexture("debug_mapcenter");
@@ -49,6 +51,7 @@ public class TextureHandler {
 	public void destroy(){
 		terrain.release();
 		entities.release();
+		items.release();
 		
 		player.release();
 		debug.release();
@@ -107,6 +110,10 @@ public class TextureHandler {
 			case "entities":
 				entities.bind();
 				currentlyBound = entities;
+				break;
+			case "items":
+				items.bind();
+				currentlyBound = items;
 				break;
 			default:
 				//TODO make a proper error handler

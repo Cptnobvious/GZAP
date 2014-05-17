@@ -10,12 +10,16 @@ import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glVertex2i;
+import interfaces.Inventory;
+import items.Item;
 import entities.living.AbstractMob;
 import gzap.Boot;
 import gzap.Standards;
 
-public class Player extends AbstractMob{
+public class Player extends AbstractMob implements Inventory{
 
+	Item[] inventory = new Item[10];
+	
 	public Player(int x, int y, int z, int health) {
 		super(x, y, z, health);
 	}
@@ -76,6 +80,53 @@ public class Player extends AbstractMob{
 		glEnd();
 		glPopMatrix();
 
+	}
+
+
+	@Override
+	public int getInventorySize() {
+		return inventory.length;
+	}
+
+
+	@Override
+	public Item getItemInSlot(int slot) {
+		return inventory[slot];
+	}
+
+
+	@Override
+	public boolean setItemInSlot(int slot, Item item) {
+		inventory[slot] = item;
+		return true;
+	}
+
+
+	@Override
+	public boolean isRoomInInventory() {
+		for (int i = 0; i < getInventorySize(); i++){
+			if (getItemInSlot(i) == null){
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+
+	@Override
+	public boolean addItemToInventory(Item item) {
+		if (isRoomInInventory()){
+			for (int i = 0; i < getInventorySize(); i++){
+				if (getItemInSlot(i) == null){
+					setItemInSlot(i, item);
+					break;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 }

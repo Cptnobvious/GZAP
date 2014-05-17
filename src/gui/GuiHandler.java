@@ -25,6 +25,10 @@ public class GuiHandler {
 	private int id = -1;
 	private int requestedPointsLeft = -1;
 	
+	private boolean gotWorldInput = false;
+	
+	private int ticksPassed = 0;
+	
 	public void mouseInput(){
 		int mouseX = Mouse.getX();
 		int mouseY = Mouse.getY();
@@ -48,8 +52,14 @@ public class GuiHandler {
 			justRequested = false;
 		}
 		
-		if (Mouse.isButtonDown(0) && activePane.doesAllowMapInteraction()){
+		if (Mouse.isButtonDown(0) && activePane.doesAllowMapInteraction() && !gotWorldInput){
 			worldInput(mouseX, mouseY);
+			gotWorldInput = true;
+		}
+		
+		ticksPassed++;
+		if (ticksPassed > 10){
+			gotWorldInput = false;
 		}
 	}
 	
