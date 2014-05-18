@@ -13,17 +13,17 @@ import gzap.Standards;
 
 public abstract class GUIWindow {
 	
-	private int ScreenX;
-	private int ScreenY;
-	private int Width;
-	private int Height;
-	private int GrabBarHeight = 12;
-	private int id;
+	protected int ScreenX;
+	protected int ScreenY;
+	protected int Width;
+	protected int Height;
+	protected int GrabBarHeight = 12;
+	protected int id;
 	private String title = "Unnamed Window";
-	private boolean mouseLeft = false;
-	private boolean mouseLeftButton = false;
-	private boolean grabbed = false;
-	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
+	protected boolean mouseLeft = false;
+	protected boolean mouseLeftButton = false;
+	protected boolean grabbed = false;
+	protected ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
 	private ArrayList<GUIIcon> icons = new ArrayList<GUIIcon>();
 
 	
@@ -197,7 +197,7 @@ public abstract class GUIWindow {
 		return false;
 	}
 	
-	private boolean isInGrabBar(int mouseX, int mouseY){
+	protected boolean isInGrabBar(int mouseX, int mouseY){
 		mouseY = Standards.W_HEIGHT - mouseY - 1;
 		
 		if ((mouseX > ScreenX) && (mouseX < ScreenX + Width)){

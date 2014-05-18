@@ -7,35 +7,35 @@ import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glVertex2i;
+import interfaces.Inventory;
+import items.Item;
+import gui.elements.GUIIcon;
 import gzap.Boot;
 import gzap.Standards;
-import util.Color4F;
 
-public class GUIButton {
+
+public class GUISlot{
 
 	protected int x;
 	protected int y;
-	protected int width;
-	protected int height;
-	private int buttonID;
+	private int InventorySlot;
 	protected boolean hover = false;
-	private String name = "";
+	protected Inventory parent;
+	private GUIIcon item;
 	
-	public GUIButton(int x, int y, int width, int height, int buttonID){
+	public GUISlot(int x, int y, int invslot, Inventory parent) {
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.buttonID = buttonID;
+		this.InventorySlot = invslot;
+		this.parent = parent;
 	}
 	
-	public GUIButton(int x, int y, int width, int height, int buttonID, String name){
-		this.x = x;
+	public int getY(){
+		return this.y;
+	}
+	
+	public void setY(int y){
 		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.buttonID = buttonID;
-		this.name = name;
 	}
 	
 	public void setHover(boolean hover){
@@ -43,18 +43,18 @@ public class GUIButton {
 	}
 	
 	public int onClick(int wX, int wY, int mouseX, int mouseY){
-		if (isOnButton(wX, wY, mouseX, mouseY)){
-			return buttonID;
+		if (isOnSlot(wX, wY, mouseX, mouseY)){
+			return InventorySlot;
 		}
 		
 		return -1;
 	}
 	
-	public boolean isOnButton(int wX, int wY, int mouseX, int mouseY){
+	public boolean isOnSlot(int wX, int wY, int mouseX, int mouseY){
 		mouseY = Standards.W_HEIGHT - mouseY - 1;
 		
-		if ((mouseX > wX + x) && (mouseX < wX + x + width)){
-			if ((mouseY > wY + y) && (mouseY < wY + y + height)){
+		if ((mouseX > wX + x) && (mouseX < wX + x + Standards.TILE_SIZE)){
+			if ((mouseY > wY + y) && (mouseY < wY + y + Standards.TILE_SIZE)){
 				return true;
 			}
 		}
@@ -72,9 +72,16 @@ public class GUIButton {
 		if (this.hover){
 			glColor4f(0.9f, 0.9f, 0.9f, 1f);
 		} else {
-			glColor4f(0.3f, 0.3f, 0.7f, 1f);
+			glColor4f(0.3f, 0.3f, 0.3f, 0f);
 		}
 			
+		if (parent.getItemInSlot(InventorySlot) == null){
+			item = null;
+		} else {
+			item = new GUIIcon(0, 0, parent.getItemInSlot(InventorySlot).getBase().getTexInfo());
+		}
+		
+		
 		glPushMatrix();
 		
 		
@@ -82,15 +89,18 @@ public class GUIButton {
 		{
 			glVertex2i(ScreenX, ScreenY);
 			
-			glVertex2i(ScreenX + width, ScreenY);
+			glVertex2i(ScreenX + Standards.TILE_SIZE, ScreenY);
 
-			glVertex2i(ScreenX + width, ScreenY + height);
+			glVertex2i(ScreenX + Standards.TILE_SIZE, ScreenY + Standards.TILE_SIZE);
 			
-			glVertex2i(ScreenX, ScreenY + height);
+			glVertex2i(ScreenX, ScreenY + Standards.TILE_SIZE);
 		}
+		
 		glEnd();
 		glPopMatrix();
 		
-		Boot.getTextWriter().drawString(wX + x, wY + y, name);
+		if (item != null){
+			item.draw(ScreenX, ScreenY);
+		}
 	}
 }

@@ -1,7 +1,7 @@
 package entities.inanimate.ents;
 
 import gui.elements.GUIWindow;
-import gui.windows.InventoryWindow;
+import gui.elements.GUIInventoryWindow;
 import gzap.Boot;
 import interfaces.Inventory;
 import items.Item;
@@ -19,18 +19,18 @@ public class Fridge extends AbstractInanimateEntity implements Inventory{
 		super(x, y, z, null);
 		texinfo = new TexInfo(0, 0, "items");
 		isSolid = true;
-		setItemInSlot(0, new Item(ItemID.MILK));
-		setItemInSlot(1, new Item(ItemID.MILK));
-		setItemInSlot(2, new Item(ItemID.MILK));
-		setItemInSlot(3, new Item(ItemID.MILK));
-		setItemInSlot(4, new Item(ItemID.MILK));
-		setItemInSlot(5, new Item(ItemID.MILK));
+		//setItemInSlot(0, new Item(ItemID.MILK));
+		//setItemInSlot(1, new Item(ItemID.MILK));
+		//setItemInSlot(2, new Item(ItemID.MILK));
+		//setItemInSlot(3, new Item(ItemID.MILK));
+		//setItemInSlot(4, new Item(ItemID.MILK));
+		//setItemInSlot(5, new Item(ItemID.MILK));
 	}
 
 	@Override
 	public void getMouseEvent(int button) {
 		if (button == 0 && canClick){
-			Boot.getGUIHandler().addWindow((GUIWindow)(new InventoryWindow(-1, "Fridge", this)));
+			Boot.getGUIHandler().addWindow((GUIWindow)(new GUIInventoryWindow(-1, "Fridge", this)));
 		}
 	}
 
