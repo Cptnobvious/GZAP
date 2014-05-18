@@ -75,6 +75,7 @@ public class Boot {
 			input();
 			
 			if (tick > TICKRATE){
+				guihandler.updateWindows();
 				npclist.update(deltaTime);
 				tick = 0;
 			}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 
+import util.PointMath;
 import util.TexInfo;
 import gui.elements.buttons.GUIButton;
 import gui.elements.buttons.GUISlot;
@@ -14,13 +15,36 @@ public class GUIInventoryWindow extends GUIWindow{
 
 	private Inventory linksTo;
 	private ArrayList<GUISlot> slots = new ArrayList<GUISlot>();
+	private boolean firstopen = true;
+	private int WorldX;
+	private int WorldY;
 	
-	public GUIInventoryWindow(int id, String name, Inventory inventory) {
+	public GUIInventoryWindow(int id, String name, Inventory inventory, int WorldX, int WorldY) {
 		super(id, name);
 		linksTo = inventory;
+		this.WorldX = WorldX;
+		this.WorldY = WorldY;
+		
 		this.Width = (5 * 32) + 4;
 		this.Height = (((linksTo.getInventorySize() / 5) + 1) * 32) + 8;
-		addSlot(new GUISlot(0, 0, 0, linksTo));
+		
+		int j = 0;
+		int k = 0;
+		
+		for (int i = 0; i < linksTo.getInventorySize(); i++){
+			if (i % 5 == 0 && i != 0){
+				k = 0;
+				j++;
+			}
+			
+			if (linksTo.getItemInSlot(i) != null){
+				TexInfo texinfo = linksTo.getItemInSlot(i).getBase().getTexInfo();
+				texinfo.setTextureName("items");
+				addSlot(new GUISlot((k * 32) + 2, (j * 32) + 4, i, linksTo));
+			}
+			
+			k++;
+		}
 	}
 
 	
@@ -117,29 +141,16 @@ public class GUIInventoryWindow extends GUIWindow{
 	
 	@Override
 	public void drawForeground(){
-		clearIcons();
 		
-		int j = 0;
-		int k = 0;
-		
-		for (int i = 0; i < linksTo.getInventorySize(); i++){
-			if (i % 5 == 0 && i != 0){
-				k = 0;
-				j++;
-			}
-			
-			if (linksTo.getItemInSlot(i) != null){
-				TexInfo texinfo = linksTo.getItemInSlot(i).getBase().getTexInfo();
-				texinfo.setTextureName("items");
-				addIcon(new GUIIcon((k * 32) + 2, (j * 32) + 4, texinfo));
-			}
-			
-			k++;
-		}
-		
-		drawIcons();
 	}
 	
+	@Override
+	public void update(){
+		if (PointMath.distance2Points((double)WorldX, (double)WorldY, (double)Boot.getPlayer().getX(), (double)Boot.getPlayer().getY()) > 2){
+			Boot.getGUIHandler().removeWindow(id);
+		}
+	}
+
 	public void addSlot(GUISlot slot){
 		slot.setY(slot.getY() + GrabBarHeight);
 		slots.add(slot);
@@ -149,6 +160,10 @@ public class GUIInventoryWindow extends GUIWindow{
 		for (int x = 0; x < slots.size(); x++){
 			slots.get(x).draw(ScreenX, ScreenY);
 		}
+	}
+	
+	public void clearSlots(){
+		slots.clear();
 	}
 	
 	protected void recieveSlotEvent(int slotID){

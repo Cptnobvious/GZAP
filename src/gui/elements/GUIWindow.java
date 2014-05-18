@@ -244,4 +244,8 @@ public abstract class GUIWindow {
 	protected void recieveButtonEvent(int buttonID){
 		
 	}
+	
+	public void update(){
+		
+	}
 }

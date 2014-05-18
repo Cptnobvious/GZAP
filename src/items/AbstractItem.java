@@ -10,12 +10,19 @@ public abstract class AbstractItem {
 
 	String name;
 	protected TexInfo texinfo;
+	private int id;
 	
-	public AbstractItem(String name, TexInfo texinfo){
+	public AbstractItem(int id, String name, TexInfo texinfo){
 		this.name = name;
 		this.texinfo = texinfo;
+		
+		this.id = id;
 	}
 
+	public int getID(){
+		return id;
+	}
+	
 	public TexInfo getTexInfo(){
 		return texinfo;
 	}

@@ -20,6 +20,7 @@ public class GUISlot{
 	protected int y;
 	private int InventorySlot;
 	protected boolean hover = false;
+	private int itemID;
 	protected Inventory parent;
 	private GUIIcon item;
 	
@@ -28,6 +29,12 @@ public class GUISlot{
 		this.y = y;
 		this.InventorySlot = invslot;
 		this.parent = parent;
+		
+		itemID = parent.getItemInSlot(invslot).getBase().getID();
+	}
+	
+	public int getItemID(){
+		return itemID;
 	}
 	
 	public int getY(){

@@ -114,6 +114,11 @@ public class GuiHandler {
 			window.setID(getUniqueWindowID());
 		}
 		
+		int dx = Mouse.getX();
+		int dy = Mouse.getY() - Standards.W_HEIGHT;
+		
+		window.move(dx, dy);
+		
 		windowslist.add(window);
 	}
 	
@@ -175,6 +180,12 @@ public class GuiHandler {
 				pointsRequested = false;
 				requestedPointsLeft = -1;
 			}
+		}
+	}
+	
+	public void updateWindows(){
+		for (int i = 0; i < windowslist.size(); i++){
+			windowslist.get(i).update();
 		}
 	}
 	
