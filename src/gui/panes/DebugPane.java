@@ -2,8 +2,6 @@ package gui.panes;
 
 import items.Item;
 import items.ItemID;
-import items.baseitems.Milk;
-
 import org.lwjgl.input.Mouse;
 
 import entities.inanimate.ents.Fridge;
@@ -12,7 +10,6 @@ import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.windows.DebugGui;
 import gzap.Boot;
-import gzap.GameRegistry;
 import gzap.Standards;
 
 public class DebugPane extends GUIPane{
@@ -59,7 +56,7 @@ public class DebugPane extends GUIPane{
 		switch(buttonID){
 		default:
 		case 1:
-			Boot.getGUIHandler().addWindow((GUIWindow)(new DebugGui(-1)));
+			Boot.getGUIHandler().addWindow((new DebugGui(-1)));
 			break;
 		case 2:
 			requestPoints(1);

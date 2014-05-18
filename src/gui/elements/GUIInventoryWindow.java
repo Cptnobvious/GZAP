@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 
 import util.PointMath;
 import util.TexInfo;
-import gui.elements.buttons.GUIButton;
 import gui.elements.buttons.GUISlot;
 import gzap.Boot;
 import interfaces.Inventory;
@@ -37,11 +36,7 @@ public class GUIInventoryWindow extends GUIWindow{
 				j++;
 			}
 			
-			if (linksTo.getItemInSlot(i) != null){
-				TexInfo texinfo = linksTo.getItemInSlot(i).getBase().getTexInfo();
-				texinfo.setTextureName("items");
-				addSlot(new GUISlot((k * 32) + 2, (j * 32) + 4, i, linksTo));
-			}
+			addSlot(new GUISlot((k * 32) + 2, (j * 32) + 4, i, linksTo));
 			
 			k++;
 		}
@@ -146,7 +141,7 @@ public class GUIInventoryWindow extends GUIWindow{
 	
 	@Override
 	public void update(){
-		if (PointMath.distance2Points((double)WorldX, (double)WorldY, (double)Boot.getPlayer().getX(), (double)Boot.getPlayer().getY()) > 2){
+		if (PointMath.distance2Points(WorldX, WorldY, Boot.getPlayer().getX(), Boot.getPlayer().getY()) > 2){
 			Boot.getGUIHandler().removeWindow(id);
 		}
 	}

@@ -56,7 +56,7 @@ public abstract class AbstractItem {
 		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
-		glTranslatef((float)x, (float)y, 0f);
+		glTranslatef(x, y, 0f);
 		glRotatef(0.0f, 0.0f, 0.0f, 1.0f);
 		
 		

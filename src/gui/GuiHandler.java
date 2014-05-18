@@ -12,12 +12,11 @@ import gzap.Standards;
 import org.lwjgl.input.Mouse;
 
 import world.tile.Tile;
-import world.tile.TileEntity;
 
 public class GuiHandler {
 
 	private static ArrayList<GUIWindow> windowslist = new ArrayList<GUIWindow>();
-	private static GUIPane activePane = (GUIPane)new DebugPane();
+	private static GUIPane activePane = new DebugPane();
 	private static PanesSelector panesselector = new PanesSelector();
 	
 	private boolean pointsRequested = false;

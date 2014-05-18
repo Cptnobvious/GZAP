@@ -9,7 +9,6 @@ import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 import gzap.Boot;
 import gzap.Standards;
-import util.Color4F;
 
 public class GUIButton {
 

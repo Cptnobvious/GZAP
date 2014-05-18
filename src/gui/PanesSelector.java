@@ -49,15 +49,15 @@ public class PanesSelector {
 		switch (pane){
 		default:
 		case 0:
-			return (GUIPane)(new DebugPane());
+			return (new DebugPane());
 		case 1:
-			return (GUIPane)(new PrefabPane());
+			return (new PrefabPane());
 		case 2:
-			return (GUIPane)(new ConstructionPane());
+			return (new ConstructionPane());
 		case 3:
-			return (GUIPane)(new DefaultPane());
+			return (new DefaultPane());
 		case 4:
-			return (GUIPane)(new PlayerPane());
+			return (new PlayerPane());
 		}
 		
 	}

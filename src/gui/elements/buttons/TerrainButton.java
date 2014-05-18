@@ -26,8 +26,8 @@ public class TerrainButton extends GUIButton {
 		
 		glColor4f(1f, 1f, 1f, 1f);
 
-		float xloc = (float)TexX;
-		float yloc = (float)TexY;
+		float xloc = TexX;
+		float yloc = TexY;
 		float top;
 		float bottom;
 		float left;

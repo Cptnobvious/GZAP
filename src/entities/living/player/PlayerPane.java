@@ -1,34 +1,41 @@
 package entities.living.player;
 
+import interfaces.Inventory;
 import util.TexInfo;
-import items.ItemID;
 import gui.elements.GUIIcon;
 import gui.elements.GUIPane;
+import gui.elements.buttons.GUISlot;
 import gzap.Boot;
-import gzap.GameRegistry;
 
 public class PlayerPane extends GUIPane{
 
+	private Inventory inventory;
+
 	public PlayerPane(){
 		allowsMapInteraction = true;
-		//TexInfo texinfo = new TexInfo(0, 0, "items");
-		//addIcon(new GUIIcon(10, 10, texinfo));
+		inventory = Boot.getPlayer();
+
+		int j = 0;
+		int k = 0;
+
+		for (int i = 0; i < inventory.getInventorySize(); i++){
+			if (i % 5 == 0 && i != 0){
+				k = 0;
+				j++;
+			}
+
+
+			addSlot(new GUISlot((k * 36) + 10, (j * 36 + 2) + 4, i, inventory));
+
+
+			k++;
+		}
 	}
-	
-	
+
+
 	@Override
 	public void drawForeground(){
-		clearIcons();
-		
-		for (int i = 0; i < Boot.getPlayer().getInventorySize(); i++){
-			if (Boot.getPlayer().getItemInSlot(i) != null){
-				TexInfo texinfo = Boot.getPlayer().getItemInSlot(i).getBase().getTexInfo();
-				texinfo.setTextureName("items");
-				addIcon(new GUIIcon((i * 32) + 8, 10, texinfo));
-			}
-		}
-		
-		drawIcons();
+
 	}
-	
+
 }

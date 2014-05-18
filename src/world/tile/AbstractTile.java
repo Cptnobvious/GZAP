@@ -94,7 +94,7 @@ public abstract class AbstractTile {
 		glPushMatrix();
 		
 		//glTranslatef(((float)x * Standards.TILE_SIZE), ((float)y * Standards.TILE_SIZE), 0f);
-		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
+		glTranslatef(x + rotXOffset, y + rotYOffset, 0f);
 		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		
 		

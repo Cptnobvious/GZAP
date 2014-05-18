@@ -8,7 +8,6 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.*;
 import org.lwjgl.input.Keyboard;
 
-import entities.living.mobs.Zombie;
 import entities.living.player.Player;
 import gui.GuiHandler;
 import util.TextWriter;

@@ -84,7 +84,7 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 		
 		//This push and pop prevent rotate from having a field day
 		glPushMatrix();
-		glTranslatef((float)x + rotXOffset, (float)y + rotYOffset, 0f);
+		glTranslatef(x + rotXOffset, y + rotYOffset, 0f);
 		glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 		
 		

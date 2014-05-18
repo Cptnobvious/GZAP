@@ -117,7 +117,7 @@ public class PrefabPane extends GUIPane{
 		default:
 			break;
 		case 1:
-			Boot.getGUIHandler().addWindow((GUIWindow)(new DebugGui(-1)));
+			Boot.getGUIHandler().addWindow((new DebugGui(-1)));
 			break;
 		case 2:
 			requestPoints(2);

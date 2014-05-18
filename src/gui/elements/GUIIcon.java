@@ -36,7 +36,7 @@ public class GUIIcon {
 		glColor4f(1f, 1f, 1f, 1f);
 		glColor4f(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 		
-		
+		currentTexInfo.setTextureName("items");
 		Boot.getTexHandler().bindTexture(currentTexInfo.getTextureName());
 		
 		float xloc = 0;

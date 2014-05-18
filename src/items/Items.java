@@ -1,7 +1,6 @@
 package items;
 
 import items.baseitems.Milk;
-import gzap.Boot;
 import gzap.GameRegistry;
 
 public class Items {

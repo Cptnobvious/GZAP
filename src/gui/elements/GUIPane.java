@@ -1,12 +1,14 @@
 package gui.elements;
 
 import static org.lwjgl.opengl.GL11.*;
+import interfaces.Inventory;
 
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 
 import gui.elements.buttons.GUIButton;
+import gui.elements.buttons.GUISlot;
 import gzap.Boot;
 
 public abstract class GUIPane {
@@ -14,6 +16,8 @@ public abstract class GUIPane {
 	private String texturename;
 	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
 	private ArrayList<GUIIcon> icons = new ArrayList<GUIIcon>();
+	private ArrayList<GUISlot> slots = new ArrayList<GUISlot>();
+	private Inventory linksTo;
 	private boolean mouseStatus = false;
 	protected boolean allowsMapInteraction = false;
 	
@@ -67,6 +71,7 @@ public abstract class GUIPane {
 		drawBackground();
 		drawForeground();
 		drawButtons();
+		drawSlots();
 	}
 	
 	public void addText(int x, int y, String text){
@@ -132,6 +137,28 @@ public abstract class GUIPane {
 			}
 		}
 		
+		//Deal with slots
+		
+		for (int i = 0; i < slots.size(); i++){
+			if (slots.get(i).isOnSlot(800, 288, x, y)){
+				slots.get(i).setHover(true);
+			} else {
+				slots.get(i).setHover(false);
+			}
+			
+			if (Mouse.isButtonDown(0) && !mouseStatus){
+				int buttonID = slots.get(i).onClick(800, 288, x, y);
+				if (buttonID != -1){
+					recieveSlotEvent(buttonID);
+				}
+				mouseStatus = true;
+			} else if (Mouse.isButtonDown(0) && mouseStatus) {
+				//do nothing
+			} else {
+				mouseStatus = false;
+			}
+		}
+		
 		recieveMouseEvent(x, y);
 	}
 	
@@ -151,4 +178,21 @@ public abstract class GUIPane {
 		return true;
 	}
 	
+	public void addSlot(GUISlot slot){
+		slots.add(slot);
+	}
+	
+	public void drawSlots(){
+		for (int x = 0; x < slots.size(); x++){
+			slots.get(x).draw(800, 288);
+		}
+	}
+	
+	public void clearSlots(){
+		slots.clear();
+	}
+	
+	protected void recieveSlotEvent(int slotID){
+		
+	}
 }

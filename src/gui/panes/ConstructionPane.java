@@ -32,13 +32,13 @@ public class ConstructionPane extends GUIPane{
 			if (GameRegistry.getTile(i).getSubTiles() > 0){
 				for (int j = 0; j < GameRegistry.getTile(i).getSubTiles(); j++){
 					buttonX = (((i + offset) % 8)* (32 + 4)) + 10;
-					addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i], j)));
+					addButton((new TerrainButton(buttonX, buttonY, allowed[i], j)));
 					offset++;
 				}
 				offset--;
 			} else {
 				buttonX = (((i + offset) % 8)* (32 + 4)) + 10;
-				addButton((GUIButton)(new TerrainButton(buttonX, buttonY, allowed[i], 0)));
+				addButton((new TerrainButton(buttonX, buttonY, allowed[i], 0)));
 			}
 		}
 	}

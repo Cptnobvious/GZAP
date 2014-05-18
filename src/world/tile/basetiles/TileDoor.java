@@ -29,7 +29,7 @@ public class TileDoor extends AbstractTile{
 
 	@Override
 	public TileEntity getTileEntity(Tile parent) {
-		return (TileEntity)new TileDoorEntity(parent);
+		return new TileDoorEntity(parent);
 	}
 	
 }

@@ -5,7 +5,6 @@ import items.Items;
 
 import java.util.ArrayList;
 
-import entities.inanimate.AbstractInanimateEntity;
 import world.tile.AbstractTile;
 import world.tile.Tiles;
 

@@ -8,7 +8,6 @@ import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glVertex2i;
 import interfaces.Inventory;
-import items.Item;
 import gui.elements.GUIIcon;
 import gzap.Boot;
 import gzap.Standards;
@@ -30,7 +29,11 @@ public class GUISlot{
 		this.InventorySlot = invslot;
 		this.parent = parent;
 		
-		itemID = parent.getItemInSlot(invslot).getBase().getID();
+		if (parent.getItemInSlot(invslot) != null){
+			itemID = parent.getItemInSlot(invslot).getBase().getID();
+		} else {
+			itemID = -1;
+		}
 	}
 	
 	public int getItemID(){
@@ -79,7 +82,7 @@ public class GUISlot{
 		if (this.hover){
 			glColor4f(0.9f, 0.9f, 0.9f, 1f);
 		} else {
-			glColor4f(0.3f, 0.3f, 0.3f, 0f);
+			glColor4f(0.0f, 1f, 0.0f, 0.2f);
 		}
 			
 		if (parent.getItemInSlot(InventorySlot) == null){
@@ -102,12 +105,13 @@ public class GUISlot{
 			
 			glVertex2i(ScreenX, ScreenY + Standards.TILE_SIZE);
 		}
-		
 		glEnd();
 		glPopMatrix();
 		
 		if (item != null){
 			item.draw(ScreenX, ScreenY);
-		}
+		} 
+		
+		
 	}
 }

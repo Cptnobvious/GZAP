@@ -1,7 +1,5 @@
 package world.tile.basetiles;
 
-import java.util.Random;
-
 import util.TexInfo;
 import world.tile.AbstractTile;
 import world.tile.Tile;

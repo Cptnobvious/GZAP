@@ -31,8 +31,8 @@ public class Fridge extends AbstractInanimateEntity implements Inventory{
 	@Override
 	public void getMouseEvent(int button) {
 		if (button == 0 && canClick){
-			if (PointMath.distance2Points((double)xLoc, (double)yLoc, (double)Boot.getPlayer().getX(), (double)Boot.getPlayer().getY()) <= 2){
-				Boot.getGUIHandler().addWindow((GUIWindow)(new GUIInventoryWindow(-1, "Fridge", this, xLoc, yLoc)));
+			if (PointMath.distance2Points(xLoc, yLoc, Boot.getPlayer().getX(), Boot.getPlayer().getY()) <= 2){
+				Boot.getGUIHandler().addWindow((new GUIInventoryWindow(-1, "Fridge", this, xLoc, yLoc)));
 			}
 		}
 	}
