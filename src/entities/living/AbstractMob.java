@@ -52,15 +52,15 @@ public abstract class AbstractMob extends AbstractEntity{
 
 		return false;
 	}
-	
+
 	public void setID(int a){
 		id = a;
 	}
-	
+
 	public int getID(){
 		return id;
 	}
-	
+
 	public boolean move(int direction){
 		if (canMove(direction)){
 			switch (direction){
@@ -84,14 +84,30 @@ public abstract class AbstractMob extends AbstractEntity{
 
 			return true;
 		}
-		
+
 		orientation = direction;
-		
+
 		return false;
+	}
+
+	@Override
+	public void update(){
 	}
 
 	public int getHealth() {
 		return health;
+	}
+
+	public boolean damage(int damage){
+		setHealth(this.health - damage);
+		if (health <= 0) {
+			kill();
+		}
+		return true;
+	}
+
+	public void kill(){
+		Boot.getNPCList().removeNPC(id);
 	}
 
 	public void setHealth(int health) {

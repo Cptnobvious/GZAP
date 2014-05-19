@@ -27,6 +27,7 @@ public class TextureHandler {
 	
 	public static Texture debugMenu;
 	public static Texture constructionMenu;
+	public static Texture playerpane;
 	
 	public TextureHandler(){
 		
@@ -46,6 +47,7 @@ public class TextureHandler {
 		
 		constructionMenu = loadTexture("constructionmenu");
 		debugMenu = loadTexture("debugmenu");
+		playerpane = loadTexture("playerpane");
 	}
 	
 	public void destroy(){
@@ -62,6 +64,7 @@ public class TextureHandler {
 		
 		constructionMenu.release();
 		debugMenu.release();
+		playerpane.release();
 	}
 	
 	public void bindTexture(String key){
@@ -114,6 +117,10 @@ public class TextureHandler {
 			case "items":
 				items.bind();
 				currentlyBound = items;
+				break;
+			case "playerpane":
+				playerpane.bind();
+				currentlyBound = playerpane;
 				break;
 			default:
 				//TODO make a proper error handler

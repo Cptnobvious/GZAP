@@ -18,7 +18,7 @@ import gzap.Standards;
 
 public class Player extends AbstractMob implements Inventory{
 
-	Item[] inventory = new Item[10];
+	Item[] inventory = new Item[36];
 	
 	public Player(int x, int y, int z, int health) {
 		super(x, y, z, health);

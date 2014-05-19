@@ -20,7 +20,7 @@ public class Zombie extends AbstractMob{
 	}
 
 	@Override
-	public void update(){
+	public void think(){
 		Random rand = new Random(System.currentTimeMillis());
 
 		if (!hasTarget){

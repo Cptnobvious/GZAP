@@ -6,13 +6,16 @@ public abstract class AbstractEntity {
 	protected int yLoc;
 	protected int zLoc;
 	protected int deltaTime = 0;
+	protected int thinkTime = 0;
 	protected int updateRate;
+	protected int thinkRate;
 
 	public AbstractEntity(int x, int y, int z){
 		this.xLoc = x;
 		this.yLoc = y;
 		this.zLoc = z;
-		this.updateRate = 20;
+		this.updateRate = 12;
+		this.thinkRate = 20;
 	}
 	
 	public abstract void draw(int x, int y);
@@ -25,10 +28,25 @@ public abstract class AbstractEntity {
 			update();
 		}
 		
+		if (thinkTime == 0){
+			think();
+		}
+		
+		thinkTime++;
 		deltaTime++;
+		
+		if (thinkTime == thinkRate){
+			thinkTime = 0;
+		}
+		
 		if (deltaTime == updateRate){
 			deltaTime = 0;
 		}	
+		
+	}
+	
+	public void think(){
+		
 	}
 	
 	public void update(){
