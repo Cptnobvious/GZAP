@@ -112,8 +112,8 @@ public class GUIInventoryWindow extends GUIWindow{
 					int buttonID = slots.get(i).onClick(ScreenX, ScreenY, mouseX, mouseY);
 					if (buttonID != -1){
 						recieveSlotEvent(buttonID);
+						mouseLeftButton = true;
 					}
-					mouseLeftButton = true;
 				} else if (Mouse.isButtonDown(0) && mouseLeftButton) {
 					//do nothing
 				} else {
@@ -162,7 +162,7 @@ public class GUIInventoryWindow extends GUIWindow{
 	}
 	
 	protected void recieveSlotEvent(int slotID){
-		
+		Boot.getGUIHandler().interactSlot(linksTo, slotID);
 	}
 	
 }

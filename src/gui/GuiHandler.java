@@ -1,8 +1,12 @@
 package gui;
 
 
+import interfaces.Inventory;
+import items.Item;
+
 import java.util.ArrayList;
 
+import gui.elements.GUIIcon;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
 import gui.panes.DebugPane;
@@ -11,6 +15,7 @@ import gzap.Standards;
 
 import org.lwjgl.input.Mouse;
 
+import util.TexInfo;
 import world.tile.Tile;
 
 public class GuiHandler {
@@ -27,6 +32,10 @@ public class GuiHandler {
 	private boolean gotWorldInput = false;
 	
 	private int ticksPassed = 0;
+	
+	private Inventory inventory = null;
+	private int slotID = -1;
+	private Item grabbed = null;
 	
 	public void mouseInput(){
 		int mouseX = Mouse.getX();
@@ -102,6 +111,7 @@ public class GuiHandler {
 		
 		panesselector.draw();
 		drawSideMenu();
+		drawGrabbed();
 	}
 	
 	public void drawSideMenu(){
@@ -185,6 +195,29 @@ public class GuiHandler {
 	public void updateWindows(){
 		for (int i = 0; i < windowslist.size(); i++){
 			windowslist.get(i).update();
+		}
+	}
+	
+	public void interactSlot(Inventory inv, int slot){
+		if (inv.getItemInSlot(slot) != null && grabbed == null){
+			this.inventory = inv;
+			this.slotID = slot;
+			grabbed = inventory.getItemInSlot(slotID);
+			inventory.setItemInSlot(slotID, null);
+		} else if (grabbed != null && inv.getItemInSlot(slot) == null){
+			inv.setItemInSlot(slot, grabbed);
+			this.inventory = null;
+			this.slotID = -1;
+			grabbed = null;
+		}
+	}
+	
+	public void drawGrabbed(){
+		if (grabbed != null){
+			TexInfo tempinfo = grabbed.getBase().getTexInfo();
+			tempinfo.setTextureName("items");
+			GUIIcon drawIcon = new GUIIcon(0, 0, tempinfo);
+			drawIcon.draw(Mouse.getX() - 16, Standards.W_HEIGHT - Mouse.getY() - 16);
 		}
 	}
 	

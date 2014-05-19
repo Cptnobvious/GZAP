@@ -21,11 +21,9 @@ public class Fridge extends AbstractInanimateEntity implements Inventory{
 		texinfo = new TexInfo(0, 0, "items");
 		isSolid = true;
 		setItemInSlot(0, new Item(ItemID.MILK));
-		setItemInSlot(1, new Item(ItemID.MILK));
-		setItemInSlot(2, new Item(ItemID.MILK));
-		setItemInSlot(3, new Item(ItemID.MILK));
-		setItemInSlot(4, new Item(ItemID.MILK));
-		setItemInSlot(5, new Item(ItemID.MILK));
+		setItemInSlot(1, new Item(ItemID.WATER_BOTTLE));
+		setItemInSlot(2, new Item(ItemID.APPLE));
+		setItemInSlot(3, new Item(ItemID.NUTRIBAR));
 	}
 
 	@Override

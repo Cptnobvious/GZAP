@@ -17,7 +17,7 @@ public abstract class GUIPane {
 	private ArrayList<GUIButton> buttons = new ArrayList<GUIButton>();
 	private ArrayList<GUIIcon> icons = new ArrayList<GUIIcon>();
 	private ArrayList<GUISlot> slots = new ArrayList<GUISlot>();
-	private Inventory linksTo;
+	protected Inventory linksTo;
 	private boolean mouseStatus = false;
 	protected boolean allowsMapInteraction = false;
 	
@@ -150,8 +150,8 @@ public abstract class GUIPane {
 				int buttonID = slots.get(i).onClick(800, 288, x, y);
 				if (buttonID != -1){
 					recieveSlotEvent(buttonID);
+					mouseStatus = true;
 				}
-				mouseStatus = true;
 			} else if (Mouse.isButtonDown(0) && mouseStatus) {
 				//do nothing
 			} else {
@@ -193,6 +193,6 @@ public abstract class GUIPane {
 	}
 	
 	protected void recieveSlotEvent(int slotID){
-		
+		Boot.getGUIHandler().interactSlot(linksTo, slotID);
 	}
 }
