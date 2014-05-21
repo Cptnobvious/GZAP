@@ -9,6 +9,7 @@ public abstract class AbstractMob extends AbstractEntity{
 	protected int health;
 	protected int orientation;
 	protected int id = -1;
+	protected int attackTimer = 0;
 
 	public AbstractMob(int x, int y, int z, int health) {
 		super(x, y, z);
@@ -92,6 +93,9 @@ public abstract class AbstractMob extends AbstractEntity{
 
 	@Override
 	public void update(){
+		if (attackTimer > 0){
+			attackTimer--;
+		}
 	}
 
 	public int getHealth() {

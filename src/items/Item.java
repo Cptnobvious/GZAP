@@ -14,4 +14,8 @@ public class Item {
 		return base;
 	}
 	
+	public int getDamageDealt(){
+		return base.getDamageDealt();
+	}
+	
 }

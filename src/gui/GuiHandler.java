@@ -6,6 +6,7 @@ import items.Item;
 
 import java.util.ArrayList;
 
+import entities.living.AbstractMob;
 import gui.elements.GUIIcon;
 import gui.elements.GUIPane;
 import gui.elements.GUIWindow;
@@ -92,10 +93,14 @@ public class GuiHandler {
 			newX = cx + (mouseX / Standards.TILE_SIZE) - 12;
 			newY = cy + ((Standards.W_HEIGHT - mouseY) / Standards.TILE_SIZE) - 12;
 			
-			Tile active = Boot.getWorldObj().getTileAtCoords(newX, newY);
-			//TileEntity active = Boot.getWorldObj().getTileAtCoords(newX, newY).getTileEntity();
-			if (active != null){
-				active.getMouseEvent(button);
+			AbstractMob mob = Boot.getNPCList().NPCAtLocation(newX, newY);
+			if (mob != null){
+				Boot.getPlayer().mobInteract(mob);
+			} else {
+				Tile active = Boot.getWorldObj().getTileAtCoords(newX, newY);
+				if (active != null){
+					active.getMouseEvent(button);
+				}
 			}
 		}
 	}

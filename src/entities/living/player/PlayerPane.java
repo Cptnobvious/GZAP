@@ -23,7 +23,7 @@ public class PlayerPane extends GUIPane{
 		int k = 0;
 		int l = -1;
 		
-		for (int i = 0; i < linksTo.getInventorySize(); i++){
+		for (int i = 0; i < PlayerInfo.INVENTORYSIZE; i++){
 			if (i % 4 == 0 && i != 0){
 				k = 0;
 				j++;
@@ -38,6 +38,9 @@ public class PlayerPane extends GUIPane{
 
 			k++;
 		}
+		
+		addSlot(new GUISlot(200, 300, PlayerInfo.INVENTORYSIZE, linksTo));
+		
 	}
 
 

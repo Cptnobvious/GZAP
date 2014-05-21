@@ -11,6 +11,7 @@ public abstract class AbstractItem {
 	String name;
 	protected TexInfo texinfo;
 	private int id;
+	protected int damageDealt = 0;
 	
 	public AbstractItem(int id, String name, TexInfo texinfo){
 		this.name = name;
@@ -21,6 +22,10 @@ public abstract class AbstractItem {
 
 	public int getID(){
 		return id;
+	}
+	
+	public int getDamageDealt(){
+		return damageDealt;
 	}
 	
 	public TexInfo getTexInfo(){

@@ -3,6 +3,7 @@ package items;
 import items.baseitems.Apple;
 import items.baseitems.Milk;
 import items.baseitems.Nutribar;
+import items.baseitems.Stick;
 import items.baseitems.Water;
 import gzap.GameRegistry;
 
@@ -13,6 +14,7 @@ public class Items {
 		GameRegistry.registerItem(ItemID.APPLE, new Apple());
 		GameRegistry.registerItem(ItemID.WATER_BOTTLE, new Water());
 		GameRegistry.registerItem(ItemID.NUTRIBAR, new Nutribar());
+		GameRegistry.registerItem(ItemID.STICK, new Stick());
 	}
 
 }

@@ -14,6 +14,7 @@ public class Zombie extends AbstractMob{
 
 	private AbstractMob target = null;
 	private boolean hasTarget = false;
+	private int attackSpeed = 1;
 
 	public Zombie(int x, int y, int z) {
 		super(x, y, z, 100);
@@ -40,6 +41,10 @@ public class Zombie extends AbstractMob{
 		} else {
 			double distance = PointMath.distance2Points(target.getX(), target.getY(), this.getX(), this.getY());
 
+			if (attackTimer == 0 && distance < 2){
+				attackTimer = attackSpeed;
+				target.damage(10);
+			}
 			if (distance < 8){
 				move(goTowardsTargetDirection());
 			} else {

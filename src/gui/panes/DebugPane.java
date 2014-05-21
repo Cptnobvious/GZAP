@@ -22,6 +22,7 @@ public class DebugPane extends GUIPane{
 		addButton(10, 60, 100, 40, 2, "Zombie");
 		addButton(10, 110, 100, 40, 3, "Fridge");
 		addButton(10, 160, 100, 40, 4, "Milk");
+		addButton(10, 210, 100, 40, 5, "Hurt");
 	}
 
 	@Override
@@ -68,6 +69,9 @@ public class DebugPane extends GUIPane{
 			break;
 		case 4:
 			Boot.getPlayer().addItemToInventory(new Item(ItemID.MILK));
+			break;
+		case 5:
+			Boot.getPlayer().damage(10);
 			break;
 		}
 		

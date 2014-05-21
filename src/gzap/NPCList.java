@@ -73,6 +73,17 @@ public class NPCList {
 		}
 	}
 	
+	public AbstractMob NPCAtLocation(int x, int y){
+		for (int i = 0; i < mobs.size(); i++){
+			AbstractMob mob = mobs.get(i);
+			if (mob.getX() == x && mob.getY() == y){
+				return mob;
+			}
+		}
+		
+		return null;
+	}
+	
 	public boolean isOccupied(int x, int y){
 		for (int i = 0; i < mobs.size(); i++){
 			int occupiedX = mobs.get(i).getX();
