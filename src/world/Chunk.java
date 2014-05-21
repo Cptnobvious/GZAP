@@ -16,6 +16,8 @@ public class Chunk {
 	private int chunkY;
 
 	public Chunk(int x, int y){
+		chunkX = x;
+		chunkY = y;
 		contents = new Tile[Standards.CHUNK_SIZE][Standards.CHUNK_SIZE];
 		init();
 	}
