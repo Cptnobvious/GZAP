@@ -80,13 +80,9 @@ public class Boot {
 			worldObj.update();
 			guihandler.mouseInput();
 
-			if (moveTick <= 0){
-				if (input(deltaTime)){
-					moveTick = 125;
-				}
-			} else {
-				moveTick = moveTick - deltaTime;
-			}
+			
+			input(deltaTime);
+			
 
 
 			if (tick >= TICKRATE){
@@ -177,9 +173,15 @@ public class Boot {
 			break;
 		}
 
-		if (direction != -1){
-			player.move(direction);
+		if (moveTick <= 0){
+			if (direction != -1){
+				player.move(direction);
+				moveTick = 150;
+			}
+		} else {
+			moveTick = moveTick - delta;
 		}
+		
 
 		return true;
 	}
