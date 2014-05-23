@@ -68,7 +68,7 @@ public class Boot {
 		timer.init();
 
 
-		//Keyboard.enableRepeatEvents(true);
+		Keyboard.enableRepeatEvents(true);
 
 		while (!Display.isCloseRequested()){
 
@@ -82,12 +82,12 @@ public class Boot {
 
 			if (moveTick <= 0){
 				if (input(deltaTime)){
-					moveTick = 100;
+					moveTick = 125;
 				}
 			} else {
 				moveTick = moveTick - deltaTime;
 			}
-			
+
 
 			if (tick >= TICKRATE){
 				guihandler.updateWindows();
@@ -125,28 +125,45 @@ public class Boot {
 	public static boolean input(int delta){
 
 		char key = 0;
+		int direction = -1;
 
-		if (Keyboard.getEventKeyState()){
-			key = previousCommand;
-		} else {
-			if (Keyboard.next()){
+		/*
+		if (Keyboard.next()){
+			if (!Keyboard.isRepeatEvent()){
+				key = 0;
+			} else {
 				key = Keyboard.getEventCharacter();
-				previousCommand = key;
 			}
 		}
+		*/
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_W)){
+			direction = Standards.NORTH;
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_S)){
+			direction = Standards.SOUTH;
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_D)){
+			direction = Standards.EAST;
+		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)){
+			direction = Standards.WEST;
+		}
+	
+
+			//key = Keyboard.getEventCharacter();
+			//previousCommand = key;
+
 
 		switch (key){
 		case 'w':
-			player.move(Standards.NORTH);
+			direction = Standards.NORTH;
 			break;
 		case 's':
-			player.move(Standards.SOUTH);
+			direction = Standards.SOUTH;
 			break;
 		case 'd':
-			player.move(Standards.EAST);
+			direction = Standards.EAST;
 			break;
 		case 'a':
-			player.move(Standards.WEST);
+			direction = Standards.WEST;
 			break;
 		case 'e':
 			break;
@@ -158,6 +175,10 @@ public class Boot {
 			break;
 		default:
 			break;
+		}
+
+		if (direction != -1){
+			player.move(direction);
 		}
 
 		return true;
