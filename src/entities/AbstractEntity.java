@@ -5,44 +5,25 @@ public abstract class AbstractEntity {
 	protected int xLoc;
 	protected int yLoc;
 	protected int zLoc;
-	protected int deltaTime = 0;
-	protected int thinkTime = 0;
-	protected int updateRate;
-	protected int thinkRate;
+	protected int updateTick = 0;
+	protected int updateSpeed = 0;
 
 	public AbstractEntity(int x, int y, int z){
 		this.xLoc = x;
 		this.yLoc = y;
 		this.zLoc = z;
-		this.updateRate = 12;
-		this.thinkRate = 20;
 	}
 	
 	public abstract void draw(int x, int y);
-	
-	
 
 	public void _update(int delta){
-		
-		if (deltaTime == 0){
+		if (updateTick == 0){
 			update();
-		}
-		
-		if (thinkTime == 0){
 			think();
+			updateTick = updateSpeed;
+		} else {
+			updateTick--;
 		}
-		
-		thinkTime++;
-		deltaTime++;
-		
-		if (thinkTime == thinkRate){
-			thinkTime = 0;
-		}
-		
-		if (deltaTime == updateRate){
-			deltaTime = 0;
-		}	
-		
 	}
 	
 	public void think(){

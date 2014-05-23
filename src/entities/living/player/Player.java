@@ -22,6 +22,7 @@ import gzap.Standards;
 public class Player extends AbstractMob implements Inventory{
 
 	Item[] inventory = new Item[PlayerInfo.INVENTORYSIZE + PlayerInfo.EQUIPSLOTS];
+	private int healingRate = PlayerInfo.BASEHEALRATE;
 
 	public Player(int x, int y, int z, int health) {
 		super(x, y, z, health);
@@ -131,7 +132,10 @@ public class Player extends AbstractMob implements Inventory{
 
 	public void mobInteract(AbstractMob mob){
 		if (getItemInSlot(PlayerInfo.WEAPONSLOT) != null){
-			mob.damage(getItemInSlot(PlayerInfo.WEAPONSLOT).getDamageDealt());
+			if (attackTimer == 0){
+				attackTimer = 1;
+				mob.damage(getItemInSlot(PlayerInfo.WEAPONSLOT).getDamageDealt());
+			}
 		}
 	}
 

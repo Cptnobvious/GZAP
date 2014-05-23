@@ -63,6 +63,8 @@ public class Boot {
 		worldObj.Generate(0, 0);
 		timer.init();
 		
+		int test = 0;
+		
 		while (!Display.isCloseRequested()){
 			
 			int deltaTime = timer.getDelta();
@@ -73,10 +75,10 @@ public class Boot {
 			worldObj.update();
 			input();
 			
-			if (tick > TICKRATE){
+			if (tick >= TICKRATE){
 				guihandler.updateWindows();
 				npclist.update(deltaTime);
-				tick = 0;
+				tick -= TICKRATE;
 			}
 			
 			

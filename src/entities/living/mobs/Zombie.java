@@ -17,7 +17,8 @@ public class Zombie extends AbstractMob{
 	private int attackSpeed = 1;
 
 	public Zombie(int x, int y, int z) {
-		super(x, y, z, 100);
+		super(x, y, z, 20);
+		updateSpeed = 20;
 	}
 
 	@Override
@@ -52,7 +53,6 @@ public class Zombie extends AbstractMob{
 				this.target = null;
 			}
 		}
-
 	}
 
 	private int goTowardsTargetDirection(){
