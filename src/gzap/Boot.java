@@ -16,7 +16,7 @@ import world.Map;
 public class Boot {
 
 	private static TextureHandler texturehandler;
-	
+
 	private static Player player;
 	private static Map worldObj;
 	private static TextWriter textwriter = new TextWriter();
@@ -26,7 +26,11 @@ public class Boot {
 	private static GameTimer timer = new GameTimer();
 	private static int tick = 0;
 	private static final int TICKRATE = 50;
-	
+
+	private static char previousCommand = 0;
+	private static int moveRate = 2;
+	private static int moveTick = 0;
+
 
 	public static void main(String[] args) {
 		try{
@@ -37,16 +41,16 @@ public class Boot {
 			e.printStackTrace();
 		}
 
-		
+
 		//TODO add a check to see if the save directory already exists
 		File dir = new File(Standards.WORLD_SAVE_LOCATION);
 		dir.mkdirs();
 		dir = new File("data");
 		dir.mkdir();
-		
+
 		//TODO put this initialization code in its own block somewhere
 		registry.initializeRegistry();
-		
+
 		//Initialization code OpenGL
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -57,32 +61,42 @@ public class Boot {
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		setupTextureHandler();
-		
+
 		player = new Player(14, 14, 0, 100);
 		worldObj = new Map();
 		worldObj.Generate(0, 0);
 		timer.init();
-		
-		int test = 0;
-		
+
+
+		//Keyboard.enableRepeatEvents(true);
+
 		while (!Display.isCloseRequested()){
-			
+
 			int deltaTime = timer.getDelta();
-			
+
 			tick += deltaTime;
-			
+
 			draw();
 			worldObj.update();
-			input();
+			guihandler.mouseInput();
+
+			if (moveTick <= 0){
+				if (input(deltaTime)){
+					moveTick = 100;
+				}
+			} else {
+				moveTick = moveTick - deltaTime;
+			}
 			
+
 			if (tick >= TICKRATE){
 				guihandler.updateWindows();
 				player._update(deltaTime);
 				npclist.update(deltaTime);
 				tick -= TICKRATE;
 			}
-			
-			
+
+
 			Display.update();
 			Display.sync(60);
 		}
@@ -91,30 +105,36 @@ public class Boot {
 		//Remember to release the texture when done
 		shutdownGracefully();
 	}
-	
+
 	public static void draw(){
-		
+
 		glClear(GL_COLOR_BUFFER_BIT);
-		
+
 		glColor4f(1f, 1f, 1f, 1f);
 
 		int xStart = player.getX() - 12;
 		int yStart = player.getY() - 12;
-		
+
 		worldObj.draw(0, 0, xStart, yStart);
 		npclist.draw();
 		player.draw(13 * Standards.TILE_SIZE, 13 * Standards.TILE_SIZE);
 		guihandler.draw();
-		
+
 	}
-	
-	public static boolean input(){
+
+	public static boolean input(int delta){
+
 		char key = 0;
-		
-		if (Keyboard.next()){
-			key = Keyboard.getEventCharacter();
+
+		if (Keyboard.getEventKeyState()){
+			key = previousCommand;
+		} else {
+			if (Keyboard.next()){
+				key = Keyboard.getEventCharacter();
+				previousCommand = key;
+			}
 		}
-		
+
 		switch (key){
 		case 'w':
 			player.move(Standards.NORTH);
@@ -139,9 +159,7 @@ public class Boot {
 		default:
 			break;
 		}
-		
-		guihandler.mouseInput();
-		
+
 		return true;
 	}
 
@@ -149,31 +167,31 @@ public class Boot {
 		texturehandler = new TextureHandler();
 		texturehandler.init();
 	}
-	
+
 	public static Map getWorldObj(){
 		return worldObj;
 	}	
-	
+
 	public static Player getPlayer(){
 		return player;
 	}
-	
+
 	public static TextWriter getTextWriter(){
 		return textwriter;
 	}
-	
+
 	public static GameRegistry getGameRegistry(){
 		return registry;
 	}
-	
+
 	public static TextureHandler getTexHandler(){
 		return texturehandler;
 	}
-	
+
 	public static GuiHandler getGUIHandler(){
 		return guihandler;
 	}
-	
+
 	public static NPCList getNPCList(){
 		return npclist;
 	}
