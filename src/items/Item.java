@@ -18,4 +18,8 @@ public class Item {
 		return base.getDamageDealt();
 	}
 	
+	public int getAttackSpeed(){
+		return base.getAttackSpeed();
+	}
+	
 }

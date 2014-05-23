@@ -12,6 +12,7 @@ public abstract class AbstractItem {
 	protected TexInfo texinfo;
 	private int id;
 	protected int damageDealt = 0;
+	protected int attackSpeed = 0; //Ticks before you can swing again
 	
 	public AbstractItem(int id, String name, TexInfo texinfo){
 		this.name = name;
@@ -26,6 +27,10 @@ public abstract class AbstractItem {
 	
 	public int getDamageDealt(){
 		return damageDealt;
+	}
+	
+	public int getAttackSpeed(){
+		return attackSpeed;
 	}
 	
 	public TexInfo getTexInfo(){

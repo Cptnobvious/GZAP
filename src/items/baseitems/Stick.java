@@ -10,6 +10,7 @@ public class Stick extends AbstractItem{
 		super(ItemID.STICK, "Stick", null);
 		texinfo = new TexInfo(4, 0);
 		damageDealt = 10;
+		attackSpeed = 10;
 	}
 
 }

@@ -131,10 +131,11 @@ public class Player extends AbstractMob implements Inventory{
 	}
 
 	public void mobInteract(AbstractMob mob){
-		if (getItemInSlot(PlayerInfo.WEAPONSLOT) != null){
+		Item weapon = getItemInSlot(PlayerInfo.WEAPONSLOT);
+		if (weapon != null){
 			if (attackTimer == 0){
-				attackTimer = 1;
-				mob.damage(getItemInSlot(PlayerInfo.WEAPONSLOT).getDamageDealt());
+				attackTimer = weapon.getAttackSpeed();
+				mob.damage(weapon.getDamageDealt());
 			}
 		}
 	}
