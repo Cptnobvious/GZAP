@@ -18,25 +18,25 @@ public class GUIInventoryWindow extends GUIWindow{
 	private int WorldX;
 	private int WorldY;
 	
-	public GUIInventoryWindow(int id, String name, Inventory inventory, int WorldX, int WorldY) {
+	public GUIInventoryWindow(int id, String name, Inventory inventory, int WorldX, int WorldY, int across) {
 		super(id, name);
 		linksTo = inventory;
 		this.WorldX = WorldX;
 		this.WorldY = WorldY;
 		
-		this.Width = (5 * 32) + 4;
-		this.Height = (((linksTo.getInventorySize() / 5) + 1) * 32) + 8;
+		this.Width = (across * 34) + 4;
+		this.Height = ((linksTo.getInventorySize() / across) * 34) + 8;
 		
 		int j = 0;
 		int k = 0;
 		
 		for (int i = 0; i < linksTo.getInventorySize(); i++){
-			if (i % 5 == 0 && i != 0){
+			if (i % across == 0 && i != 0){
 				k = 0;
 				j++;
 			}
 			
-			addSlot(new GUISlot((k * 32) + 2, (j * 32) + 4, i, linksTo));
+			addSlot(new GUISlot((k * 34) + 2, (j * 34) + 4, i, linksTo));
 			
 			k++;
 		}

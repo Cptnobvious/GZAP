@@ -1,5 +1,7 @@
 package entities.inanimate.ents;
 
+import java.util.ArrayList;
+
 import gui.elements.GUIWindow;
 import gui.elements.GUIInventoryWindow;
 import gzap.Boot;
@@ -8,6 +10,7 @@ import items.Item;
 import items.ItemID;
 import util.PointMath;
 import util.TexInfo;
+import world.generation.container.FoodGen;
 import entities.inanimate.AbstractInanimateEntity;
 
 public class Fridge extends AbstractInanimateEntity implements Inventory{
@@ -20,17 +23,28 @@ public class Fridge extends AbstractInanimateEntity implements Inventory{
 		super(x, y, z, null);
 		texinfo = new TexInfo(0, 0, "items");
 		isSolid = true;
+		/*
 		setItemInSlot(0, new Item(ItemID.STICK));
 		setItemInSlot(1, new Item(ItemID.WATER_BOTTLE));
 		setItemInSlot(2, new Item(ItemID.APPLE));
 		setItemInSlot(3, new Item(ItemID.NUTRIBAR));
+		*/
+		fill();
+	}
+	
+	private void fill(){
+		ArrayList<Item> templist = FoodGen.generateContents(contains.length, 30);
+		
+		for (int i = 0; i < contains.length; i++){
+			setItemInSlot(i, templist.get(i));
+		}
 	}
 
 	@Override
 	public void getMouseEvent(int button) {
 		if (button == 0 && canClick){
 			if (PointMath.distance2Points(xLoc, yLoc, Boot.getPlayer().getX(), Boot.getPlayer().getY()) <= 2){
-				Boot.getGUIHandler().addWindow((new GUIInventoryWindow(-1, "Fridge", this, xLoc, yLoc)));
+				Boot.getGUIHandler().addWindow((new GUIInventoryWindow(-1, "Fridge", this, xLoc, yLoc, 3)));
 			}
 		}
 	}

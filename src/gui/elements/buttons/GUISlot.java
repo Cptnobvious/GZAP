@@ -82,7 +82,7 @@ public class GUISlot{
 		if (this.hover){
 			glColor4f(0.9f, 0.9f, 0.9f, 1f);
 		} else {
-			glColor4f(0.0f, 1f, 0.0f, 0.2f);
+			glColor4f(0.0f, 0.0f, 0.7f, 0.1f);
 		}
 			
 		if (parent.getItemInSlot(InventorySlot) == null){
