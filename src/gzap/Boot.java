@@ -80,9 +80,9 @@ public class Boot {
 			worldObj.update();
 			guihandler.mouseInput();
 
-			
+
 			input(deltaTime);
-			
+
 
 
 			if (tick >= TICKRATE){
@@ -131,8 +131,8 @@ public class Boot {
 				key = Keyboard.getEventCharacter();
 			}
 		}
-		*/
-		
+		 */
+
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)){
 			direction = Standards.NORTH;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_S)){
@@ -141,36 +141,30 @@ public class Boot {
 			direction = Standards.EAST;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_A)){
 			direction = Standards.WEST;
-		}
-	
+		} else {
+
 
 			//key = Keyboard.getEventCharacter();
 			//previousCommand = key;
 
+			if (Keyboard.next()){
+				key = Keyboard.getEventCharacter();
+			}
 
-		switch (key){
-		case 'w':
-			direction = Standards.NORTH;
-			break;
-		case 's':
-			direction = Standards.SOUTH;
-			break;
-		case 'd':
-			direction = Standards.EAST;
-			break;
-		case 'a':
-			direction = Standards.WEST;
-			break;
-		case 'e':
-			break;
-		case 'o':
-			worldObj.saveChunk(0,0);
-			break;
-		case 'i':
-			worldObj.loadChunk(0,0);
-			break;
-		default:
-			break;
+			switch (key){
+			case 'e':
+				break;
+			case 'o':
+				//worldObj.saveChunk(0,0);
+				System.out.println("You pressed o");
+				break;
+			case 'i':
+				//worldObj.loadChunk(0,0);
+				break;
+			default:
+				break;
+			}
+
 		}
 
 		if (moveTick <= 0){
@@ -181,7 +175,7 @@ public class Boot {
 		} else {
 			moveTick = moveTick - delta;
 		}
-		
+
 
 		return true;
 	}
