@@ -40,6 +40,9 @@ public class Tile {
 	public void update(){
 		if (TE != null){
 			TE.update();
+		} 
+		if (AIE != null){
+			AIE.update();
 		}
 	}
 	
@@ -53,6 +56,9 @@ public class Tile {
 	
 	public void setInanimateEntity(AbstractInanimateEntity ent){
 		AIE = ent;
+		
+		//TODO a better function than this.
+		isSolid = AIE.getSolid();
 	}
 	
 	public TileEntity getTileEntity(){
