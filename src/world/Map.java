@@ -19,6 +19,15 @@ public class Map {
 		}
 	}
 	
+	public Map(int width, int height){
+		world = new Chunk[width][height];
+		for (int x = 0; x < width; x++){
+			for (int y = 0; y < height; y++){
+				world[x][y] = new Chunk(x, y);
+			}
+		}
+	}
+	
 	public void draw(int windowX, int windowY, int xStart, int yStart){
 		for (int x = 0; x < Standards.MAP_TILES_TO_DRAW; x++){
 			for (int y = 0; y < Standards.MAP_TILES_TO_DRAW; y++){
