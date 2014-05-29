@@ -1,10 +1,16 @@
 package entities.inanimate;
 
 import static org.lwjgl.opengl.GL11.*;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import util.Color4F;
 import util.TexInfo;
 import entities.AbstractEntity;
 import gzap.Boot;
+import gzap.GameRegistry;
 import gzap.Standards;
 
 public abstract class AbstractInanimateEntity extends AbstractEntity{
@@ -12,6 +18,8 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 	private int orientation = Standards.NORTH;
 	protected TexInfo texinfo = null;
 	protected boolean isSolid = false;
+	protected boolean initialized = false;
+	protected int EntID = -1;
 	
 	public AbstractInanimateEntity(int x, int y, int z, TexInfo texinfo) {
 		super(x, y, z);
@@ -20,6 +28,10 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 	
 	public abstract void update();
 
+	public int getEntID(){
+		return EntID;
+	}
+	
 	public void setSolid(boolean solid){
 		this.isSolid = solid;
 	}
@@ -108,5 +120,7 @@ public abstract class AbstractInanimateEntity extends AbstractEntity{
 	}
 
 	public abstract void getMouseEvent(int button);
-
+	public abstract void save(FileOutputStream out) throws IOException;
+	public abstract void load(FileInputStream in) throws IOException;
+	
 }

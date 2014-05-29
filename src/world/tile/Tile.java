@@ -112,6 +112,14 @@ public class Tile {
 	
 	public void save(FileOutputStream out) throws IOException{
 		out.write(base.getBaseType());
+		
+		if (AIE != null){
+			out.write(0);
+		} else {
+			out.write(AIE.getEntID());
+			AIE.save(out);
+		}
+		
 	}
 	
 	public void load(FileInputStream in) throws IOException{
